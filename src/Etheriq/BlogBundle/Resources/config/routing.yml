@@ -1,3 +1,12 @@
 homepage:
     pattern:  /
     defaults: { _controller: EtheriqBlogBundle:Main:index }
+
+guest:
+    pattern:  /guest
+    defaults: { _controller: EtheriqBlogBundle:Main:guest }
+
+about:
+    pattern:  /about
+    defaults: { _controller: EtheriqBlogBundle:Main:about }
+
