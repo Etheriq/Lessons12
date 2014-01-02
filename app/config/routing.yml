@@ -1,0 +1,4 @@
+etheriq_blog:
+    resource: "@EtheriqBlogBundle/Resources/config/routing.yml"
+    prefix:   /
+
