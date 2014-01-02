@@ -18,4 +18,14 @@ class MainController extends Controller
         return $this->render('EtheriqBlogBundle:pages:homepage.html.twig');
     }
 
-} 
+    public function aboutAction()
+    {
+        return $this->render('EtheriqBlogBundle:pages:about.html.twig');
+    }
+
+    public function guestAction()
+    {
+        return $this->render('EtheriqBlogBundle:pages:guest.html.twig');
+    }
+
+}
