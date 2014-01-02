@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}" />
+        <link rel="stylesheet" href="{{ asset('css/myStyle.css') }}" />
+    {% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+<body>
+{% block body %}
+
+        {% block menu %}
+            <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                        <span class="sr-only">Etheriq Blog</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <span class="navbar-brand">Etheriq Blog</span>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse navbar-ex1-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About me</a></li>
+                        <li><a href="#">Guest book</a></li>
+
+                    </ul>
+                    <form class="navbar-form navbar-right" role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search">
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+
+                </div><!-- /.navbar-collapse -->
+            </nav>
+        {% endblock menu %}
+
+    <div class="container">
+
+        {% block breadcrumb %}
+
+            <p>BreadCrumb</p>
+
+        {% endblock breadcrumb %}
+
+        <div class="col-md-8">
+            {% block content %}
+                <p>
+
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce neque lacus, placerat id risus at, sollicitudin bibendum dui. Proin adipiscing vitae eros at cursus. Suspendisse lacinia malesuada scelerisque. Nulla facilisi. Ut vehicula quam sed consequat pretium. Maecenas blandit magna in tortor vulputate sollicitudin. Donec pulvinar fringilla diam, sed rutrum arcu iaculis pretium. Sed adipiscing metus sed libero tempus, blandit feugiat erat semper. Proin fermentum accumsan posuere. Nulla vel porta lorem. Etiam molestie augue sed diam bibendum suscipit. Aliquam tellus dolor, fermentum et aliquam non, dictum sed sapien. Duis porta purus vel lacus sodales blandit. Proin eleifend quis justo at accumsan.
+                    Sed at nisi libero. Suspendisse a mattis lectus. Cras nec pharetra purus, sit amet venenatis libero. Donec et imperdiet arcu, ac iaculis neque. Nunc tincidunt lacus eu fringilla pretium. Fusce non ultricies nibh, ut tempor felis. Vestibulum luctus auctor eros, varius faucibus ante sagittis ultrices. Proin hendrerit nunc in feugiat feugiat. Suspendisse non malesuada metus, non elementum urna.
+
+                </p>
+            {% endblock content %}
+        </div>
+
+        <div class="col-md-4">
+            {% block sidebar %}
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Lost articles</h3>
+                    </div>
+                    <div class="panel-body">
+                        5 lost articles
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Last post from guest</h3>
+                    </div>
+                    <div class="panel-body">
+                        post from guest
+                    </div>
+                </div>
+
+
+            {% endblock sidebar %}
+        </div>
+
+    </div>
+
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('js/jquery.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.js') }}"></script>
+{% endblock %}
+</body>
+</html>
