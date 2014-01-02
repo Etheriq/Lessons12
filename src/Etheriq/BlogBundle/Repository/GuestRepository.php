@@ -18,7 +18,7 @@ class GuestRepository extends EntityRepository
 
         return $this->getEntityManager()
             ->createQuery(
-                'SELECT g FROM EtheriqLesson8Bundle:Guest g ORDER BY g.id DESC'
+                'SELECT g FROM EtheriqBlogBundle:Guest g ORDER BY g.id DESC'
             );
     }
 
@@ -27,7 +27,7 @@ class GuestRepository extends EntityRepository
 
         return $this->getEntityManager()
             ->createQuery(
-                'SELECT g FROM EtheriqLesson8Bundle:Guest g'
+                'SELECT g FROM EtheriqBlogBundle:Guest g'
             );
     }
 } 
