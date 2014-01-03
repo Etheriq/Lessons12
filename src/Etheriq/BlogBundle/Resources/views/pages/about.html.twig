@@ -6,6 +6,15 @@
 
      {% block wraper %}
 
+         {% block breadcrumb %}
+
+             <ol class="breadcrumb">
+                 <li><a href="{{ path('homepage') }}">{{ 'Home'|trans }}</a></li>
+                 <li class="active">{{ 'About me'|trans }}</li>
+             </ol>
+
+         {% endblock breadcrumb %}
+
          <p> ABOUT </p>
 
      {% endblock wraper %}
