@@ -11,6 +11,7 @@ namespace Etheriq\BlogBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Class Blog
@@ -383,5 +384,20 @@ class Blog
     public function getTags()
     {
         return $this->tags;
+    }
+
+    public function setTags(ArrayCollection $tags)
+    {
+        $this->tags = $tags;
+
+
+        $tags->forAll(function ($key, $element) {
+
+            $element->addBlogTag($this);
+
+            return true;
+        });
+
+        return $this;
     }
 }

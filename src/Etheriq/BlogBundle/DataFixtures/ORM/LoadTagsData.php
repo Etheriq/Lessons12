@@ -26,7 +26,7 @@ class LoadTagsData extends AbstractFixture implements OrderedFixtureInterface
             $tag = new Tags();
             $tag->setTagName($tagName);
             $manager->persist($tag);
-            //$this->addReference($tag);
+            $this->addReference($tagName, $tag);
         }
 
         $manager->flush();

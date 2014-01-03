@@ -26,7 +26,7 @@ class LoadCategoryData extends AbstractFixture implements OrderedFixtureInterfac
             $category = new Category();
             $category->setCategoryName($categoryName);
             $manager->persist($category);
-            //$this->addReference($tag);
+            $this->addReference($categoryName, $category);
         }
 
         $manager->flush();

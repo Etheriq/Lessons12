@@ -1,0 +1,17 @@
+blogs:
+    1:
+        title: Lorem ipsum dolor
+        pictureSrc: img/blog/pic1.jpg
+        textBlog: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed quis lacus malesuada est malesuada semper in venenatis nibh. Aenean blandit tellus feugiat enim pharetra, eu tempor nibh eleifend. Aenean nibh odio, posuere in nunc tempor, imperdiet vehicula tellus. Aliquam at neque elit. Phasellus sodales massa non molestie bibendum. Pellentesque urna magna, commodo vitae posuere vel, accumsan et tellus. Cras ac fermentum lacus, vel euismod felis. In ut neque sollicitudin, porta libero eu, accumsan felis. Etiam ac elit neque. Aenean faucibus vel nulla sed dignissim. Sed venenatis urna sed pretium dapibus. Donec laoreet justo sapien, at hendrerit quam egestas id. Nullam dignissim convallis fringilla. Proin facilisis feugiat ipsum. Maecenas ornare porta risus venenatis imperdiet. In suscipit justo et lectus tincidunt, vel iaculis odio hendrerit.
+        rating: 3.5
+        numOfVot: 4
+        category: Joomla
+        tags: [CSS3, WEB, Twig, Doctrine]
+    2:
+        title: Nunc vestibulum varius vulputate
+        pictureSrc: img/blog/pic2.jpg
+        textBlog: Nunc vestibulum varius vulputate. Nam lacinia sed purus ut tincidunt. Maecenas vitae augue vitae purus vestibulum tempor et non lectus. Integer venenatis, mauris non pulvinar fermentum, leo sem vulputate dolor, nec rutrum tellus quam id tellus. Integer vitae cursus mi, nec interdum velit. Proin tempus ut tellus id feugiat. Nam mattis augue et ipsum interdum faucibus. Etiam pellentesque ante orci, sed tempor lorem molestie at.
+        rating: 4
+        numOfVot: 2
+        category: Symfony
+        tags: [PHPStorm, WEB, Twig, Doctrine]
