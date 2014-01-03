@@ -7,6 +7,8 @@
      {% block wraper %}
 
         <div class="well">
-            <p>Страница {{ pageNumber }} не найдена.</p>
+            {% trans %}
+                Page number %pageNumber% not found
+            {% endtrans %}
         </div>
      {% endblock wraper %}

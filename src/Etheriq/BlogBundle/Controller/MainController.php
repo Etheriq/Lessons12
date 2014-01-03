@@ -15,7 +15,9 @@ class MainController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('EtheriqBlogBundle:pages:homepage.html.twig');
+        $locale = $this->get('request')->getLocale();
+
+        return $this->render('EtheriqBlogBundle:pages:homepage.html.twig', array('locale' => $locale));
     }
 
     public function aboutAction()
@@ -23,9 +25,11 @@ class MainController extends Controller
         return $this->render('EtheriqBlogBundle:pages:about.html.twig');
     }
 
-    public function guestAction()
+    public function setLocaleAction($loc)
     {
-        return $this->render('EtheriqBlogBundle:pages:guest.html.twig');
+        $this->get('request')->setLocale($loc);
+        return $this->redirect($this->generateUrl('homepage', array('_locale' => $loc) ));
     }
+
 
 }

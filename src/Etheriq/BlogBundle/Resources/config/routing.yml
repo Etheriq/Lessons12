@@ -1,21 +1,36 @@
 homepage:
-    pattern:  /
-    defaults: { _controller: EtheriqBlogBundle:Main:index }
+    pattern:  /{_locale}
+    defaults: { _controller: EtheriqBlogBundle:Main:index, _locale: en }
+    requirements:
+            _locale: en|ru|uk
 
 guest:
-    pattern:  /guest/{page}
+    pattern:  /{_locale}/guest/{page}
     defaults: { _controller: EtheriqBlogBundle:Guest:showGuest, page: 1 }
     requirements:
             page:  \d+
+            _locale: en|ru|uk
 
 guest_showInfo:
-    pattern:  /guest/show/{slug}
+    pattern:  /{_locale}/guest/show/{slug}
     defaults: { _controller: EtheriqBlogBundle:Guest:showGuestInfo }
+    requirements:
+            _locale: en|ru|uk
 
 guest_deleteItem:
-    pattern:  /guest/delete/{slug}
+    pattern:  /{_locale}/guest/delete/{slug}
     defaults: { _controller: EtheriqBlogBundle:Guest:deleteGuestItem }
+    requirements:
+            _locale: en|ru|uk
 
 about:
-    pattern:  /about
+    pattern:  /{_locale}/about
     defaults: { _controller: EtheriqBlogBundle:Main:about }
+    requirements:
+            _locale: en|ru|uk
+
+set_locale:
+    pattern: /setLocale/{loc}
+    defaults: { _controller: EtheriqBlogBundle:Main:setLocale, loc: en }
+    requirements:
+            loc: en|ru|uk
