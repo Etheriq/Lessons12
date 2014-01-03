@@ -8,7 +8,10 @@
 
          {% block breadcrumb %}
 
-             <p>BreadCrumb</p>
+             <ol class="breadcrumb">
+                 <li><a href="{{ path('homepage') }}">{{ 'Home'|trans }}</a></li>
+                 <li class="active">{{ 'Guest book'|trans }}</li>
+             </ol>
 
          {% endblock breadcrumb %}
 
@@ -51,11 +54,11 @@
                      <u>{{ 'Record'|trans }} id # {{ item.id }}</u>.
                      <a href="{{ path('guest_deleteItem', {'slug': item.slug}) }}" class="btn btn-danger btn-sm">{{ 'Delete'|trans }}</a>
                      <a href="{{ path('guest_showInfo', {'slug': item.slug}) }}" class="btn btn-info btn-sm">{{ 'More info'|trans }}</a>
-                     <span> {{ 'Created'|trans }}: {{ item.getCreated()| date("d.m.Y G:i") }} </span>
-                     <span> {{ 'Changed'|trans }}: {{ item.getUpdated()| date("d.m.Y G:i") }} </span>
+                     <span> {{ 'Created'|trans }}: {{ item.created| date("d.m.Y G:i") }} </span>
+                     <span> {{ 'Changed'|trans }}: {{ item.updated| date("d.m.Y G:i") }} </span>
                      <hr>
-                     <b>{{ item.getNameGuest() }}</b>  ({{ item.getEmailGuest() }})<br>
-                     {{ item.getBodyGuest()|limitWords(20, path('guest_showInfo', {'slug': item.slug}))|raw }}
+                     <b>{{ item.nameGuest }}</b>  ({{ item.emailGuest }})<br>
+                     {{ item.bodyGuest|limitWords(20, path('guest_showInfo', {'slug': item.slug}))|raw }}
                  </div>
              {% endfor %}
          {% endif %}
