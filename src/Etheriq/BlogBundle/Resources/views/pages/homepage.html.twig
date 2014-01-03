@@ -16,18 +16,17 @@
          <div class="col-md-2">
              <ul class="locale_change">
                  <li>
-                     {#<a href="{{ path('set_locale', {'loc': 'en'}) }}">#}
-                     <a href="#">
+                     <a href="{{ path('set_locale', {'loc': 'en'}) }}">
                          <img src="{{ asset('img/flag_great_britain.png') }}" alt="English">
                      </a>
                  </li>
                  <li>
-                     <a href="#">
+                     <a href="{{ path('set_locale', {'loc': 'ru'}) }}">
                          <img src="{{ asset('img/flag_russia.png') }}" alt="Russian">
                      </a>
                  </li>
                  <li>
-                     <a href="#">
+                     <a href="{{ path('set_locale', {'loc': 'uk'}) }}">
                          <img src="{{ asset('img/flag_ukraine.png') }}" alt="Ukrainian">
                      </a>
                  </li>

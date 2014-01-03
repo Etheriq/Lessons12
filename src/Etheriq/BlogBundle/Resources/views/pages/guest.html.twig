@@ -6,8 +6,14 @@
 
      {% block wraper %}
 
+         {% block breadcrumb %}
+
+             <p>BreadCrumb</p>
+
+         {% endblock breadcrumb %}
+
          <div class="row">
-             <div class="col-md-11">
+             <div class="col-md-12">
          {{ form_start(form, {'attr': {'role': 'form', 'novalidate': 'novalidate' }}) }}
          <div class="col-md-6" style="text-align: right">
              <div class="form-inline">

@@ -24,6 +24,7 @@ class GuestController extends Controller
 {
     public function showGuestAction($page, Request $request)
     {
+        $locale = $this->get('request')->getLocale();
         $em = $this->getDoctrine()->getManager();
 //        $em->getFilters()->disable('softdeleteable');  // to display removed data
         $query = $em->getRepository('EtheriqBlogBundle:Guest')->findDESCGuests();  // Order by DESC
@@ -59,7 +60,8 @@ class GuestController extends Controller
 
         return $this->render('EtheriqBlogBundle:pages:guest.html.twig', array(
             'fanta' => $pagerFanta,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'locale' => $locale
         ));
     }
 
