@@ -37,7 +37,7 @@ class GuestController extends Controller
             $pagerFanta->setCurrentPage($page);
         } catch (NotValidCurrentPageException $e) {
 
-            return $this->render('EtheriqBlogBundle:pages:pageNotFound.html.twig', array('pageNumber' => $page));
+            return $this->render('EtheriqBlogBundle:pages:guestPageNotFound.html.twig', array('pageNumber' => $page));
         }
 
         $guest = new Guest();
@@ -62,5 +62,60 @@ class GuestController extends Controller
             'form' => $form->createView()
         ));
     }
+
+    public function showGuestInfoAction($slug, Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $guestShow = $em->getRepository('EtheriqBlogBundle:Guest')->findOneBy(array('slug' => $slug));
+
+        if (!$guestShow) {
+            return $this->render('EtheriqBlogBundle:pages:guestPageNotFound.html.twig', array('pageNumber' => $slug));
+            exit;
+        }
+        $guestShow->setNameGuest($guestShow->getNameGuest());
+        $guestShow->setEmailGuest($guestShow->getEmailGuest());
+        $guestShow->setBodyGuest($guestShow->getBodyGuest());
+
+        $created = $guestShow->getCreated()->format('d.m.Y G:i');
+        $updated = $guestShow->getUpdated()->format('d.m.Y G:i');
+
+        $form = $this->createForm(new GuestType(), $guestShow);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $guestToDb = $this->getDoctrine()->getManager();
+
+//            $guestEvent = new GuestEvent($guestShow);
+//            $dispatcher = $this->get('event_dispatcher');
+//            $dispatcher->dispatch(RegisterEvent::GUEST_EDIT, $guestEvent);
+
+            $guestToDb->flush();
+
+            return $this->redirect($this->generateUrl('guest'));
+        }
+
+        return $this->render('EtheriqBlogBundle:pages:guestShowInfo.html.twig', array(
+            'form' => $form->createView(),
+            'created' => $created,
+            'updated' => $updated
+        ));
+    }
+
+    public function deleteGuestItemAction($slug)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $guestDelete = $em->getRepository('EtheriqBlogBundle:Guest')->findOneBy(array('slug' => $slug));
+
+//        $guestEvent = new GuestEvent($guestDelete);
+//        $dispatcher = $this->get('event_dispatcher');
+//        $dispatcher->dispatch(RegisterEvent::GUEST_DELETE, $guestEvent);
+
+        $em->remove($guestDelete);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('guest'));
+    }
+
+
 
 } 

@@ -1,0 +1,53 @@
+{% extends 'EtheriqBlogBundle::base.html.twig' %}
+
+    {% block title %}
+        Show more info about some guest
+    {% endblock title %}
+
+     {% block wraper %}
+
+         <div class="row">
+             <div class="col-md-5">
+                <a href="{{ path('guest') }}" class="btn btn-sm btn-default">{{ 'On Main'|trans }}</a>
+             </div>
+             <div class="col-md-5">
+                 <span> {{ 'Created'|trans }}: {{ created }} </span><br>
+                 <span> {{ 'Changed'|trans }}: {{ updated }} </span><br><br>
+             </div>
+         </div>
+
+
+         <div class="row">
+             <div class="col-md-11">
+                 {{ form_start(form, {'attr': {'role': 'form', 'novalidate': 'novalidate' }}) }}
+                 <div class="col-md-6" style="text-align: right">
+                     <div class="form-inline">
+                         {{ form_label(form.nameGuest, 'Name'|trans|raw) }}
+                         {{ form_widget(form.nameGuest, { 'attr': {'class': 'form-control', 'style': 'width:30%; ', 'placeholder': 'Введите имя' } }) }}
+
+                         {{ form_label(form.emailGuest, 'E-mail'|trans|raw) }}
+                         {{ form_widget(form.emailGuest, { 'attr': {'class': 'form-control', 'style': 'width:30%; ', 'placeholder': 'Введите почтовый адрес' } }) }}
+
+                         {{ form_widget(form.save, { 'attr': {'class': 'btn btn-success'} }) }}
+                     </div>
+                     <div class="form-inline" style="margin: 5px 0;">
+                         {{ form_label(form.bodyGuest, 'Message'|trans|raw) }}
+                         {{ form_widget(form.bodyGuest, { 'attr': {'class': 'form-control', 'style': 'width:80%; height: 350px;', 'placeholder': 'Введите сообщение, минимальная длина 100 символом ' } }) }}
+                     </div>
+                 </div>
+
+                 <div class="col-md-6">
+                     <div class="col-md-12 text-left">
+                         <p>{{ form_errors(form.nameGuest) }}</p>
+                         <p>{{ form_errors(form.emailGuest) }}</p>
+                     </div>
+                     <div class="col-md-12 text-left">
+                         <p>{{ form_errors(form.bodyGuest) }}</p>
+                     </div>
+                 </div>
+
+                 {{ form_end(form) }}
+             </div>
+         </div>
+
+     {% endblock wraper %}
