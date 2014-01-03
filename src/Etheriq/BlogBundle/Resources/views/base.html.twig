@@ -42,7 +42,18 @@
     <div class="container">
         {% block wraper %}
 
+
         {% endblock wraper %}
+
+    </div>   <!--   end div container -->
+        <div class="row">
+            <div class="col-md-12 text-center">
+                {% block footer %}
+
+                {% endblock footer %}
+            </div>
+
+
     </div>
 {% endblock body %}
 {% block javascripts %}

@@ -3,10 +3,19 @@ homepage:
     defaults: { _controller: EtheriqBlogBundle:Main:index }
 
 guest:
-    pattern:  /guest
-    defaults: { _controller: EtheriqBlogBundle:Main:guest }
+    pattern:  /guest/{page}
+    defaults: { _controller: EtheriqBlogBundle:Guest:showGuest, page: 1 }
+    requirements:
+            page:  \d+
+
+guest_showInfo:
+    pattern:  /guest/show/{slug}
+    defaults: { _controller: EtheriqBlogBundle:Guest:showGuestInfo }
+
+guest_deleteItem:
+    pattern:  /guest/delete/{slug}
+    defaults: { _controller: EtheriqBlogBundle:Guest:deleteGuestItem }
 
 about:
     pattern:  /about
     defaults: { _controller: EtheriqBlogBundle:Main:about }
-
