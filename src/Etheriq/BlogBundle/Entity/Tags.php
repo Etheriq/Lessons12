@@ -35,7 +35,7 @@ class Tags
 
     /**
      *
-     * @ORM\ManyToMany(targetEntity="Blog", mappedBy="tags")
+     * @ORM\ManyToMany(targetEntity="Blog", inversedBy="tags")
      */
     protected $blogTags;
 

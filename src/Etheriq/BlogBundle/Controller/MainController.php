@@ -15,9 +15,20 @@ class MainController extends Controller
 {
     public function indexAction()
     {
-        $locale = $this->get('request')->getLocale();
+       $em = $this->getDoctrine()->getManager();
+       $blog1 = $em->getRepository('EtheriqBlogBundle:Blog')->findOneById(2);
 
-        return $this->render('EtheriqBlogBundle:pages:homepage.html.twig', array('locale' => $locale));
+
+//        $tags = $blog1->getTags();
+//
+//        var_dump($tags->getTags()); exit;
+
+        return $this->render('EtheriqBlogBundle:pages:homepage.html.twig', array(
+//            'title' => $blog1->getTitle(),
+//            'category' => $blog1->getCategory(),
+//            'tags' => $blog1->getTags(),
+            'blog' => $blog1
+        ));
     }
 
     public function aboutAction()
