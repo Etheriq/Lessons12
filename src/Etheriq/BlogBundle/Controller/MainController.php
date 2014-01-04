@@ -13,6 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Pagerfanta\Exception\NotValidCurrentPageException;
 use Pagerfanta\Pagerfanta;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Adapter\DoctrineCollectionAdapter;
 
 class MainController extends Controller
 {
@@ -70,6 +71,26 @@ class MainController extends Controller
         $blogs = $em->getRepository('EtheriqBlogBundle:Blog')->mostPopularArticles();
 
         return $this->render('EtheriqBlogBundle:sidebar:mostPopularBlogArticles.html.twig', array('blogs' => $blogs));
+    }
+
+    public function showBlogsByCategoryAction($page, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $cat = $em->getRepository('EtheriqBlogBundle:Category')->find($id);
+        $blogs = $cat->getBlogs();
+
+        $adapter = new DoctrineCollectionAdapter($blogs);
+        $pagerBlog = new Pagerfanta($adapter);
+        $pagerBlog->setMaxPerPage(2);
+
+        try {
+            $pagerBlog->setCurrentPage($page);
+        } catch (NotValidCurrentPageException $e) {
+
+            return $this->render('EtheriqBlogBundle:pages:guestPageNotFound.html.twig', array('pageNumber' => $page));
+        }
+
+        return $this->render('EtheriqBlogBundle:pages:homepage.html.twig', array('blogs' => $pagerBlog));
     }
 
 }
