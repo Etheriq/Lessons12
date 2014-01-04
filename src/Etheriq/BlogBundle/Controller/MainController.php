@@ -23,7 +23,7 @@ class MainController extends Controller
 //        $query = $em->getRepository('EtheriqBlogBundle:Blog')->findAllBlogs();  // order by id DESC
         $adapter = new DoctrineORMAdapter($query);
         $pagerBlog = new Pagerfanta($adapter);
-        $pagerBlog->setMaxPerPage(1);
+        $pagerBlog->setMaxPerPage(5);
 
         try {
             $pagerBlog->setCurrentPage($page);

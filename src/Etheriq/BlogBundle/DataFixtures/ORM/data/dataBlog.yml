@@ -15,3 +15,115 @@ blogs:
         numOfVot: 2
         category: Symfony
         tags: [PHPStorm, WEB, Twig, Doctrine]
+    3:
+        title: Praesent consectetur
+        pictureSrc: img/blog/symfony.jpg
+        textBlog: Nunc vestibulum varius vulputate. Nam lacinia sed purus ut tincidunt. Maecenas vitae augue vitae purus vestibulum tempor et non lectus. Integer venenatis, mauris non pulvinar fermentum, leo sem vulputate dolor, nec rutrum tellus quam id tellus. Integer vitae cursus mi, nec interdum velit. Proin tempus ut tellus id feugiat. Nam mattis augue et ipsum interdum faucibus. Etiam pellentesque ante orci, sed tempor lorem molestie at.
+        rating: 3.2
+        numOfVot: 4
+        category: Symfony
+        tags: [PHPStorm, WEB, Twig, Doctrine]
+    4:
+        title: Integer nec quam ligula
+        pictureSrc: img/blog/bluz.jpg
+        textBlog: Nunc vestibulum varius vulputate. Nam lacinia sed purus ut tincidunt. Maecenas vitae augue vitae purus vestibulum tempor et non lectus. Integer venenatis, mauris non pulvinar fermentum, leo sem vulputate dolor, nec rutrum tellus quam id tellus. Integer vitae cursus mi, nec interdum velit. Proin tempus ut tellus id feugiat. Nam mattis augue et ipsum interdum faucibus. Etiam pellentesque ante orci, sed tempor lorem molestie at.
+        rating: 3.9
+        numOfVot: 7
+        category: Bluz
+        tags: [PHPStorm, WEB, HTML5, CSS3]
+    5:
+        title: Fusce egestas ornare dui
+        pictureSrc: img/blog/wordpress.jpg
+        textBlog: Nunc vestibulum varius vulputate. Nam lacinia sed purus ut tincidunt. Maecenas vitae augue vitae purus vestibulum tempor et non lectus. Integer venenatis, mauris non pulvinar fermentum, leo sem vulputate dolor, nec rutrum tellus quam id tellus. Integer vitae cursus mi, nec interdum velit. Proin tempus ut tellus id feugiat. Nam mattis augue et ipsum interdum faucibus. Etiam pellentesque ante orci, sed tempor lorem molestie at.
+        rating: 4.1
+        numOfVot: 12
+        category: WordPress
+        tags: [PHPStorm, WEB, HTML5]
+    6:
+        title: Praesent pulvinar vestibulum dolor
+        pictureSrc: img/blog/yii.jpg
+        textBlog: Nunc vestibulum varius vulputate. Nam lacinia sed purus ut tincidunt. Maecenas vitae augue vitae purus vestibulum tempor et non lectus. Integer venenatis, mauris non pulvinar fermentum, leo sem vulputate dolor, nec rutrum tellus quam id tellus. Integer vitae cursus mi, nec interdum velit. Proin tempus ut tellus id feugiat. Nam mattis augue et ipsum interdum faucibus. Etiam pellentesque ante orci, sed tempor lorem molestie at.
+        rating: 4.7
+        numOfVot: 5
+        category: Yii
+        tags: [PHPStorm, WEB, Twig]
+    7:
+        title: Integer felis purus
+        pictureSrc: img/blog/wordpress.jpg
+        textBlog: Nunc vestibulum varius vulputate. Nam lacinia sed purus ut tincidunt. Maecenas vitae augue vitae purus vestibulum tempor et non lectus. Integer venenatis, mauris non pulvinar fermentum, leo sem vulputate dolor, nec rutrum tellus quam id tellus. Integer vitae cursus mi, nec interdum velit. Proin tempus ut tellus id feugiat. Nam mattis augue et ipsum interdum faucibus. Etiam pellentesque ante orci, sed tempor lorem molestie at.
+        rating: 2.5
+        numOfVot: 3
+        category: WordPress
+        tags: [PHPStorm, WEB, CSS3]
+    8:
+        title: Etiam non odio eget erat
+        pictureSrc: img/blog/yii.jpg
+        textBlog: Nunc vestibulum varius vulputate. Nam lacinia sed purus ut tincidunt. Maecenas vitae augue vitae purus vestibulum tempor et non lectus. Integer venenatis, mauris non pulvinar fermentum, leo sem vulputate dolor, nec rutrum tellus quam id tellus. Integer vitae cursus mi, nec interdum velit. Proin tempus ut tellus id feugiat. Nam mattis augue et ipsum interdum faucibus. Etiam pellentesque ante orci, sed tempor lorem molestie at.
+        rating: 4.2
+        numOfVot: 22
+        category: Yii
+        tags: [PHPStorm, WEB, Twig]
+    9:
+        title: Sed euismod rhoncus nulla a dictum
+        pictureSrc: img/blog/bluz.jpg
+        textBlog: Nunc vestibulum varius vulputate. Nam lacinia sed purus ut tincidunt. Maecenas vitae augue vitae purus vestibulum tempor et non lectus. Integer venenatis, mauris non pulvinar fermentum, leo sem vulputate dolor, nec rutrum tellus quam id tellus. Integer vitae cursus mi, nec interdum velit. Proin tempus ut tellus id feugiat. Nam mattis augue et ipsum interdum faucibus. Etiam pellentesque ante orci, sed tempor lorem molestie at.
+        rating: 3.9
+        numOfVot: 9
+        category: Bluz
+        tags: [PHPStorm, WEB, Twig, Doctrine]
+    10:
+        title: Integer semper lacus sit amet nibh viverra
+        pictureSrc: img/blog/html.jpg
+        textBlog: Nunc vestibulum varius vulputate. Nam lacinia sed purus ut tincidunt. Maecenas vitae augue vitae purus vestibulum tempor et non lectus. Integer venenatis, mauris non pulvinar fermentum, leo sem vulputate dolor, nec rutrum tellus quam id tellus. Integer vitae cursus mi, nec interdum velit. Proin tempus ut tellus id feugiat. Nam mattis augue et ipsum interdum faucibus. Etiam pellentesque ante orci, sed tempor lorem molestie at.
+        rating: 3.9
+        numOfVot: 14
+        category: HTML
+        tags: [PHPStorm, WEB, HTML5, CSS3]
+    11:
+        title: Integer mattis augue molestie
+        pictureSrc: img/blog/drupal.jpg
+        textBlog: Nunc vestibulum varius vulputate. Nam lacinia sed purus ut tincidunt. Maecenas vitae augue vitae purus vestibulum tempor et non lectus. Integer venenatis, mauris non pulvinar fermentum, leo sem vulputate dolor, nec rutrum tellus quam id tellus. Integer vitae cursus mi, nec interdum velit. Proin tempus ut tellus id feugiat. Nam mattis augue et ipsum interdum faucibus. Etiam pellentesque ante orci, sed tempor lorem molestie at.
+        rating: 4.1
+        numOfVot: 12
+        category: Drupal
+        tags: [PHPStorm, WEB, HTML5]
+    12:
+        title: Nunc vestibulum varius vulputate
+        pictureSrc: img/blog/yii.jpg
+        textBlog: Nunc vestibulum varius vulputate. Nam lacinia sed purus ut tincidunt. Maecenas vitae augue vitae purus vestibulum tempor et non lectus. Integer venenatis, mauris non pulvinar fermentum, leo sem vulputate dolor, nec rutrum tellus quam id tellus. Integer vitae cursus mi, nec interdum velit. Proin tempus ut tellus id feugiat. Nam mattis augue et ipsum interdum faucibus. Etiam pellentesque ante orci, sed tempor lorem molestie at.
+        rating: 4.4
+        numOfVot: 17
+        category: Yii
+        tags: [PHPStorm, WEB, Twig]
+    13:
+        title: In consectetur mauris mauris
+        pictureSrc: img/blog/symfony.jpg
+        textBlog: Nunc vestibulum varius vulputate. Nam lacinia sed purus ut tincidunt. Maecenas vitae augue vitae purus vestibulum tempor et non lectus. Integer venenatis, mauris non pulvinar fermentum, leo sem vulputate dolor, nec rutrum tellus quam id tellus. Integer vitae cursus mi, nec interdum velit. Proin tempus ut tellus id feugiat. Nam mattis augue et ipsum interdum faucibus. Etiam pellentesque ante orci, sed tempor lorem molestie at.
+        rating: 4.8
+        numOfVot: 7
+        category: Symfony
+        tags: [PHPStorm, WEB, Twig, Doctrine]
+    14:
+        title: Phasellus rutrum turpis
+        pictureSrc: img/blog/bluz.jpg
+        textBlog: Nunc vestibulum varius vulputate. Nam lacinia sed purus ut tincidunt. Maecenas vitae augue vitae purus vestibulum tempor et non lectus. Integer venenatis, mauris non pulvinar fermentum, leo sem vulputate dolor, nec rutrum tellus quam id tellus. Integer vitae cursus mi, nec interdum velit. Proin tempus ut tellus id feugiat. Nam mattis augue et ipsum interdum faucibus. Etiam pellentesque ante orci, sed tempor lorem molestie at.
+        rating: 2.5
+        numOfVot: 2
+        category: Bluz
+        tags: [WEB, Twig, CSS3]
+    15:
+        title: Quisque non ante eros
+        pictureSrc: img/blog/cms.jpg
+        textBlog: Nunc vestibulum varius vulputate. Nam lacinia sed purus ut tincidunt. Maecenas vitae augue vitae purus vestibulum tempor et non lectus. Integer venenatis, mauris non pulvinar fermentum, leo sem vulputate dolor, nec rutrum tellus quam id tellus. Integer vitae cursus mi, nec interdum velit. Proin tempus ut tellus id feugiat. Nam mattis augue et ipsum interdum faucibus. Etiam pellentesque ante orci, sed tempor lorem molestie at.
+        rating: 2.9
+        numOfVot: 7
+        category: CMS
+        tags: [PHPStorm, WEB, HTML5, Linux, CSS3]
+    16:
+        title: Nulla facilisi. Integer nec magna magna
+        pictureSrc: img/blog/drupal.jpg
+        textBlog: Nunc vestibulum varius vulputate. Nam lacinia sed purus ut tincidunt. Maecenas vitae augue vitae purus vestibulum tempor et non lectus. Integer venenatis, mauris non pulvinar fermentum, leo sem vulputate dolor, nec rutrum tellus quam id tellus. Integer vitae cursus mi, nec interdum velit. Proin tempus ut tellus id feugiat. Nam mattis augue et ipsum interdum faucibus. Etiam pellentesque ante orci, sed tempor lorem molestie at.
+        rating: 3.6
+        numOfVot: 16
+        category: Drupal
+        tags: [PHPStorm, WEB, HTML5]
