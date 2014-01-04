@@ -32,7 +32,7 @@ class BlogRepository extends EntityRepository
     {
 
         return $this->getEntityManager()
-            ->createQuery('SELECT b FROM EtheriqBlogBundle:Blog b ORDER BY b.id');
+            ->createQuery('SELECT b FROM EtheriqBlogBundle:Blog b ORDER BY b.id DESC');
 
     }
 
