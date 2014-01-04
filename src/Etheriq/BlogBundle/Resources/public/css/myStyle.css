@@ -37,8 +37,14 @@ body
 }
 .article-header
 {
+
     margin-bottom: 15px;
 }
+.article-header span
+{
+    float: right;
+}
+
 .article-body img
 {
     width: 60px;
