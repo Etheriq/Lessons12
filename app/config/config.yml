@@ -70,3 +70,22 @@ stof_doctrine_extensions:
             timestampable: true
             sluggable: true
             softdeleteable: true
+
+liip_imagine:
+    driver:               gd
+    web_root:             %kernel.root_dir%/../web
+    data_root:            %kernel.root_dir%/../web/img/blog
+    cache_mkdir_mode:     0777
+    cache_prefix:         /img/blog
+#    cache_prefix:         /media/cache
+    cache:                web_path
+    cache_clearer:        true
+    data_loader:          filesystem
+    controller_action:    liip_imagine.controller:filterAction
+    formats:              []
+    filter_sets:
+        blog_main:
+            quality: 60
+            filters:
+                relative_resize: { heighten: 60 }
+#                thumbnail: { size: [120, 90], mode: outbound }

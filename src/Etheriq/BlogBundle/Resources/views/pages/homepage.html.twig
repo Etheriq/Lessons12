@@ -44,8 +44,9 @@
                     {{ blog.title }}
                    </div>
                     <div class="article-body">
-                        <img src="{{ asset(blog.picture) }}" class="img-rounded">
-                        {{ blog.textBlog|limitWords(30, path('blog_showInfo', {'slug': blog.slug}))|raw }}
+                        {#<img src="{{ asset(blog.picture) | imagine_filter('blog_main') }}" class="img-rounded">#}
+                        <img src="{{ asset(blog.picture) }}" class="img-thumbnail">
+                        {{ blog.textBlog|limitWords(70, path('blog_showInfo', {'slug': blog.slug}))|raw }}
                     </div>
 
                     <div class="article-footer">
