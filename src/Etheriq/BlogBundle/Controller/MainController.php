@@ -77,6 +77,7 @@ class MainController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $cat = $em->getRepository('EtheriqBlogBundle:Category')->find($id);
+        $catName = $cat->getCategoryName();
         $blogs = $cat->getBlogs();
 
         $adapter = new DoctrineCollectionAdapter($blogs);
@@ -90,7 +91,34 @@ class MainController extends Controller
             return $this->render('EtheriqBlogBundle:pages:guestPageNotFound.html.twig', array('pageNumber' => $page));
         }
 
-        return $this->render('EtheriqBlogBundle:pages:homepage.html.twig', array('blogs' => $pagerBlog));
+        return $this->render('EtheriqBlogBundle:pages:homepage.html.twig', array(
+            'blogs' => $pagerBlog,
+            'filter' => $catName
+        ));
+    }
+
+    public function showBlogsByTagAction($page, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $tag = $em->getRepository('EtheriqBlogBundle:Tags')->find($id);
+        $tagName = $tag->getTagName();
+        $blogs = $tag->getBlogTags();
+
+        $adapter = new DoctrineCollectionAdapter($blogs);
+        $pagerBlog = new Pagerfanta($adapter);
+        $pagerBlog->setMaxPerPage(5);
+
+        try {
+            $pagerBlog->setCurrentPage($page);
+        } catch (NotValidCurrentPageException $e) {
+
+            return $this->render('EtheriqBlogBundle:pages:guestPageNotFound.html.twig', array('pageNumber' => $page));
+        }
+
+        return $this->render('EtheriqBlogBundle:pages:homepage.html.twig', array(
+            'blogs' => $pagerBlog,
+            'filter' => $tagName
+        ));
     }
 
 }
