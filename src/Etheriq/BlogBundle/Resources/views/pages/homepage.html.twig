@@ -41,6 +41,13 @@
          <div class="col-md-8">
              {% block content %}
 
+                 {% if filter is defined %}
+                     <div class="alert alert-success">
+                         {{ 'Filtered by'|trans }} <strong>{{ filter }}</strong>
+                         &nbsp;&nbsp;&nbsp; {{blogs.NbResults}} {{ 'articless has found'|trans }}
+                     </div>
+
+                 {% endif %}
                 {% for blog in blogs %}
                    <div class="article-header">
                    <a href="{{ path('blog_showInfo', {'slug': blog.slug})|raw }}">
@@ -72,7 +79,9 @@
                        <div class="text-right myTags">
                            <strong>{{ 'Tags'|trans }} </strong>
                           {% for tag in blog.tags %}
-                              <span class="label label-info">{{ tag.tagName }}</span>
+                              <a href="{{ path('blog_tag', {'id': tag.id}) }}">
+                                <span class="label label-info">{{ tag.tagName }}</span>
+                              </a>
                           {% endfor %}
                        </div>
                    </div>
