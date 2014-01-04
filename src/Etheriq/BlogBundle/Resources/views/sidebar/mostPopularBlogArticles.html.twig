@@ -1,7 +1,13 @@
 <div class="left-sidebar">
     <ul>
         {% for item in blogs %}
-            <li><a href="{{ path('blog_showInfo', {'slug': item.slug}) }}">{{ item.title }}</a> {{ item.rating }}</li>
+            <li  class="list-group-item">
+
+                <a href="{{ path('blog_showInfo', {'slug': item.slug}) }}">
+                    {{ item.title }}
+                </a>
+                <span class="badge">{{ item.rating }}</span>
+            </li>
         {% endfor %}
     </ul>
 </div>

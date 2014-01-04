@@ -19,12 +19,22 @@ body
 .myCat
 {
     float: left;
+    width: 200px;
+}
+.text-left.myCat a
+{
+    color: white;
+}
+.text-left.myCat a:hover
+{
+    text-decoration: none;
+
 }
 .myRating
 {
     float: left;
     text-align: center;
-    margin-left: 25%;
+    margin-left: 15%;
 }
 
 .myTags
@@ -34,6 +44,14 @@ body
 .article-footer
 {
     margin-top: 15px;
+}
+.article-header a strong
+{
+    color: #727272;
+}
+.article-header a:hover
+{
+    text-decoration: none;
 }
 .article-header
 {
@@ -50,4 +68,10 @@ body
     width: 60px;
     float: left;
     margin-right: 5px;
+}
+.list-group-item
+{
+    border: none;
+    padding: 0;
+    padding-top: 3px;
 }

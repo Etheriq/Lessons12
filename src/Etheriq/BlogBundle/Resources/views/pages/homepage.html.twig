@@ -55,12 +55,16 @@
                    <div class="article-footer">
                       <div class="text-left myCat">
                           <strong>{{ 'Category'|trans }} </strong>
-                          {{ blog.category.categoryName }}
+                          <span class="label label-primary">
+                              <a href="{{ path('blog_category', {'category': blog.category.categoryName}) }}">
+                                {{ blog.category.categoryName }}
+                              </a>
+                          </span>
                       </div>
 
                        <div class="myRating">
                            <strong>{{ 'Rating'|trans }}</strong>
-                           {{ blog.rating }}
+                           <span class="badge">{{ blog.rating }}</span>
                        </div>
 
                        <div class="text-right myTags">

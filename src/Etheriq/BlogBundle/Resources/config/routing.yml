@@ -11,6 +11,12 @@ blog_showInfo:
     requirements:
             _locale: en|ru|uk
 
+blog_category:
+    pattern:  /{_locale}/blog/category/{category}
+    defaults: { _controller: EtheriqBlogBundle:Main:showBlogsByCategory }
+    requirements:
+            _locale: en|ru|uk
+
 guest:
     pattern:  /{_locale}/guest/{page}
     defaults: { _controller: EtheriqBlogBundle:Guest:showGuest, page: 1 }
