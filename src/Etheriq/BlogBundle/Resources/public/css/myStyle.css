@@ -20,6 +20,12 @@ body
 {
     float: left;
 }
+.myRating
+{
+    float: left;
+    text-align: center;
+    margin-left: 25%;
+}
 
 .myTags
 {
@@ -38,5 +44,4 @@ body
     width: 60px;
     float: left;
     margin-right: 5px;
-
 }

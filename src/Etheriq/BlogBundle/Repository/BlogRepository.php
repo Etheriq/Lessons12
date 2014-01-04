@@ -36,4 +36,13 @@ class BlogRepository extends EntityRepository
 
     }
 
+    public function fiveLastBlogs()
+    {
+
+        return $this->getEntityManager()
+            ->createQuery('SELECT b FROM EtheriqBlogBundle:Blog b ORDER BY b.created DESC')
+            ->setMaxResults(5)
+            ->getArrayResult();
+    }
+
 } 

@@ -32,9 +32,6 @@ class MainController extends Controller
             return $this->render('EtheriqBlogBundle:pages:guestPageNotFound.html.twig', array('pageNumber' => $page));
         }
 
-
-//        $blog1 = $em->getRepository('EtheriqBlogBundle:Blog')->findOneById(2);
-
         return $this->render('EtheriqBlogBundle:pages:homepage.html.twig', array(
             'blogs' => $pagerBlog
         ));
@@ -59,5 +56,20 @@ class MainController extends Controller
         return $this->render('EtheriqBlogBundle:sidebar:lastGuest.html.twig', array('guests' => $guests));
     }
 
+    public function showLastArticlesAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $blogs = $em->getRepository('EtheriqBlogBundle:Blog')->fiveLastBlogs();
+
+        return $this->render('EtheriqBlogBundle:sidebar:lastArticleFromBlog.html.twig', array('blogs' => $blogs));
+    }
+
+    public function showArticlesByRatingAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $blogs = $em->getRepository('EtheriqBlogBundle:Blog')->mostPopularArticles();
+
+        return $this->render('EtheriqBlogBundle:sidebar:mostPopularBlogArticles.html.twig', array('blogs' => $blogs));
+    }
 
 }
