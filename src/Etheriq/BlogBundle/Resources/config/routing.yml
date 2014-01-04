@@ -1,6 +1,13 @@
 homepage:
-    pattern:  /{_locale}
-    defaults: { _controller: EtheriqBlogBundle:Main:index, _locale: en }
+    pattern:  /{_locale}/{page}
+    defaults: { _controller: EtheriqBlogBundle:Main:index, _locale: en, page: 1 }
+    requirements:
+            page:  \d+
+            _locale: en|ru|uk
+
+blog_showInfo:
+    pattern:  /{_locale}/blog/show/{slug}
+    defaults: { _controller: EtheriqBlogBundle:Main:showBlogInfo }
     requirements:
             _locale: en|ru|uk
 

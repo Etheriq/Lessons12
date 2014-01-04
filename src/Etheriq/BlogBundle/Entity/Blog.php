@@ -390,7 +390,6 @@ class Blog
     {
         $this->tags = $tags;
 
-
         $tags->forAll(function ($key, $element) {
 
             $element->addBlogTag($this);

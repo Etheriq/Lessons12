@@ -5,7 +5,7 @@
     {% endblock title %}
 
      {% block wraper %}
-
+<div class="row">
          <div class="col-md-10">
              {% block breadcrumb %}
 
@@ -34,20 +34,35 @@
                  </li>
              </ul>
          </div>
-
-         <div class="row">
+</div>
+     <div class="row">
          <div class="col-md-8">
              {% block content %}
 
-                {{ blog.title }} <br>
-                 {{ blog.category.categoryName }} <br>
+                {% for blog in blogs %}
+                   <div class="article-header">
+                    {{ blog.title }}
+                   </div>
+                    <div class="article-body">
+                        <img src="{{ asset(blog.picture) }}" class="img-rounded">
+                        {{ blog.textBlog|limitWords(30, path('blog_showInfo', {'slug': blog.slug}))|raw }}
+                    </div>
 
-                 {{ blog.slug }} <br>
+                    <div class="article-footer">
+                       <div class="text-left myCat">
+                           <strong>Category: </strong>
+                           {{ blog.category.categoryName }}
+                       </div>
 
-                 {% for tag in blog.tags %}
-                     <span class="label label-info">{{ tag.tagName }}</span>
-                 {% endfor %}
+                        <div class="text-right myTags">
+                            <strong>Tags: </strong>
+                           {% for tag in blog.tags %}
+                               <span class="label label-info">{{ tag.tagName }}</span>
+                           {% endfor %}
+                        </div>
+                    </div>
 
+                   {% endfor %}
 
              {% endblock content %}
          </div>
@@ -68,31 +83,18 @@
                          <h3 class="panel-title">Last post from guest</h3>
                      </div>
                      <div class="panel-body">
-                         post from guest
+                         {{ render(controller('EtheriqBlogBundle:Main:showLastGuest')) }}
                      </div>
                  </div>
 
 
              {% endblock sidebar %}
          </div>
-         </div>
-
-
-
-
-
+     </div>
 
 
      {% endblock wraper %}
 
          {% block footer %}
-                     <p> footer home</p>
+             {{ pagerfanta(blogs, 'myFantaSet') }}
          {% endblock footer %}
-
-
-
-
-
-
-
-
