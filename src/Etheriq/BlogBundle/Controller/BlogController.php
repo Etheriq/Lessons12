@@ -15,9 +15,9 @@ use Pagerfanta\Pagerfanta;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Adapter\DoctrineCollectionAdapter;
 
-class MainController extends Controller
+class BlogController extends Controller
 {
-    public function indexAction($page)
+    public function showBlogMainPageAction($page)
     {
         $em = $this->getDoctrine()->getManager();
         $query = $em->getRepository('EtheriqBlogBundle:Blog')->findBlogsDESC();  // Order by created DESC
@@ -36,25 +36,6 @@ class MainController extends Controller
         return $this->render('EtheriqBlogBundle:pages:homepage.html.twig', array(
             'blogs' => $pagerBlog
         ));
-    }
-
-    public function aboutAction()
-    {
-        return $this->render('EtheriqBlogBundle:pages:about.html.twig');
-    }
-
-    public function setLocaleAction($loc)
-    {
-        $this->get('request')->setLocale($loc);
-        return $this->redirect($this->generateUrl('homepage', array('_locale' => $loc) ));
-    }
-
-    public function showLastGuestAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-        $guests = $em->getRepository('EtheriqBlogBundle:Guest')->fiveLastGuest();
-
-        return $this->render('EtheriqBlogBundle:sidebar:lastGuest.html.twig', array('guests' => $guests));
     }
 
     public function showLastArticlesAction()

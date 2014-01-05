@@ -1,25 +1,25 @@
 homepage:
     pattern:  /{_locale}/{page}
-    defaults: { _controller: EtheriqBlogBundle:Main:index, _locale: en, page: 1 }
+    defaults: { _controller: EtheriqBlogBundle:Blog:showBlogMainPage, _locale: en, page: 1 }
     requirements:
             page:  \d+
             _locale: en|ru|uk
 
 blog_showInfo:
     pattern:  /{_locale}/blog/show/{slug}
-    defaults: { _controller: EtheriqBlogBundle:Main:showBlogInfo }
+    defaults: { _controller: EtheriqBlogBundle:Blog:showBlogInfo }
     requirements:
             _locale: en|ru|uk
 
 blog_category:
     pattern:  /{_locale}/blog/category/{id}/{page}
-    defaults: { _controller: EtheriqBlogBundle:Main:showBlogsByCategory, page: 1 }
+    defaults: { _controller: EtheriqBlogBundle:Blog:showBlogsByCategory, page: 1 }
     requirements:
             _locale: en|ru|uk
 
 blog_tag:
     pattern:  /{_locale}/blog/tag/{id}/{page}
-    defaults: { _controller: EtheriqBlogBundle:Main:showBlogsByTag, page: 1 }
+    defaults: { _controller: EtheriqBlogBundle:Blog:showBlogsByTag, page: 1 }
     requirements:
             _locale: en|ru|uk
 
@@ -44,12 +44,12 @@ guest_deleteItem:
 
 about:
     pattern:  /{_locale}/about
-    defaults: { _controller: EtheriqBlogBundle:Main:about }
+    defaults: { _controller: EtheriqBlogBundle:AboutMe:showAboutMePage }
     requirements:
             _locale: en|ru|uk
 
 set_locale:
     pattern: /setLocale/{loc}
-    defaults: { _controller: EtheriqBlogBundle:Main:setLocale, loc: en }
+    defaults: { _controller: EtheriqBlogBundle:Additional:setLocale, loc: en }
     requirements:
             loc: en|ru|uk

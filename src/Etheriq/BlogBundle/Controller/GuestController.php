@@ -116,6 +116,14 @@ class GuestController extends Controller
         return $this->redirect($this->generateUrl('guest'));
     }
 
+    public function showLastGuestAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $guests = $em->getRepository('EtheriqBlogBundle:Guest')->fiveLastGuest();
+
+        return $this->render('EtheriqBlogBundle:sidebar:lastGuest.html.twig', array('guests' => $guests));
+    }
+
 
 
 } 
