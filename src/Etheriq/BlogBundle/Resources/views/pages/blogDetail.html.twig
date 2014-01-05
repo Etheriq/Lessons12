@@ -24,7 +24,7 @@
                 {{ form_widget(form.rating) }}
                 <br>
                 {{ form_label(form.textBlog, 'text_article'|trans|raw) }}
-                {{ form_widget(form.textBlog, { 'attr': {'class': 'form-control', 'style': 'width:80%; height: 350px;', 'placeholder': 'Введите сообщение, минимальная длина 100 символом ' } }) }}
+                {{ form_widget(form.textBlog, { 'attr': {'class': 'form-control', 'style': 'width:80%; height: 350px;', 'placeholder': 'Введите сообщение, минимальная длина 50 символом ' } }) }}
 
                 <br>
                 <p><strong>{{ 'rating_article'|trans }}</strong> <span class="badge">{{ rating|rating(voters) }}</span></p>
@@ -43,6 +43,8 @@
 
                 <p>{{ form_errors(form.title) }}</p>
                 <p>{{ form_errors(form.textBlog) }}</p>
+                <p>{{ form_errors(form) }}</p>
+
 
          {{ form_end(form) }}
 
