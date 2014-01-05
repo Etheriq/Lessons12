@@ -23,6 +23,12 @@ blog_tag:
     requirements:
             _locale: en|ru|uk
 
+blog_search:
+    pattern:  /{_locale}/blog/search/{search}/{page}
+    defaults: { _controller: EtheriqBlogBundle:Blog:searchBlogsByTitle, page: 1 }
+    requirements:
+            _locale: en|ru|uk
+
 guest:
     pattern:  /{_locale}/guest/{page}
     defaults: { _controller: EtheriqBlogBundle:Guest:showGuest, page: 1 }
