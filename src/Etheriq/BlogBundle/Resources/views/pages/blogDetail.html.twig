@@ -19,7 +19,7 @@
          {{ form_start(form, {'attr': {'role': 'form', 'novalidate': 'novalidate' }}) }}
 
                 {{ form_label(form.title, 'blog_title'|trans|raw) }}
-                {{ form_widget(form.title, { 'attr': {'class': 'form-control', 'style': 'width:30%; ', 'placeholder': 'Введите название статьи' } }) }}
+                {{ form_widget(form.title, { 'attr': {'class': 'form-control', 'style': 'width:80%; ', 'placeholder': 'Введите название статьи' } }) }}
 
                 {{ form_widget(form.rating) }}
                 <br>
@@ -27,8 +27,21 @@
                 {{ form_widget(form.textBlog, { 'attr': {'class': 'form-control', 'style': 'width:80%; height: 350px;', 'placeholder': 'Введите сообщение, минимальная длина 50 символом ' } }) }}
 
                 <br>
-                <p><strong>{{ 'rating_article'|trans }}</strong> <span class="badge">{{ rating|rating(voters) }}</span></p>
-                <div  id = "rates">
+
+                <p><strong>{{ 'category_article'|trans }}</strong></p>
+                <select name="category_article" class="form-control" style="width: 80%;">
+                    {% for category in categorys %}
+                        {% if category.id == categotyBlogId %}
+                            <option selected value="{{ category.id }}">{{ category.categoryName }}</option>
+                        {% else %}
+                            <option value="{{ category.id }}">{{ category.categoryName }}</option>
+                        {% endif %}
+                     {% endfor %}
+                </select>
+
+                <br>
+                 <p><strong>{{ 'rating_article'|trans }}</strong> <span class="badge">{{ rating|rating(voters) }}</span></p>
+                 <div  id = "rates">
                  <ul>
                      <li class="defaultRating"></li>
                      <li class="defaultRating"></li>

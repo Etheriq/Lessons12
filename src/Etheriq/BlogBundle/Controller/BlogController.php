@@ -117,6 +117,9 @@ class BlogController extends Controller
         $allRequest = $request->createFromGlobals();
         $rate = $allRequest->request->all();
 
+        $categorys = $em->getRepository('EtheriqBlogBundle:Category')->findAll();
+
+
         $blogShow->setTitle($blogShow->getTitle());
         $blogShow->setTextBlog($blogShow->getTextBlog());
 
@@ -140,6 +143,9 @@ class BlogController extends Controller
                 $blogShow->setRating($ratingOld);
             }
 
+            $category = $em->getRepository('EtheriqBlogBundle:Category')->findOneById($rate['category_article']);
+            $blogShow->setCategory($category);
+
             $blogToDb->flush();
 
             return $this->redirect($this->generateUrl('homepage'));
@@ -148,7 +154,9 @@ class BlogController extends Controller
         return $this->render('EtheriqBlogBundle:pages:blogDetail.html.twig', array(
             'form' => $form->createView(),
             'rating' => $ratingOld,
-            'voters' => $blogShow->getNumberOfVoters()
+            'voters' => $blogShow->getNumberOfVoters(),
+            'categorys' => $categorys,
+            'categotyBlogId' => $blogShow->getCategory()->getId()
         ));
 
     }
