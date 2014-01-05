@@ -10,7 +10,7 @@ blogs:
     2:
         title: Nunc vestibulum varius vulputate
         pictureSrc: img/blog/symfony.jpg
-        textBlog: Nunc vestibulum varius vulputate. Nam lacinia sed purus ut tincidunt. Maecenas vitae augue vitae purus vestibulum tempor et non lectus. Integer venenatis, mauris non pulvinar fermentum, leo sem vulputate dolor, nec rutrum tellus quam id tellus. Integer vitae cursus mi, nec interdum velit. Proin tempus ut tellus id feugiat. Nam mattis augue et ipsum interdum faucibus. Etiam pellentesque ante orci, sed tempor lorem molestie at.
+        textBlog: Pellentesque quis enim venenatis ante suscipit vulputate. In eget rhoncus nulla. Aenean non convallis lorem, ut laoreet purus. Vestibulum laoreet metus at tincidunt gravida. Suspendisse vel semper orci. Sed id enim vulputate, molestie massa eu, condimentum mauris. Ut non volutpat sapien. Integer vitae dapibus erat. Proin volutpat, erat et lacinia aliquet, libero odio dapibus metus, et porttitor magna risus nec orci. Morbi nec suscipit nisl. Nam ut quam vel velit luctus mattis a nec urna. Curabitur quis blandit nulla. Morbi laoreet scelerisque nisi, ac vehicula arcu tempus id. Mauris sit amet velit mauris.
         rating: 7
         numOfVot: 2
         category: Symfony
@@ -18,7 +18,7 @@ blogs:
     3:
         title: Praesent consectetur
         pictureSrc: img/blog/symfony.jpg
-        textBlog: Nunc vestibulum varius vulputate. Nam lacinia sed purus ut tincidunt. Maecenas vitae augue vitae purus vestibulum tempor et non lectus. Integer venenatis, mauris non pulvinar fermentum, leo sem vulputate dolor, nec rutrum tellus quam id tellus. Integer vitae cursus mi, nec interdum velit. Proin tempus ut tellus id feugiat. Nam mattis augue et ipsum interdum faucibus. Etiam pellentesque ante orci, sed tempor lorem molestie at.
+        textBlog: Ut faucibus imperdiet blandit. Duis nec semper dolor, nec malesuada turpis. Cras aliquam diam ut volutpat porttitor. Integer ac metus tempus, euismod ipsum ut, lobortis neque. Mauris molestie velit elit, sit amet interdum ligula scelerisque ut. Nulla faucibus placerat euismod. Integer enim metus, sodales feugiat dolor in, convallis vehicula elit. Mauris quis quam sed eros tincidunt tincidunt sed in tellus.
         rating: 15
         numOfVot: 4
         category: Symfony
@@ -26,7 +26,7 @@ blogs:
     4:
         title: Integer nec quam ligula
         pictureSrc: img/blog/bluz.jpg
-        textBlog: Nunc vestibulum varius vulputate. Nam lacinia sed purus ut tincidunt. Maecenas vitae augue vitae purus vestibulum tempor et non lectus. Integer venenatis, mauris non pulvinar fermentum, leo sem vulputate dolor, nec rutrum tellus quam id tellus. Integer vitae cursus mi, nec interdum velit. Proin tempus ut tellus id feugiat. Nam mattis augue et ipsum interdum faucibus. Etiam pellentesque ante orci, sed tempor lorem molestie at.
+        textBlog: In quis posuere nisi. Fusce ut nunc id nisl condimentum ultrices non vel metus. Integer fringilla hendrerit eros, a egestas arcu vulputate quis. Duis convallis lectus purus, fringilla egestas enim fringilla a. Sed ut augue tempus, volutpat lorem ut, tincidunt dui. Donec sit amet ligula ut neque dignissim semper et et felis. Fusce blandit, erat et ornare vestibulum, tortor mi luctus felis, sit amet hendrerit lectus sapien ac velit. Vestibulum aliquam interdum urna, eu euismod ligula tempus eget. Proin volutpat, velit a vestibulum tincidunt, sem augue varius ligula, ut semper quam risus non ante. Nam ligula dui, feugiat non sollicitudin et, vulputate pretium orci. Ut at lectus mauris.
         rating: 25
         numOfVot: 7
         category: Bluz
@@ -34,7 +34,7 @@ blogs:
     5:
         title: Fusce egestas ornare dui
         pictureSrc: img/blog/wordpress.jpg
-        textBlog: Nunc vestibulum varius vulputate. Nam lacinia sed purus ut tincidunt. Maecenas vitae augue vitae purus vestibulum tempor et non lectus. Integer venenatis, mauris non pulvinar fermentum, leo sem vulputate dolor, nec rutrum tellus quam id tellus. Integer vitae cursus mi, nec interdum velit. Proin tempus ut tellus id feugiat. Nam mattis augue et ipsum interdum faucibus. Etiam pellentesque ante orci, sed tempor lorem molestie at.
+        textBlog: Sed quis ante eu ligula adipiscing consequat a lobortis eros. Quisque quam sem, tristique sit amet mi vitae, hendrerit imperdiet orci. Sed id massa vel felis ullamcorper luctus eget nec purus. Ut aliquam sodales turpis, vitae laoreet urna placerat a. Cras semper dapibus risus, eu suscipit nibh accumsan ullamcorper. Quisque est massa, dapibus nec mollis quis, luctus vitae diam. Maecenas at enim in neque pretium vulputate eget vitae enim. Maecenas sed condimentum nulla, eleifend vehicula purus.
         rating: 40
         numOfVot: 12
         category: WordPress
@@ -42,7 +42,7 @@ blogs:
     6:
         title: Praesent pulvinar vestibulum dolor
         pictureSrc: img/blog/yii.jpg
-        textBlog: Nunc vestibulum varius vulputate. Nam lacinia sed purus ut tincidunt. Maecenas vitae augue vitae purus vestibulum tempor et non lectus. Integer venenatis, mauris non pulvinar fermentum, leo sem vulputate dolor, nec rutrum tellus quam id tellus. Integer vitae cursus mi, nec interdum velit. Proin tempus ut tellus id feugiat. Nam mattis augue et ipsum interdum faucibus. Etiam pellentesque ante orci, sed tempor lorem molestie at.
+        textBlog: Ut eleifend commodo libero, at molestie nulla tincidunt id. Nam fermentum magna id hendrerit scelerisque. Phasellus auctor volutpat faucibus. Vestibulum tincidunt turpis enim, quis interdum velit condimentum eget. Mauris vitae eros sed orci porttitor fringilla et non arcu. Suspendisse ut tortor faucibus, tristique magna sit amet, scelerisque ligula. In placerat vestibulum justo, quis malesuada augue auctor ut. Vestibulum posuere convallis sem. Cras faucibus rhoncus turpis, et pulvinar risus rhoncus dignissim. Mauris vel magna fringilla, interdum sem sit amet, tristique dui. Donec quis augue posuere, vehicula urna sit amet, tincidunt enim. Donec sollicitudin lectus id sapien eleifend, sit amet varius dui faucibus. Cras ut neque sollicitudin, ultrices nibh eget, feugiat elit. Phasellus iaculis lacus sed ullamcorper egestas. Suspendisse sagittis tempus lorem, non aliquet nunc viverra non. Donec laoreet, ipsum nec egestas vulputate, ipsum est ultrices nulla, sit amet hendrerit sem dolor vitae orci.
         rating: 23
         numOfVot: 5
         category: Yii
@@ -50,7 +50,7 @@ blogs:
     7:
         title: Integer felis purus
         pictureSrc: img/blog/wordpress.jpg
-        textBlog: Nunc vestibulum varius vulputate. Nam lacinia sed purus ut tincidunt. Maecenas vitae augue vitae purus vestibulum tempor et non lectus. Integer venenatis, mauris non pulvinar fermentum, leo sem vulputate dolor, nec rutrum tellus quam id tellus. Integer vitae cursus mi, nec interdum velit. Proin tempus ut tellus id feugiat. Nam mattis augue et ipsum interdum faucibus. Etiam pellentesque ante orci, sed tempor lorem molestie at.
+        textBlog: Mauris ullamcorper nulla ut velit rutrum, et ullamcorper risus fermentum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut sed venenatis justo, et accumsan orci. Cras eu rhoncus ipsum. Nunc lacus risus, feugiat vel sollicitudin eu, iaculis nec velit. Interdum et malesuada fames ac ante ipsum primis in faucibus. Donec suscipit orci auctor turpis adipiscing, id tempus augue tincidunt.
         rating: 11
         numOfVot: 3
         category: WordPress
@@ -58,7 +58,7 @@ blogs:
     8:
         title: Etiam non odio eget erat
         pictureSrc: img/blog/yii.jpg
-        textBlog: Nunc vestibulum varius vulputate. Nam lacinia sed purus ut tincidunt. Maecenas vitae augue vitae purus vestibulum tempor et non lectus. Integer venenatis, mauris non pulvinar fermentum, leo sem vulputate dolor, nec rutrum tellus quam id tellus. Integer vitae cursus mi, nec interdum velit. Proin tempus ut tellus id feugiat. Nam mattis augue et ipsum interdum faucibus. Etiam pellentesque ante orci, sed tempor lorem molestie at.
+        textBlog: Vivamus auctor quis velit ultrices aliquet. Nulla rhoncus velit nunc, non feugiat arcu malesuada ut. Pellentesque aliquet urna sed mollis viverra. Quisque consequat bibendum enim, nec tempus dolor tristique viverra. Duis porttitor sagittis massa, quis suscipit nisi hendrerit sit amet. Vestibulum molestie vestibulum ornare. Morbi bibendum augue nec quam condimentum lacinia. Aenean eget leo quam. Vivamus placerat quis urna ut cursus. Curabitur et ligula sem. Vestibulum faucibus felis at arcu placerat tempus. Nullam pharetra, arcu sed hendrerit ullamcorper, nulla sem commodo dolor, eget tincidunt eros sapien sit amet dolor. Donec accumsan dolor sed nunc cursus malesuada. Phasellus sit amet consectetur tortor. Integer sagittis ultricies urna, vitae condimentum velit mattis at. Aliquam vitae imperdiet lorem.
         rating: 98
         numOfVot: 22
         category: Yii
@@ -66,7 +66,7 @@ blogs:
     9:
         title: Sed euismod rhoncus nulla a dictum
         pictureSrc: img/blog/bluz.jpg
-        textBlog: Nunc vestibulum varius vulputate. Nam lacinia sed purus ut tincidunt. Maecenas vitae augue vitae purus vestibulum tempor et non lectus. Integer venenatis, mauris non pulvinar fermentum, leo sem vulputate dolor, nec rutrum tellus quam id tellus. Integer vitae cursus mi, nec interdum velit. Proin tempus ut tellus id feugiat. Nam mattis augue et ipsum interdum faucibus. Etiam pellentesque ante orci, sed tempor lorem molestie at.
+        textBlog: Donec condimentum lobortis risus varius placerat. Duis consequat felis sit amet ligula lacinia suscipit. Duis elit odio, euismod sit amet fringilla vel, sollicitudin quis ante. Cras ut blandit odio, nec blandit neque. In in bibendum felis. Maecenas semper elit mauris, ac fermentum turpis rhoncus et. Praesent faucibus commodo velit, ac porttitor odio cursus eu. Suspendisse facilisis pharetra turpis. Morbi consequat imperdiet porta. Nullam feugiat dui quis odio suscipit, eu vestibulum mi hendrerit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas posuere tempor nisl, eget consequat tellus accumsan volutpat.
         rating: 37
         numOfVot: 9
         category: Bluz
@@ -74,7 +74,7 @@ blogs:
     10:
         title: Integer semper lacus sit amet nibh viverra
         pictureSrc: img/blog/html.jpg
-        textBlog: Nunc vestibulum varius vulputate. Nam lacinia sed purus ut tincidunt. Maecenas vitae augue vitae purus vestibulum tempor et non lectus. Integer venenatis, mauris non pulvinar fermentum, leo sem vulputate dolor, nec rutrum tellus quam id tellus. Integer vitae cursus mi, nec interdum velit. Proin tempus ut tellus id feugiat. Nam mattis augue et ipsum interdum faucibus. Etiam pellentesque ante orci, sed tempor lorem molestie at.
+        textBlog: In tempor porttitor laoreet. Donec lobortis facilisis orci ultrices rhoncus. Praesent scelerisque molestie lectus, sit amet tempor orci sollicitudin eu. Suspendisse ac felis vitae felis dapibus scelerisque non a metus. Sed in fringilla sem. Aliquam rutrum turpis quis lacus placerat, ullamcorper viverra felis vestibulum. Suspendisse ornare tortor sit amet volutpat tristique. In pellentesque ut dui at adipiscing. Phasellus vitae libero tincidunt, placerat risus in, consectetur lectus. Duis non elit sed magna aliquet pellentesque. Maecenas nisi nunc, consequat sit amet eleifend et, tincidunt sed turpis.
         rating: 51
         numOfVot: 14
         category: HTML
@@ -82,7 +82,7 @@ blogs:
     11:
         title: Integer mattis augue molestie
         pictureSrc: img/blog/drupal.jpg
-        textBlog: Nunc vestibulum varius vulputate. Nam lacinia sed purus ut tincidunt. Maecenas vitae augue vitae purus vestibulum tempor et non lectus. Integer venenatis, mauris non pulvinar fermentum, leo sem vulputate dolor, nec rutrum tellus quam id tellus. Integer vitae cursus mi, nec interdum velit. Proin tempus ut tellus id feugiat. Nam mattis augue et ipsum interdum faucibus. Etiam pellentesque ante orci, sed tempor lorem molestie at.
+        textBlog: Curabitur sagittis luctus sapien, quis pretium quam ullamcorper eu. Sed accumsan sapien ac molestie adipiscing. Nulla sed tempor eros. Cras sapien sapien, viverra et diam quis, pretium facilisis neque. Donec sapien elit, congue et nisi id, interdum pulvinar erat. Etiam vel enim interdum, consequat nisi eu, pellentesque velit. Praesent blandit pellentesque viverra. Quisque congue, urna id gravida scelerisque, lacus nibh mollis quam, nec cursus felis diam at urna. Phasellus sit amet ante sit amet purus lacinia vulputate. Suspendisse potenti.
         rating: 43
         numOfVot: 12
         category: Drupal
@@ -90,7 +90,7 @@ blogs:
     12:
         title: Nunc vestibulum varius vulputate
         pictureSrc: img/blog/yii.jpg
-        textBlog: Nunc vestibulum varius vulputate. Nam lacinia sed purus ut tincidunt. Maecenas vitae augue vitae purus vestibulum tempor et non lectus. Integer venenatis, mauris non pulvinar fermentum, leo sem vulputate dolor, nec rutrum tellus quam id tellus. Integer vitae cursus mi, nec interdum velit. Proin tempus ut tellus id feugiat. Nam mattis augue et ipsum interdum faucibus. Etiam pellentesque ante orci, sed tempor lorem molestie at.
+        textBlog: Pellentesque purus arcu, sollicitudin aliquam sapien id, volutpat rutrum nibh. Nulla vestibulum vitae ligula quis tristique. Proin posuere enim nec magna tristique pharetra. Aenean justo magna, molestie vel molestie eget, tincidunt mattis diam. Maecenas sed commodo turpis. Proin non est nisl. Phasellus tempor volutpat imperdiet. Morbi tempus, est dignissim pharetra dapibus, lorem sapien imperdiet mauris, vel varius augue sapien ac sapien. Sed felis augue, vehicula eu ante a, suscipit tincidunt risus. Sed sodales rutrum aliquet. Integer eu hendrerit libero, quis egestas dui. Nunc auctor tortor non eros dignissim pulvinar. Fusce non lacus et dolor blandit congue sit amet ac ipsum. Nam viverra, lorem quis sagittis dictum, odio nunc aliquet sapien, a consectetur mauris velit vitae neque. Morbi sodales elit purus, eget eleifend neque tempus in.
         rating: 63
         numOfVot: 17
         category: Yii
@@ -98,7 +98,7 @@ blogs:
     13:
         title: In consectetur mauris mauris
         pictureSrc: img/blog/symfony.jpg
-        textBlog: Nunc vestibulum varius vulputate. Nam lacinia sed purus ut tincidunt. Maecenas vitae augue vitae purus vestibulum tempor et non lectus. Integer venenatis, mauris non pulvinar fermentum, leo sem vulputate dolor, nec rutrum tellus quam id tellus. Integer vitae cursus mi, nec interdum velit. Proin tempus ut tellus id feugiat. Nam mattis augue et ipsum interdum faucibus. Etiam pellentesque ante orci, sed tempor lorem molestie at.
+        textBlog: Nulla sagittis dolor ligula, quis placerat massa elementum dignissim. Mauris faucibus, purus laoreet ornare placerat, eros neque vestibulum mauris, pharetra varius nunc mauris ac libero. Quisque vitae diam eget metus tincidunt mattis. Aliquam at massa consectetur, molestie dui ut, lacinia quam. Aliquam dignissim nisi felis, quis semper felis feugiat et. Proin imperdiet at magna id varius. Fusce molestie sem a lectus scelerisque, et mattis nulla hendrerit. Ut mattis suscipit libero ut placerat. Maecenas in fringilla est. Aenean porttitor metus eu ipsum sollicitudin fermentum.
         rating: 32
         numOfVot: 7
         category: Symfony
@@ -106,7 +106,7 @@ blogs:
     14:
         title: Phasellus rutrum turpis
         pictureSrc: img/blog/bluz.jpg
-        textBlog: Nunc vestibulum varius vulputate. Nam lacinia sed purus ut tincidunt. Maecenas vitae augue vitae purus vestibulum tempor et non lectus. Integer venenatis, mauris non pulvinar fermentum, leo sem vulputate dolor, nec rutrum tellus quam id tellus. Integer vitae cursus mi, nec interdum velit. Proin tempus ut tellus id feugiat. Nam mattis augue et ipsum interdum faucibus. Etiam pellentesque ante orci, sed tempor lorem molestie at.
+        textBlog: Proin suscipit non tortor quis gravida. Donec sodales justo lectus, non eleifend arcu pellentesque malesuada. Cras posuere convallis euismod. Etiam vel venenatis turpis. Nullam nec fermentum purus. Aliquam tempor felis tellus. Nam vitae velit eget libero pellentesque rutrum. Suspendisse ut pellentesque enim. Aliquam ac sollicitudin elit. Suspendisse consectetur odio metus, a fermentum ipsum commodo sit amet. Suspendisse eu lacus eu sapien viverra eleifend. Praesent est libero, tristique sit amet dui sed, luctus laoreet nibh. Vivamus dictum consequat feugiat. Duis porttitor nulla eget mollis ornare. Nulla bibendum est erat, sed elementum ipsum faucibus ut.
         rating: 7
         numOfVot: 2
         category: Bluz
@@ -114,7 +114,7 @@ blogs:
     15:
         title: Quisque non ante eros
         pictureSrc: img/blog/cms.jpg
-        textBlog: Nunc vestibulum varius vulputate. Nam lacinia sed purus ut tincidunt. Maecenas vitae augue vitae purus vestibulum tempor et non lectus. Integer venenatis, mauris non pulvinar fermentum, leo sem vulputate dolor, nec rutrum tellus quam id tellus. Integer vitae cursus mi, nec interdum velit. Proin tempus ut tellus id feugiat. Nam mattis augue et ipsum interdum faucibus. Etiam pellentesque ante orci, sed tempor lorem molestie at.
+        textBlog: Nunc eu auctor erat, non fermentum velit. Nulla sit amet orci ultricies velit ultrices laoreet sed quis augue. Cras et porttitor mauris. Morbi iaculis pretium rhoncus. Aliquam vestibulum malesuada mauris, vel convallis justo eleifend vitae. Nullam sodales eu felis a porta. Nullam nec luctus magna. In nec dolor id nunc consectetur volutpat ac nec odio. Nunc porttitor felis sed varius tristique. In sit amet enim ac justo fringilla lobortis quis vel sem. Aliquam quis nulla libero. Fusce ornare massa at purus malesuada, eget fringilla arcu interdum. Aenean nec purus a sem ornare lobortis et ut turpis. Cras vel tortor eget justo pellentesque suscipit vitae sed turpis.
         rating: 33
         numOfVot: 7
         category: CMS
@@ -122,7 +122,7 @@ blogs:
     16:
         title: Nulla facilisi. Integer nec magna magna
         pictureSrc: img/blog/drupal.jpg
-        textBlog: Nunc vestibulum varius vulputate. Nam lacinia sed purus ut tincidunt. Maecenas vitae augue vitae purus vestibulum tempor et non lectus. Integer venenatis, mauris non pulvinar fermentum, leo sem vulputate dolor, nec rutrum tellus quam id tellus. Integer vitae cursus mi, nec interdum velit. Proin tempus ut tellus id feugiat. Nam mattis augue et ipsum interdum faucibus. Etiam pellentesque ante orci, sed tempor lorem molestie at.
+        textBlog: In hac habitasse platea dictumst. Integer id arcu a sem accumsan mollis. Nullam non vestibulum massa. Interdum et malesuada fames ac ante ipsum primis in faucibus. Quisque ac tortor sit amet nibh pellentesque bibendum a a velit. Nam at urna odio. Nulla facilisi. Morbi eleifend felis et malesuada consectetur. Fusce congue eros ut erat commodo, eget rutrum ipsum sodales. Nullam lobortis magna sit amet dictum placerat. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lectus metus, pellentesque vel dui in, egestas pharetra diam. Suspendisse tempus, nulla eu ornare consectetur, mi arcu pellentesque massa, non ultrices turpis nibh nec orci.
         rating: 36
         numOfVot: 16
         category: Drupal

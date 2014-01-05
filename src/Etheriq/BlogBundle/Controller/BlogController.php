@@ -14,6 +14,8 @@ use Pagerfanta\Exception\NotValidCurrentPageException;
 use Pagerfanta\Pagerfanta;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Adapter\DoctrineCollectionAdapter;
+use Symfony\Component\HttpFoundation\Request;
+use Etheriq\BlogBundle\Form\BlogDetailType;
 
 class BlogController extends Controller
 {
@@ -102,7 +104,7 @@ class BlogController extends Controller
         ));
     }
 
-    public function showBlogInfoAction($slug)
+    public function showBlogInfoAction($slug, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $blogShow = $em->getRepository('EtheriqBlogBundle:Blog')->findOneBySlug($slug);
@@ -112,10 +114,42 @@ class BlogController extends Controller
             exit;
         }
 
+        $allRequest = $request->createFromGlobals();
+        $rate = $allRequest->request->all();
+
         $blogShow->setTitle($blogShow->getTitle());
         $blogShow->setTextBlog($blogShow->getTextBlog());
 
+        $ratingOld = $blogShow->getRating();
+        $blogShow->setRating(0);
 
+        $form = $this->createForm(new BlogDetailType(), $blogShow);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $blogToDb = $this->getDoctrine()->getManager();
+
+            if ($rate['blogDetailed']['rating'] != 0) {
+                $ratingNew = $ratingOld + $rate['blogDetailed']['rating'];
+                $voters = $blogShow->getNumberOfVoters();
+
+                $blogShow->setRating($ratingNew);
+                $blogShow->setNumberOfVoters($voters + 1);
+
+            } else {
+                $blogShow->setRating($ratingOld);
+            }
+
+            $blogToDb->flush();
+
+            return $this->redirect($this->generateUrl('homepage'));
+        }
+
+        return $this->render('EtheriqBlogBundle:pages:blogDetail.html.twig', array(
+            'form' => $form->createView(),
+            'rating' => $ratingOld,
+            'voters' => $blogShow->getNumberOfVoters()
+        ));
 
     }
 

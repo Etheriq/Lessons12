@@ -61,7 +61,7 @@ class Blog
 
     /**
      *
-     * @Assert\NotBlank(message = "name.not_blank")
+     * @Assert\NotBlank(message = "blog_title.not_blank")
      * @Assert\Length(min = "5", minMessage = "name.short")
      * @ORM\Column(type="string", length=200)
      */

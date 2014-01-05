@@ -22,9 +22,9 @@ class BlogDetailType  extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('titleBlog', 'text')
+            ->add('title', 'text')
             ->add('textBlog', 'textarea')
-            ->add('rate', 'hidden')
+            ->add('rating', 'hidden')
             ->add('save', 'submit');
     }
 

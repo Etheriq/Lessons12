@@ -1,0 +1,49 @@
+{% extends 'EtheriqBlogBundle::base.html.twig' %}
+
+    {% block title %}
+        About
+    {% endblock title %}
+
+     {% block wraper %}
+
+         {% block breadcrumb %}
+
+             <ol class="breadcrumb">
+                 <li><a href="{{ path('homepage') }}">{{ 'Home'|trans }}</a></li>
+                 <li class="active">{{ 'Blog in detail'|trans }}</li>
+             </ol>
+
+         {% endblock breadcrumb %}
+
+
+         {{ form_start(form, {'attr': {'role': 'form', 'novalidate': 'novalidate' }}) }}
+
+                {{ form_label(form.title, 'blog_title'|trans|raw) }}
+                {{ form_widget(form.title, { 'attr': {'class': 'form-control', 'style': 'width:30%; ', 'placeholder': 'Введите название статьи' } }) }}
+
+                {{ form_widget(form.rating) }}
+                <br>
+                {{ form_label(form.textBlog, 'text_article'|trans|raw) }}
+                {{ form_widget(form.textBlog, { 'attr': {'class': 'form-control', 'style': 'width:80%; height: 350px;', 'placeholder': 'Введите сообщение, минимальная длина 100 символом ' } }) }}
+
+                <br>
+                <p><strong>{{ 'rating_article'|trans }}</strong> <span class="badge">{{ rating|rating(voters) }}</span></p>
+                <div  id = "rates">
+                 <ul>
+                     <li class="defaultRating"></li>
+                     <li class="defaultRating"></li>
+                     <li class="defaultRating"></li>
+                     <li class="defaultRating"></li>
+                     <li class="defaultRating"></li>
+                 </ul>
+                </div>
+
+                <br><br>
+                {{ form_widget(form.save, { 'attr': {'class': 'btn btn-success'} }) }}
+
+                <p>{{ form_errors(form.title) }}</p>
+                <p>{{ form_errors(form.textBlog) }}</p>
+
+         {{ form_end(form) }}
+
+     {% endblock wraper %}
