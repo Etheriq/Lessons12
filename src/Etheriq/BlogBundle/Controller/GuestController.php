@@ -24,7 +24,6 @@ class GuestController extends Controller
 {
     public function showGuestAction($page, Request $request)
     {
-        $locale = $this->get('request')->getLocale();
         $em = $this->getDoctrine()->getManager();
 //        $em->getFilters()->disable('softdeleteable');  // to display removed data
         $query = $em->getRepository('EtheriqBlogBundle:Guest')->findDESCGuests();  // Order by DESC
@@ -60,15 +59,14 @@ class GuestController extends Controller
 
         return $this->render('EtheriqBlogBundle:pages:guest.html.twig', array(
             'fanta' => $pagerFanta,
-            'form' => $form->createView(),
-            'locale' => $locale
+            'form' => $form->createView()
         ));
     }
 
     public function showGuestInfoAction($slug, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $guestShow = $em->getRepository('EtheriqBlogBundle:Guest')->findOneBy(array('slug' => $slug));
+        $guestShow = $em->getRepository('EtheriqBlogBundle:Guest')->findOneBySlug($slug);
 
         if (!$guestShow) {
             return $this->render('EtheriqBlogBundle:pages:guestPageNotFound.html.twig', array('pageNumber' => $slug));
@@ -106,7 +104,7 @@ class GuestController extends Controller
     public function deleteGuestItemAction($slug)
     {
         $em = $this->getDoctrine()->getManager();
-        $guestDelete = $em->getRepository('EtheriqBlogBundle:Guest')->findOneBy(array('slug' => $slug));
+        $guestDelete = $em->getRepository('EtheriqBlogBundle:Guest')->findOneBySlug($slug);
 
 //        $guestEvent = new GuestEvent($guestDelete);
 //        $dispatcher = $this->get('event_dispatcher');
@@ -116,6 +114,14 @@ class GuestController extends Controller
         $em->flush();
 
         return $this->redirect($this->generateUrl('guest'));
+    }
+
+    public function showLastGuestAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $guests = $em->getRepository('EtheriqBlogBundle:Guest')->fiveLastGuest();
+
+        return $this->render('EtheriqBlogBundle:sidebar:lastGuest.html.twig', array('guests' => $guests));
     }
 
 

@@ -30,4 +30,13 @@ class GuestRepository extends EntityRepository
                 'SELECT g FROM EtheriqBlogBundle:Guest g'
             );
     }
+
+    public function fiveLastGuest()
+    {
+
+        return $this->getEntityManager()
+            ->createQuery('SELECT g FROM EtheriqBlogBundle:Guest g ORDER BY g.created DESC')
+            ->setMaxResults(5)
+            ->getArrayResult();
+    }
 } 

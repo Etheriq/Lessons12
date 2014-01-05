@@ -20,7 +20,7 @@
             <tag name="kernel.event_subscriber" />
         </service>
 
-        <service id="twig.extention.str.limit" class="Etheriq\BlogBundle\Twig\Extention\GuestExtention">
+        <service id="twig.extention.str.limit" class="Etheriq\BlogBundle\Twig\Extention\EtheriqTwigExtention">
             <tag name="twig.extension" />
         </service>
     </services>

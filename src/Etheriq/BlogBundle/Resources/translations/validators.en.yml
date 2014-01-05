@@ -6,3 +6,8 @@ email.not_correct: E-mail. This is not a valid email address
 message.not_blank: Message. This field must not be empty
 message.minLenght_error: Message is too short, the minimum length of 100 characters or more
 name.regex.error: The name must contain only letters
+blog_title.not_blank: Title of the topic. This field must not be empty
+blog_text.not_blank: Article should not be empty
+blog_title_length.short: Minimum length of the title theme - 5 characters or more
+blog_text.minLenght_error: The minimum length of the article - 50 characters or more
+blog_rating_error: You must specify the article's rating

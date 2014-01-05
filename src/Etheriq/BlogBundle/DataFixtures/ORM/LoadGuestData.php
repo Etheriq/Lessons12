@@ -8,13 +8,14 @@
  */
 
 namespace Etheriq\BlogBundle\DataFixtures;
+
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Symfony\Component\Yaml\Yaml;
 use Etheriq\BlogBundle\Entity\Guest;
 
-class loadGuestData extends AbstractFixture implements OrderedFixtureInterface
+class LoadGuestData extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {

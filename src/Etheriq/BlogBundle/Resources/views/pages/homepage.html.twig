@@ -5,7 +5,7 @@
     {% endblock title %}
 
      {% block wraper %}
-
+<div class="row">
          <div class="col-md-10">
              {% block breadcrumb %}
 
@@ -16,6 +16,7 @@
              {% endblock breadcrumb %}
          </div>
          <div class="col-md-2">
+             <div class="translate">
              <ul class="locale_change">
                  <li>
                      <a href="{{ path('set_locale', {'loc': 'en'}) }}">
@@ -33,22 +34,60 @@
                      </a>
                  </li>
              </ul>
+             </div>
          </div>
-
-         <div class="row">
+</div>
+     <div class="row">
          <div class="col-md-8">
              {% block content %}
-                 <p>
 
-                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce neque lacus, placerat id risus at, sollicitudin bibendum dui. Proin adipiscing vitae eros at cursus. Suspendisse lacinia malesuada scelerisque. Nulla facilisi. Ut vehicula quam sed consequat pretium. Maecenas blandit magna in tortor vulputate sollicitudin. Donec pulvinar fringilla diam, sed rutrum arcu iaculis pretium. Sed adipiscing metus sed libero tempus, blandit feugiat erat semper. Proin fermentum accumsan posuere. Nulla vel porta lorem. Etiam molestie augue sed diam bibendum suscipit. Aliquam tellus dolor, fermentum et aliquam non, dictum sed sapien. Duis porta purus vel lacus sodales blandit. Proin eleifend quis justo at accumsan.
-                     Sed at nisi libero. Suspendisse a mattis lectus. Cras nec pharetra purus, sit amet venenatis libero. Donec et imperdiet arcu, ac iaculis neque. Nunc tincidunt lacus eu fringilla pretium. Fusce non ultricies nibh, ut tempor felis. Vestibulum luctus auctor eros, varius faucibus ante sagittis ultrices. Proin hendrerit nunc in feugiat feugiat. Suspendisse non malesuada metus, non elementum urna.
+                 {% if filter is defined %}
+                     <div class="alert alert-success">
+                         {{ 'Filtered by'|trans }} <strong>{{ filter }}</strong>
+                         &nbsp;&nbsp;&nbsp; {{blogs.NbResults}} {{ 'articless has found'|trans }}
+                     </div>
 
-                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce neque lacus, placerat id risus at, sollicitudin bibendum dui. Proin adipiscing vitae eros at cursus. Suspendisse lacinia malesuada scelerisque. Nulla facilisi. Ut vehicula quam sed consequat pretium. Maecenas blandit magna in tortor vulputate sollicitudin. Donec pulvinar fringilla diam, sed rutrum arcu iaculis pretium. Sed adipiscing metus sed libero tempus, blandit feugiat erat semper. Proin fermentum accumsan posuere. Nulla vel porta lorem. Etiam molestie augue sed diam bibendum suscipit. Aliquam tellus dolor, fermentum et aliquam non, dictum sed sapien. Duis porta purus vel lacus sodales blandit. Proin eleifend quis justo at accumsan.
-                     Sed at nisi libero. Suspendisse a mattis lectus. Cras nec pharetra purus, sit amet venenatis libero. Donec et imperdiet arcu, ac iaculis neque. Nunc tincidunt lacus eu fringilla pretium. Fusce non ultricies nibh, ut tempor felis. Vestibulum luctus auctor eros, varius faucibus ante sagittis ultrices. Proin hendrerit nunc in feugiat feugiat. Suspendisse non malesuada metus, non elementum urna.
+                 {% endif %}
+                {% for blog in blogs %}
+                   <div class="article-header">
+                   <a href="{{ path('blog_showInfo', {'slug': blog.slug})|raw }}">
+                   <strong>{{ blog.title }}</strong>
+                   </a>
+                   <span>{{ 'Published'|trans }} {{ blog.created|date("d.m.Y") }}</span>
+                   </div>
+                   <div class="article-body">
+                        {#<img src="{{ asset(blog.picture) | imagine_filter('blog_main') }}" class="img-rounded">#}
+                        <img src="{{ asset(blog.picture) }}" class="img-thumbnail">
+                        {{ blog.textBlog|limitWords(63, path('blog_showInfo', {'slug': blog.slug}))|raw }}
+                   </div>
 
-                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce neque lacus, placerat id risus at, sollicitudin bibendum dui. Proin adipiscing vitae eros at cursus. Suspendisse lacinia malesuada scelerisque. Nulla facilisi. Ut vehicula quam sed consequat pretium. Maecenas blandit magna in tortor vulputate sollicitudin. Donec pulvinar fringilla diam, sed rutrum arcu iaculis pretium. Sed adipiscing metus sed libero tempus, blandit feugiat erat semper. Proin fermentum accumsan posuere. Nulla vel porta lorem. Etiam molestie augue sed diam bibendum suscipit. Aliquam tellus dolor, fermentum et aliquam non, dictum sed sapien. Duis porta purus vel lacus sodales blandit. Proin eleifend quis justo at accumsan.
-                     Sed at nisi libero. Suspendisse a mattis lectus. Cras nec pharetra purus, sit amet venenatis libero. Donec et imperdiet arcu, ac iaculis neque. Nunc tincidunt lacus eu fringilla pretium. Fusce non ultricies nibh, ut tempor felis. Vestibulum luctus auctor eros, varius faucibus ante sagittis ultrices. Proin hendrerit nunc in feugiat feugiat. Suspendisse non malesuada metus, non elementum urna.
-                 </p>
+                   <div class="article-footer">
+                      <div class="text-left myCat">
+                          <strong>{{ 'Category'|trans }} </strong>
+                          <span class="label label-primary">
+                              <a href="{{ path('blog_category', {'id': blog.category.id}) }}">
+                                {{ blog.category.categoryName }}
+                              </a>
+                          </span>
+                      </div>
+
+                       <div class="myRating">
+                           <strong>{{ 'Rating'|trans }}</strong>
+                           <span class="badge">{{ blog.rating|rating(blog.numberOfVoters) }}</span>
+                       </div>
+
+                       <div class="text-right myTags">
+                           <strong>{{ 'Tags'|trans }} </strong>
+                          {% for tag in blog.tags %}
+                              <a href="{{ path('blog_tag', {'id': tag.id}) }}">
+                                <span class="label label-info">{{ tag.tagName }}</span>
+                              </a>
+                          {% endfor %}
+                       </div>
+                   </div>
+                   <br><hr>
+                   {% endfor %}
+
              {% endblock content %}
          </div>
 
@@ -56,43 +95,40 @@
              {% block sidebar %}
                  <div class="panel panel-default">
                      <div class="panel-heading">
-                         <h3 class="panel-title">Lost articles</h3>
+                         <h3 class="panel-title">{{ 'Last articles'|trans }}</h3>
                      </div>
                      <div class="panel-body">
-                         5 lost articles
+                         {{ render(controller('EtheriqBlogBundle:Blog:showLastArticles')) }}
                      </div>
                  </div>
 
                  <div class="panel panel-default">
                      <div class="panel-heading">
-                         <h3 class="panel-title">Last post from guest</h3>
+                         <h3 class="panel-title">{{ 'Articles by rating'|trans }}</h3>
                      </div>
                      <div class="panel-body">
-                         post from guest
+                         {{ render(controller('EtheriqBlogBundle:Blog:showArticlesByRating')) }}
+                     </div>
+                 </div>
+
+
+                 <div class="panel panel-default">
+                     <div class="panel-heading">
+                         <h3 class="panel-title">{{ 'Last posts from guest book'|trans }}</h3>
+                     </div>
+                     <div class="panel-body">
+                         {{ render(controller('EtheriqBlogBundle:Guest:showLastGuest')) }}
                      </div>
                  </div>
 
 
              {% endblock sidebar %}
          </div>
-         </div>
-
-
-
-
-
+     </div>
 
 
      {% endblock wraper %}
 
          {% block footer %}
-                     <p> footer home</p>
+             {{ pagerfanta(blogs, 'myFantaSet') }}
          {% endblock footer %}
-
-
-
-
-
-
-
-

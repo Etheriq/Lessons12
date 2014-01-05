@@ -6,7 +6,8 @@ build_bootstrap();
 
 show_run("database:drop", "app/console doctrine:database:drop --force");
 show_run("database:create", "app/console doctrine:database:create");
-show_run("schema:create", "app/console doctrine:schema:create");
+show_run("generate:entities", "app/console doctrine:generate:entities Etheriq");
+show_run("schema:update", "app/console doctrine:schema:update --force");
 
 //show_run("Destroying cache dir manually", "rm -rf app/cache/*");   // ***********************
 
