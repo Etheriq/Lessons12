@@ -14,10 +14,12 @@ use Pagerfanta\Exception\NotValidCurrentPageException;
 use Pagerfanta\Pagerfanta;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Adapter\DoctrineCollectionAdapter;
+use Symfony\Component\HttpFoundation\Request;
+use Etheriq\BlogBundle\Form\BlogDetailType;
 
-class MainController extends Controller
+class BlogController extends Controller
 {
-    public function indexAction($page)
+    public function showBlogMainPageAction($page)
     {
         $em = $this->getDoctrine()->getManager();
         $query = $em->getRepository('EtheriqBlogBundle:Blog')->findBlogsDESC();  // Order by created DESC
@@ -36,25 +38,6 @@ class MainController extends Controller
         return $this->render('EtheriqBlogBundle:pages:homepage.html.twig', array(
             'blogs' => $pagerBlog
         ));
-    }
-
-    public function aboutAction()
-    {
-        return $this->render('EtheriqBlogBundle:pages:about.html.twig');
-    }
-
-    public function setLocaleAction($loc)
-    {
-        $this->get('request')->setLocale($loc);
-        return $this->redirect($this->generateUrl('homepage', array('_locale' => $loc) ));
-    }
-
-    public function showLastGuestAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-        $guests = $em->getRepository('EtheriqBlogBundle:Guest')->fiveLastGuest();
-
-        return $this->render('EtheriqBlogBundle:sidebar:lastGuest.html.twig', array('guests' => $guests));
     }
 
     public function showLastArticlesAction()
@@ -119,6 +102,63 @@ class MainController extends Controller
             'blogs' => $pagerBlog,
             'filter' => $tagName
         ));
+    }
+
+    public function showBlogInfoAction($slug, Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $blogShow = $em->getRepository('EtheriqBlogBundle:Blog')->findOneBySlug($slug);
+
+        if (!$blogShow) {
+            return $this->render('EtheriqBlogBundle:pages:guestPageNotFound.html.twig', array('pageNumber' => $slug));
+            exit;
+        }
+
+        $allRequest = $request->createFromGlobals();
+        $rate = $allRequest->request->all();
+
+        $categorys = $em->getRepository('EtheriqBlogBundle:Category')->findAll();
+
+
+        $blogShow->setTitle($blogShow->getTitle());
+        $blogShow->setTextBlog($blogShow->getTextBlog());
+
+        $ratingOld = $blogShow->getRating();
+        $blogShow->setRating(0);
+
+        $form = $this->createForm(new BlogDetailType(), $blogShow);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $blogToDb = $this->getDoctrine()->getManager();
+
+            if ($rate['blogDetailed']['rating'] != 0) {
+                $ratingNew = $ratingOld + $rate['blogDetailed']['rating'];
+                $voters = $blogShow->getNumberOfVoters();
+
+                $blogShow->setRating($ratingNew);
+                $blogShow->setNumberOfVoters($voters + 1);
+
+            } else {
+                $blogShow->setRating($ratingOld);
+            }
+
+            $category = $em->getRepository('EtheriqBlogBundle:Category')->findOneById($rate['category_article']);
+            $blogShow->setCategory($category);
+
+            $blogToDb->flush();
+
+            return $this->redirect($this->generateUrl('homepage'));
+        }
+
+        return $this->render('EtheriqBlogBundle:pages:blogDetail.html.twig', array(
+            'form' => $form->createView(),
+            'rating' => $ratingOld,
+            'voters' => $blogShow->getNumberOfVoters(),
+            'categorys' => $categorys,
+            'categotyBlogId' => $blogShow->getCategory()->getId()
+        ));
+
     }
 
 }

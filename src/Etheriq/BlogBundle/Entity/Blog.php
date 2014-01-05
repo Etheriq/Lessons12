@@ -61,16 +61,16 @@ class Blog
 
     /**
      *
-     * @Assert\NotBlank(message = "name.not_blank")
-     * @Assert\Length(min = "5", minMessage = "name.short")
+     * @Assert\NotBlank(message = "blog_title.not_blank")
+     * @Assert\Length(min = "5", minMessage = "blog_title_length.short")
      * @ORM\Column(type="string", length=200)
      */
     protected $title;
 
     /**
      *
-     * @Assert\NotBlank(message = "message.not_blank")
-     * @Assert\Length(min = "50", minMessage = "message.minLenght_error")
+     * @Assert\NotBlank(message = "blog_text.not_blank")
+     * @Assert\Length(min = "50", minMessage = "blog_text.minLenght_error")
      * @ORM\Column(type="text")
      */
     protected $textBlog;
@@ -83,7 +83,8 @@ class Blog
 
     /**
      *
-     * @ORM\Column(type="decimal", scale=1)
+     * @Assert\NotEqualTo(value = 0, message="blog_rating_error")
+     * @ORM\Column(type="integer")
      */
     protected $rating;
 

@@ -16,7 +16,7 @@ class BlogRepository extends EntityRepository
     {
 
         return $this->getEntityManager()
-            ->createQuery('SELECT b FROM EtheriqBlogBundle:Blog b ORDER BY b.rating DESC')
+            ->createQuery('SELECT b FROM EtheriqBlogBundle:Blog b ORDER BY b.rating/b.numberOfVoters DESC')
             ->setMaxResults(5)
             ->getArrayResult();
     }

@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * File: GuestExtention.php
+ * File: EtheriqTwigExtention.php
  * User: Yuriy Tarnavskiy
  * Date: 02.01.14
  * Time: 16:16
@@ -9,7 +9,7 @@
 
 namespace Etheriq\BlogBundle\Twig\Extention;
 
-class GuestExtention extends \Twig_Extension
+class EtheriqTwigExtention extends \Twig_Extension
 {
     public function getName()
     {
@@ -19,7 +19,8 @@ class GuestExtention extends \Twig_Extension
     public function getFilters()
     {
         return array(
-            'limitWords' => new \Twig_Filter_Method($this, 'limitWords')
+            'limitWords' => new \Twig_Filter_Method($this, 'limitWords'),
+            'rating' => new \Twig_Filter_Method($this, 'rating')
         );
     }
 
@@ -42,6 +43,12 @@ class GuestExtention extends \Twig_Extension
         }
 
         return $strResult.' <a href="'.$link.'"> ..... </a>';
+    }
+
+    public function rating($rating, $voters)
+    {
+
+        return round($rating / $voters, 1);
     }
 
 } 
