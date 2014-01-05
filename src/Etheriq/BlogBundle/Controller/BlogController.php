@@ -102,4 +102,21 @@ class BlogController extends Controller
         ));
     }
 
+    public function showBlogInfoAction($slug)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $blogShow = $em->getRepository('EtheriqBlogBundle:Blog')->findOneBySlug($slug);
+
+        if (!$blogShow) {
+            return $this->render('EtheriqBlogBundle:pages:guestPageNotFound.html.twig', array('pageNumber' => $slug));
+            exit;
+        }
+
+        $blogShow->setTitle($blogShow->getTitle());
+        $blogShow->setTextBlog($blogShow->getTextBlog());
+
+
+
+    }
+
 }

@@ -6,7 +6,7 @@
                 <a href="{{ path('blog_showInfo', {'slug': item.slug}) }}">
                     {{ item.title }}
                 </a>
-                <span class="badge">{{ item.rating }}</span>
+                <span class="badge">{{ item.rating|rating(item.numberOfVoters) }}</span>
             </li>
         {% endfor %}
     </ul>

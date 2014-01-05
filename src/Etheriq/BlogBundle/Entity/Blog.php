@@ -83,7 +83,7 @@ class Blog
 
     /**
      *
-     * @ORM\Column(type="decimal", scale=1)
+     * @ORM\Column(type="integer")
      */
     protected $rating;
 
