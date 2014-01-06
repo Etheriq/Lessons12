@@ -20,7 +20,8 @@ class EtheriqTwigExtention extends \Twig_Extension
     {
         return array(
             'limitWords' => new \Twig_Filter_Method($this, 'limitWords'),
-            'rating' => new \Twig_Filter_Method($this, 'rating')
+            'rating' => new \Twig_Filter_Method($this, 'rating'),
+            'tagView' => new \Twig_Filter_Method($this, 'tagView')
         );
     }
 
@@ -51,4 +52,12 @@ class EtheriqTwigExtention extends \Twig_Extension
         return round($rating / $voters, 1);
     }
 
-} 
+    public function tagView($string, $tag, $link )
+    {
+        $scale = rand(50, 150);
+
+//        return $link;
+        return "<a href=".$link."><span style='font-size: $scale%'>$tag</span></a>";
+    }
+
+}

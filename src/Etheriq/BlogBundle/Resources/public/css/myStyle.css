@@ -98,6 +98,10 @@ body
 {
     content: ">";
 }
+.left-sidebar.tagBlog a span
+{
+    padding-right: 20px;
+}
 
 /* =============   Rating CSS ==================== */
 #rates{

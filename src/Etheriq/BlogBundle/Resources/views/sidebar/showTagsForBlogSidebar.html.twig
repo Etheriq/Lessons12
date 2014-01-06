@@ -1,0 +1,5 @@
+<div class="left-sidebar tagBlog">
+        {% for item in tags %}
+            {{ item.tagName|tagView(item.tagName, path('blog_tag', {'id': item.id}))|raw }}
+        {% endfor %}
+</div>

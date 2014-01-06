@@ -205,4 +205,12 @@ class BlogController extends Controller
         ));
     }
 
+    public function showTagsAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $tags = $em->getRepository('EtheriqBlogBundle:Tags')->findAll();
+
+        return $this->render('EtheriqBlogBundle:sidebar:showTagsForBlogSidebar.html.twig', array('tags' => $tags));
+    }
+
 }
