@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Etheriq\BlogBundle\Form\BlogDetailType;
 use Pagerfanta\Adapter\FixedAdapter;
 use Pagerfanta\Adapter\ArrayAdapter;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class BlogController extends Controller
 {
@@ -182,9 +183,8 @@ class BlogController extends Controller
         return $this->redirect($this->generateUrl('blog_search', array('search' => $search)));
     }
 
-    public function searchBlogsByTitleAction($search, $page)
+    public function searchBlogsByTitleAction($search=null, $page)
     {
-
         $em = $this->getDoctrine()->getManager();
         $searchedBlogs = $em->getRepository('EtheriqBlogBundle:Blog')->searchArticlesByTitle($search);
 

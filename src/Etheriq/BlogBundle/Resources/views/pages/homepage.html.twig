@@ -48,45 +48,45 @@
                      </div>
 
                  {% endif %}
-                {% for blog in blogs %}
-                   <div class="article-header">
-                   <a href="{{ path('blog_showInfo', {'slug': blog.slug})|raw }}">
-                   <strong>{{ blog.title }}</strong>
-                   </a>
-                   <span>{{ 'Published'|trans }} {{ blog.created|date("d.m.Y") }}</span>
-                   </div>
-                   <div class="article-body">
-                        {#<img src="{{ asset(blog.picture) | imagine_filter('blog_main') }}" class="img-rounded">#}
-                        <img src="{{ asset(blog.picture) }}" class="img-thumbnail">
-                        {{ blog.textBlog|limitWords(63, path('blog_showInfo', {'slug': blog.slug}))|raw }}
-                   </div>
-
-                   <div class="article-footer">
-                      <div class="text-left myCat">
-                          <strong>{{ 'Category'|trans }} </strong>
-                          <span class="label label-primary">
-                              <a href="{{ path('blog_category', {'id': blog.category.id}) }}">
-                                {{ blog.category.categoryName }}
-                              </a>
-                          </span>
-                      </div>
-
-                       <div class="myRating">
-                           <strong>{{ 'Rating'|trans }}</strong>
-                           <span class="badge">{{ blog.rating|rating(blog.numberOfVoters) }}</span>
+                    {% for blog in blogs %}
+                       <div class="article-header">
+                       <a href="{{ path('blog_showInfo', {'slug': blog.slug})|raw }}">
+                       <strong>{{ blog.title }}</strong>
+                       </a>
+                       <span>{{ 'Published'|trans }} {{ blog.created|date("d.m.Y") }}</span>
+                       </div>
+                       <div class="article-body">
+                            {#<img src="{{ asset(blog.picture) | imagine_filter('blog_main') }}" class="img-rounded">#}
+                            <img src="{{ asset(blog.picture) }}" class="img-thumbnail">
+                            {{ blog.textBlog|limitWords(63, path('blog_showInfo', {'slug': blog.slug}))|raw }}
                        </div>
 
-                       <div class="text-right myTags">
-                           <strong>{{ 'Tags'|trans }} </strong>
-                          {% for tag in blog.tags %}
-                              <a href="{{ path('blog_tag', {'id': tag.id}) }}">
-                                <span class="label label-info">{{ tag.tagName }}</span>
-                              </a>
-                          {% endfor %}
+                       <div class="article-footer">
+                          <div class="text-left myCat">
+                              <strong>{{ 'Category'|trans }} </strong>
+                              <span class="label label-primary">
+                                  <a href="{{ path('blog_category', {'id': blog.category.id}) }}">
+                                    {{ blog.category.categoryName }}
+                                  </a>
+                              </span>
+                          </div>
+
+                           <div class="myRating">
+                               <strong>{{ 'Rating'|trans }}</strong>
+                               <span class="badge">{{ blog.rating|rating(blog.numberOfVoters) }}</span>
+                           </div>
+
+                           <div class="text-right myTags">
+                               <strong>{{ 'Tags'|trans }} </strong>
+                              {% for tag in blog.tags %}
+                                  <a href="{{ path('blog_tag', {'id': tag.id}) }}">
+                                    <span class="label label-info">{{ tag.tagName }}</span>
+                                  </a>
+                              {% endfor %}
+                           </div>
                        </div>
-                   </div>
-                   <br><hr>
-                   {% endfor %}
+                       <br><hr>
+                    {% endfor %}
 
              {% endblock content %}
          </div>
@@ -126,9 +126,11 @@
          </div>
      </div>
 
-
      {% endblock wraper %}
 
-         {% block footer %}
+     {% block footer %}
+         {% if blogs.haveToPaginate %}
              {{ pagerfanta(blogs, 'myFantaSet') }}
-         {% endblock footer %}
+         {% endif %}
+
+     {% endblock footer %}
