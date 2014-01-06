@@ -45,4 +45,13 @@ class BlogRepository extends EntityRepository
             ->getArrayResult();
     }
 
+    public function searchArticlesByTitle($title)
+    {
+
+        return $this->getEntityManager()
+            ->createQuery('SELECT b FROM EtheriqBlogBundle:Blog b where b.title like :titleSearch ')
+            ->setParameter('titleSearch', '%'.$title.'%')
+            ->execute();
+    }
+
 } 

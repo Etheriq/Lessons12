@@ -16,6 +16,8 @@ use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Adapter\DoctrineCollectionAdapter;
 use Symfony\Component\HttpFoundation\Request;
 use Etheriq\BlogBundle\Form\BlogDetailType;
+use Pagerfanta\Adapter\FixedAdapter;
+use Pagerfanta\Adapter\ArrayAdapter;
 
 class BlogController extends Controller
 {
@@ -86,6 +88,8 @@ class BlogController extends Controller
         $tag = $em->getRepository('EtheriqBlogBundle:Tags')->find($id);
         $tagName = $tag->getTagName();
         $blogs = $tag->getBlogTags();
+
+//        var_dump($tag); exit;
 
         $adapter = new DoctrineCollectionAdapter($blogs);
         $pagerBlog = new Pagerfanta($adapter);
@@ -159,6 +163,40 @@ class BlogController extends Controller
             'categotyBlogId' => $blogShow->getCategory()->getId()
         ));
 
+    }
+
+    public function findAction(Request $request)
+    {
+        $allRequest = $request->createFromGlobals();
+        $s = $allRequest->request->all();
+
+        $search = $s['search'];
+
+
+        return $this->redirect($this->generateUrl('blog_search', array('search' => $search)));
+    }
+
+    public function searchBlogsByTitleAction($search, $page)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $searchedBlogs = $em->getRepository('EtheriqBlogBundle:Blog')->searchArticlesByTitle($search);
+
+        $adapter = new ArrayAdapter($searchedBlogs);
+        $pagerBlog = new Pagerfanta($adapter);
+        $pagerBlog->setMaxPerPage(5);
+
+        try {
+            $pagerBlog->setCurrentPage($page);
+        } catch (NotValidCurrentPageException $e) {
+
+            return $this->render('EtheriqBlogBundle:pages:guestPageNotFound.html.twig', array('pageNumber' => $page));
+        }
+
+        return $this->render('EtheriqBlogBundle:pages:homepage.html.twig', array(
+            'blogs' => $pagerBlog,
+            'filter' => $search
+        ));
     }
 
 }
