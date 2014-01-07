@@ -1,0 +1,67 @@
+homepage:
+    pattern:  /{_locale}/{page}
+    defaults: { _controller: EtheriqBlogBundle:Blog:showBlogMainPage, _locale: en, page: 1 }
+    requirements:
+            page:  \d+
+            _locale: en|ru|uk
+
+blog_showInfo:
+    pattern:  /{_locale}/blog/show/{slug}
+    defaults: { _controller: EtheriqBlogBundle:Blog:showBlogInfo }
+    requirements:
+            _locale: en|ru|uk
+
+blog_category:
+    pattern:  /{_locale}/blog/category/{slug}/{page}
+    defaults: { _controller: EtheriqBlogBundle:Blog:showBlogsByCategory, page: 1 }
+    requirements:
+            _locale: en|ru|uk
+
+blog_tag:
+    pattern:  /{_locale}/blog/tag/{slug}/{page}
+    defaults: { _controller: EtheriqBlogBundle:Blog:showBlogsByTag, page: 1 }
+    requirements:
+            _locale: en|ru|uk
+
+blog_find:
+    pattern:  /{_locale}/blog/find
+    defaults: { _controller: EtheriqBlogBundle:Blog:find }
+    requirements:
+            _locale: en|ru|uk
+
+blog_search:
+    pattern:  /{_locale}/blog/search/{search}/{page}
+    defaults: { _controller: EtheriqBlogBundle:Blog:searchBlogsByTitle, page: 1 }
+    requirements:
+            _locale: en|ru|uk
+
+guest:
+    pattern:  /{_locale}/guest/{page}
+    defaults: { _controller: EtheriqBlogBundle:Guest:showGuest, page: 1 }
+    requirements:
+            page:  \d+
+            _locale: en|ru|uk
+
+guest_showInfo:
+    pattern:  /{_locale}/guest/show/{slug}
+    defaults: { _controller: EtheriqBlogBundle:Guest:showGuestInfo }
+    requirements:
+            _locale: en|ru|uk
+
+guest_deleteItem:
+    pattern:  /{_locale}/guest/delete/{slug}
+    defaults: { _controller: EtheriqBlogBundle:Guest:deleteGuestItem }
+    requirements:
+            _locale: en|ru|uk
+
+about:
+    pattern:  /{_locale}/about
+    defaults: { _controller: EtheriqBlogBundle:AboutMe:showAboutMePage }
+    requirements:
+            _locale: en|ru|uk
+
+set_locale:
+    pattern: /setLocale/{loc}
+    defaults: { _controller: EtheriqBlogBundle:Additional:setLocale, loc: en }
+    requirements:
+            loc: en|ru|uk
