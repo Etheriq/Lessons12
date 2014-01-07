@@ -52,12 +52,11 @@ class EtheriqTwigExtention extends \Twig_Extension
         return round($rating / $voters, 1);
     }
 
-    public function tagView($string, $tag, $link )
+    public function tagView($string, $link )
     {
-        $scale = rand(50, 150);
+        $scale = mt_rand(80, 150);
 
-//        return $link;
-        return "<a href=".$link."><span style='font-size: $scale%'>$tag</span></a>";
+        return "<a href=".$link."><span style='font-size: $scale%'>$string</span></a>";
     }
 
 }

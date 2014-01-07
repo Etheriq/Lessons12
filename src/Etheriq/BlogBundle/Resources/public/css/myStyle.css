@@ -102,7 +102,11 @@ body
 {
     padding-right: 20px;
 }
-
+.guest-hr
+{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 /* =============   Rating CSS ==================== */
 #rates{
     position : relative;

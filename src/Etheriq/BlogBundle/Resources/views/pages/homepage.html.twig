@@ -65,7 +65,7 @@
                           <div class="text-left myCat">
                               <strong>{{ 'Category'|trans }} </strong>
                               <span class="label label-primary">
-                                  <a href="{{ path('blog_category', {'id': blog.category.id}) }}">
+                                  <a href="{{ path('blog_category', {'slug': blog.category.slug}) }}">
                                     {{ blog.category.categoryName }}
                                   </a>
                               </span>
@@ -79,7 +79,7 @@
                            <div class="text-right myTags">
                                <strong>{{ 'Tags'|trans }} </strong>
                               {% for tag in blog.tags %}
-                                  <a href="{{ path('blog_tag', {'id': tag.id}) }}">
+                                  <a href="{{ path('blog_tag', {'slug': tag.slug}) }}">
                                     <span class="label label-info">{{ tag.tagName }}</span>
                                   </a>
                               {% endfor %}
