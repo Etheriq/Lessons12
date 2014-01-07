@@ -56,7 +56,7 @@
                      <a href="{{ path('guest_showInfo', {'slug': item.slug}) }}" class="btn btn-info btn-sm">{{ 'More info'|trans }}</a>
                      <span> {{ 'Created'|trans }}: {{ item.created| date("d.m.Y G:i") }} </span>
                      <span> {{ 'Changed'|trans }}: {{ item.updated| date("d.m.Y G:i") }} </span>
-                     <hr>
+                     <hr class="guest-hr">
                      <b>{{ item.nameGuest }}</b>  ({{ item.emailGuest }})<br>
                      {{ item.bodyGuest|limitWords(20, path('guest_showInfo', {'slug': item.slug}))|raw }}
                  </div>

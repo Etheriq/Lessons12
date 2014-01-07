@@ -9,6 +9,7 @@
 namespace Etheriq\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Class Category
@@ -32,6 +33,13 @@ class Category
      * @ORM\Column(type="string", length=150)
      */
     protected $categoryName;
+
+    /**
+     *
+     * @Gedmo\Slug(fields={"categoryName"})
+     * @ORM\Column(type="string", length=200, unique=true)
+     */
+    protected $slug;
 
     /**
      *
@@ -111,5 +119,28 @@ class Category
     public function getBlogs()
     {
         return $this->blogs;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Category
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }

@@ -59,10 +59,10 @@ class BlogController extends Controller
         return $this->render('EtheriqBlogBundle:sidebar:mostPopularBlogArticles.html.twig', array('blogs' => $blogs));
     }
 
-    public function showBlogsByCategoryAction($page, $id)
+    public function showBlogsByCategoryAction($page, $slug)
     {
         $em = $this->getDoctrine()->getManager();
-        $cat = $em->getRepository('EtheriqBlogBundle:Category')->find($id);
+        $cat = $em->getRepository('EtheriqBlogBundle:Category')->findOneBySlug($slug);
         $catName = $cat->getCategoryName();
         $blogs = $cat->getBlogs();
 
@@ -83,14 +83,12 @@ class BlogController extends Controller
         ));
     }
 
-    public function showBlogsByTagAction($page, $id)
+    public function showBlogsByTagAction($page, $slug)
     {
         $em = $this->getDoctrine()->getManager();
-        $tag = $em->getRepository('EtheriqBlogBundle:Tags')->find($id);
+        $tag = $em->getRepository('EtheriqBlogBundle:Tags')->findOneBySlug($slug);
         $tagName = $tag->getTagName();
         $blogs = $tag->getBlogTags();
-
-//        var_dump($tag); exit;
 
         $adapter = new DoctrineCollectionAdapter($blogs);
         $pagerBlog = new Pagerfanta($adapter);

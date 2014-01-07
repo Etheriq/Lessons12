@@ -27,7 +27,7 @@ class GuestController extends Controller
         $em = $this->getDoctrine()->getManager();
 //        $em->getFilters()->disable('softdeleteable');  // to display removed data
         $query = $em->getRepository('EtheriqBlogBundle:Guest')->findDESCGuests();  // Order by DESC
-//        $query2 = $em->getRepository('EtheriqBlogBundle:Guest')->findAllGuests();  // normal order
+//        $query = $em->getRepository('EtheriqBlogBundle:Guest')->findAllGuests();  // normal order
         $adapter = new DoctrineORMAdapter($query);
         $pagerFanta = new Pagerfanta($adapter);
 
@@ -123,7 +123,4 @@ class GuestController extends Controller
 
         return $this->render('EtheriqBlogBundle:sidebar:lastGuest.html.twig', array('guests' => $guests));
     }
-
-
-
-} 
+}
