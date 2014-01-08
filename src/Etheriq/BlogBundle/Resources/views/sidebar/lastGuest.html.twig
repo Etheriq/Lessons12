@@ -1,0 +1,7 @@
+<div class="left-sidebar">
+    <ul>
+        {% for item in guests %}
+            <li><a href="{{ path('guest_showInfo', {'slug': item.slug}) }}">{{ item.nameGuest }} ({{ item.emailGuest }})</a></li>
+        {% endfor %}
+    </ul>
+</div>

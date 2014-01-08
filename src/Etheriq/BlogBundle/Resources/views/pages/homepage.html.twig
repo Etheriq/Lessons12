@@ -1,0 +1,145 @@
+{% extends 'EtheriqBlogBundle::base.html.twig' %}
+
+    {% block title %}
+        Home page
+    {% endblock title %}
+
+     {% block wraper %}
+<div class="row">
+         <div class="col-md-10">
+             {% block breadcrumb %}
+
+                 <ol class="breadcrumb">
+                     <li class="active">{{ 'Home'|trans }}</li>
+                 </ol>
+
+             {% endblock breadcrumb %}
+         </div>
+         <div class="col-md-2">
+             <div class="translate">
+             <ul class="locale_change">
+                 <li>
+                     <a href="{{ path('set_locale', {'loc': 'en'}) }}">
+                         <img src="{{ asset('img/flag_great_britain.png') }}" alt="English">
+                     </a>
+                 </li>
+                 <li>
+                     <a href="{{ path('set_locale', {'loc': 'ru'}) }}">
+                         <img src="{{ asset('img/flag_russia.png') }}" alt="Russian">
+                     </a>
+                 </li>
+                 <li>
+                     <a href="{{ path('set_locale', {'loc': 'uk'}) }}">
+                         <img src="{{ asset('img/flag_ukraine.png') }}" alt="Ukrainian">
+                     </a>
+                 </li>
+             </ul>
+             </div>
+         </div>
+</div>
+     <div class="row">
+         <div class="col-md-8">
+             {% block content %}
+
+                 {% if filter is defined %}
+                     <div class="alert alert-success">
+                         {{ 'Filtered by'|trans }} <strong>{{ filter }}</strong>
+                         &nbsp;&nbsp;&nbsp; {{blogs.NbResults}} {{ 'articless has found'|trans }}
+                     </div>
+
+                 {% endif %}
+                    {% for blog in blogs %}
+                       <div class="article-header">
+                       <a href="{{ path('blog_showInfo', {'slug': blog.slug})|raw }}">
+                       <strong>{{ blog.title }}</strong>
+                       </a>
+                       <span>{{ 'Published'|trans }} {{ blog.created|date("d.m.Y") }}</span>
+                       </div>
+                       <div class="article-body">
+                            {#<img src="{{ asset(blog.picture) | imagine_filter('blog_main') }}" class="img-rounded">#}
+                            <img src="{{ asset(blog.picture) }}" class="img-thumbnail">
+                            {{ blog.textBlog|limitWords(63, path('blog_showInfo', {'slug': blog.slug}))|raw }}
+                       </div>
+
+                       <div class="article-footer">
+                          <div class="text-left myCat">
+                              <strong>{{ 'Category'|trans }} </strong>
+                              <span class="label label-primary">
+                                  <a href="{{ path('blog_category', {'slug': blog.category.slug}) }}">
+                                    {{ blog.category.categoryName }}
+                                  </a>
+                              </span>
+                          </div>
+
+                           <div class="myRating">
+                               <strong>{{ 'Rating'|trans }}</strong>
+                               <span class="badge">{{ blog.rating|rating(blog.numberOfVoters) }}</span>
+                           </div>
+
+                           <div class="text-right myTags">
+                               <strong>{{ 'Tags'|trans }} </strong>
+                              {% for tag in blog.tags %}
+                                  <a href="{{ path('blog_tag', {'slug': tag.slug}) }}">
+                                    <span class="label label-info">{{ tag.tagName }}</span>
+                                  </a>
+                              {% endfor %}
+                           </div>
+                       </div>
+                       <br><hr>
+                    {% endfor %}
+
+             {% endblock content %}
+         </div>
+
+         <div class="col-md-4">
+             {% block sidebar %}
+                 <div class="panel panel-default">
+                     <div class="panel-heading">
+                         <h3 class="panel-title">{{ 'Last articles'|trans }}</h3>
+                     </div>
+                     <div class="panel-body">
+                         {{ render(controller('EtheriqBlogBundle:Blog:showLastArticles')) }}
+                     </div>
+                 </div>
+
+                 <div class="panel panel-default">
+                     <div class="panel-heading">
+                         <h3 class="panel-title">{{ 'Articles by rating'|trans }}</h3>
+                     </div>
+                     <div class="panel-body">
+                         {{ render(controller('EtheriqBlogBundle:Blog:showArticlesByRating')) }}
+                     </div>
+                 </div>
+
+
+                 <div class="panel panel-default">
+                     <div class="panel-heading">
+                         <h3 class="panel-title">{{ 'Last posts from guest book'|trans }}</h3>
+                     </div>
+                     <div class="panel-body">
+                         {{ render(controller('EtheriqBlogBundle:Guest:showLastGuest')) }}
+                     </div>
+                 </div>
+
+                 <div class="panel panel-default">
+                     <div class="panel-heading">
+                         <h3 class="panel-title">{{ 'Blog tags'|trans }}</h3>
+                     </div>
+                     <div class="panel-body">
+                         {{ render(controller('EtheriqBlogBundle:Blog:showTags')) }}
+                     </div>
+                 </div>
+
+
+             {% endblock sidebar %}
+         </div>
+     </div>
+
+     {% endblock wraper %}
+
+     {% block footer %}
+         {% if blogs.haveToPaginate %}
+             {{ pagerfanta(blogs, 'myFantaSet') }}
+         {% endif %}
+
+     {% endblock footer %}

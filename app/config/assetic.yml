@@ -1,0 +1,57 @@
+assetic:
+    debug:          %kernel.debug%
+    use_controller: false
+    bundles:        [ EtheriqBlogBundle ]
+    java:           /usr/bin/java
+    filters:
+        cssrewrite: ~
+        yui_css:
+            jar: %kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar
+        yui_js:
+            jar: %kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar
+    assets:
+        css_bootstrap:
+            inputs:
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap.css
+            filters:
+                - cssrewrite
+                - yui_css
+            output:
+                 css/bootstrap.css
+        css_myStyle:
+            inputs:
+                - %kernel.root_dir%/../src/Etheriq/BlogBundle/Resources/public/css/myStyle.css
+            filters:
+                - cssrewrite
+                - yui_css
+            output:
+                 css/myStyle.css
+        css_myFantaPager:
+            inputs:
+                - %kernel.root_dir%/../vendor/white-october/pagerfanta-bundle/WhiteOctober/PagerfantaBundle/Resources/public/css/pagerfantaDefault.css
+            filters:
+                - cssrewrite
+                - yui_css
+            output:
+                 css/myFantaStyle.css
+        javascripts_jquery:
+            inputs:
+                - %kernel.root_dir%/../vendor/components/jquery/jquery.js
+            filters:
+                - yui_js
+            output:
+                 js/jquery.js
+        javascript_bootstrap:
+            inputs:
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/dist/js/bootstrap.js
+            filters:
+                - yui_js
+            output:
+                 js/bootstrap.js
+        javascript_rating:
+            inputs:
+                - %kernel.root_dir%/../src/Etheriq/BlogBundle/Resources/public/js/rates.js
+            filters:
+                - yui_js
+            output:
+                 js/rating.js

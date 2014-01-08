@@ -1,0 +1,74 @@
+{% extends 'EtheriqBlogBundle::base.html.twig' %}
+
+    {% block title %}
+        Guest book
+    {% endblock title %}
+
+     {% block wraper %}
+
+         {% block breadcrumb %}
+
+             <ol class="breadcrumb">
+                 <li><a href="{{ path('homepage') }}">{{ 'Home'|trans }}</a></li>
+                 <li class="active">{{ 'Guest book'|trans }}</li>
+             </ol>
+
+         {% endblock breadcrumb %}
+
+         <div class="row">
+             <div class="col-md-12">
+         {{ form_start(form, {'attr': {'role': 'form', 'novalidate': 'novalidate' }}) }}
+         <div class="col-md-6" style="text-align: right">
+             <div class="form-inline">
+                 {{ form_label(form.nameGuest, 'Name'|trans|raw) }}
+                 {{ form_widget(form.nameGuest, { 'attr': {'class': 'form-control', 'style': 'width:30%; ', 'placeholder': 'Введите имя' } }) }}
+
+                 {{ form_label(form.emailGuest, 'E-mail'|trans|raw) }}
+                 {{ form_widget(form.emailGuest, { 'attr': {'class': 'form-control', 'style': 'width:30%; ', 'placeholder': 'Введите почтовый адрес' } }) }}
+
+                 {{ form_widget(form.save, { 'attr': {'class': 'btn btn-success'} }) }}
+             </div>
+             <div class="form-inline" style="margin: 5px 0;">
+                 {{ form_label(form.bodyGuest, 'Message'|trans|raw) }}
+                 {{ form_widget(form.bodyGuest, { 'attr': {'class': 'form-control', 'style': 'width:80%; height: 50px;', 'placeholder': 'Введите сообщение, минимальная длина 100 символом ' } }) }}
+             </div>
+         </div>
+
+         <div class="col-md-6">
+             <div class="col-md-12 text-left">
+                 <p>{{ form_errors(form.nameGuest) }}</p>
+                 <p>{{ form_errors(form.emailGuest) }}</p>
+             </div>
+             <div class="col-md-12 text-left">
+                 <p>{{ form_errors(form.bodyGuest) }}</p>
+             </div>
+         </div>
+
+         {{ form_end(form) }}
+         </div>
+         </div>
+
+         {% if fanta.haveToPaginate %}
+             {% for item in fanta %}
+                 <div class="well">
+                     <u>{{ 'Record'|trans }} id # {{ item.id }}</u>.
+                     <a href="{{ path('guest_deleteItem', {'slug': item.slug}) }}" class="btn btn-danger btn-sm">{{ 'Delete'|trans }}</a>
+                     <a href="{{ path('guest_showInfo', {'slug': item.slug}) }}" class="btn btn-info btn-sm">{{ 'More info'|trans }}</a>
+                     <span> {{ 'Created'|trans }}: {{ item.created| date("d.m.Y G:i") }} </span>
+                     <span> {{ 'Changed'|trans }}: {{ item.updated| date("d.m.Y G:i") }} </span>
+                     <hr class="guest-hr">
+                     <b>{{ item.nameGuest }}</b>  ({{ item.emailGuest }})<br>
+                     {{ item.bodyGuest|limitWords(20, path('guest_showInfo', {'slug': item.slug}))|raw }}
+                 </div>
+             {% endfor %}
+         {% endif %}
+
+     {% endblock wraper %}
+
+     {% block footer %}
+         {{ pagerfanta(fanta, 'myFantaSet') }} <br>
+         <strong>{{fanta.NbResults}}</strong> {{ 'guests has found'|trans }}.
+         {% if fanta.haveToPaginate %}
+             {{ 'Page'|trans }} <strong>{{fanta.CurrentPage}}/{{fanta.NbPages}} </strong>
+         {% endif %}
+     {% endblock footer %}

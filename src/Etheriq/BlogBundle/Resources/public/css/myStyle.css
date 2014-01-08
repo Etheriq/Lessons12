@@ -1,0 +1,154 @@
+body
+{
+    padding-top: 60px;
+}
+
+.locale_change li
+{
+    float: left;
+    padding-left: 10px;
+    list-style: none;
+}
+
+.left-sidebar ul li
+{
+    list-style: none;
+    margin-left: -35px;
+}
+
+.myCat
+{
+    float: left;
+    width: 200px;
+}
+.text-left.myCat a
+{
+    color: white;
+}
+.text-left.myCat a:hover
+{
+    text-decoration: none;
+
+}
+.text-right.myTags a:hover
+{
+    text-decoration: none;
+
+}
+.myRating
+{
+    float: left;
+    text-align: center;
+    margin-left: 15%;
+}
+
+.myTags
+{
+    float: right;
+}
+.article-footer
+{
+    margin-top: 15px;
+}
+.article-header a strong
+{
+    color: #727272;
+}
+.article-header a:hover
+{
+    text-decoration: none;
+}
+.article-header
+{
+
+    margin-bottom: 15px;
+}
+.article-header span
+{
+    float: right;
+}
+
+.article-body img
+{
+    width: 60px;
+    float: left;
+    margin-right: 5px;
+}
+.list-group-item
+{
+    border: none;
+    padding: 0;
+    padding-top: 3px;
+}
+.container
+{
+    background-color: #fff7f7;
+    border-radius: 30px;
+    border: 1px solid #fff7f7;
+}
+.translate
+{
+    padding-top: 7px;
+}
+.breadcrumb
+{
+    background-color: #fff7f7;
+}
+.breadcrumb>li+li:before
+{
+    content: ">";
+}
+.left-sidebar.tagBlog a span
+{
+    padding-right: 20px;
+}
+.guest-hr
+{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+/* =============   Rating CSS ==================== */
+#rates{
+    position : relative;
+    display: inline-block;
+}
+
+#rates ul{
+    position: relative;
+    list-style: none;
+    margin-right: 20px;
+    padding-left: 0px;
+    display: inline;
+}
+
+#rates ul li{
+    float: left;
+    width: 32px;
+    height: 32px;
+}
+
+#rates ul li:hover{
+    cursor: pointer;
+}
+
+/*#rates span{
+    font-size: 14pt;
+    vertical-align: middle;
+}
+*/
+.defaultRating{
+    background-image: url("../img/star-white.png");
+    background-repeat: no-repeat;
+}
+
+.badRating{
+    background-image: url("../img/star-red.png");
+    background-repeat: no-repeat;
+}
+
+.rating{
+    background-image: url("../img/star-yellow.png");
+    background-repeat: no-repeat;
+
+}
+/* =============   end Rating CSS ==================== */

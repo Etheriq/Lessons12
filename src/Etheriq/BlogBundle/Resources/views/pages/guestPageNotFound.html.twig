@@ -1,0 +1,14 @@
+{% extends 'EtheriqBlogBundle::base.html.twig' %}
+
+    {% block title %}
+        Page not found
+    {% endblock title %}
+
+     {% block wraper %}
+
+        <div class="well">
+            {% trans %}
+                Page number %pageNumber% not found
+            {% endtrans %}
+        </div>
+     {% endblock wraper %}
