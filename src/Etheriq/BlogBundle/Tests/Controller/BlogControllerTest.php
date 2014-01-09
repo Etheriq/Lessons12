@@ -17,7 +17,7 @@ class BlogControllerTest extends WebTestCase
         $client = static::createClient();
         $crawler = $client->request('GET', '/');
 
-        $link = $crawler->filter('a:contains("About me")')->eq(0)->link();
+        $link = $crawler->filter('a:contains("About me")')->link();
         $crawler = $client->click($link);
 
         $this->assertTrue($crawler->filter('html:contains("Proin vel molestie")')->count() > 0);
@@ -26,7 +26,7 @@ class BlogControllerTest extends WebTestCase
     public function testGuestTest()
     {
         $client = static::createClient();
-        $client->request('get', '/en/guest');
+        $crawler = $client->request('get', '/en/guest');
 
         $this->assertRegExp('/More info/', $client->getResponse()->getContent());
     }
