@@ -4,8 +4,10 @@
 Lesson #12
 Subject: Blog
 
-
 git clone https://github.com/Etheriq/Lessons12.git /path
+
 composer.update
+
 sudo php bin/reload.php
+
 
