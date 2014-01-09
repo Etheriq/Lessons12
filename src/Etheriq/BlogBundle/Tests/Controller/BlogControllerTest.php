@@ -16,9 +16,9 @@ class BlogControllerTest extends WebTestCase
     public function testShowBlogMainPage()
     {
         $client = static::createClient();
-        $crawler = $client->request('GET', '/');
+        $crawler = $client->request('GET', '/en');
 
-        $link = $crawler->filter('a:contains("About me")')->first()->link();
+        $link = $crawler->filter('a:contains("About")')->first()->link();
         $crawler = $client->click($link);
 
 //        $this->assertTrue($crawler->filter('html:contains("Proin vel molestie")')->count() > 0);
