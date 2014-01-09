@@ -56,7 +56,6 @@
                        <span>{{ 'Published'|trans }} {{ blog.created|date("d.m.Y") }}</span>
                        </div>
                        <div class="article-body">
-                            {#<img src="{{ asset(blog.picture) | imagine_filter('blog_main') }}" class="img-rounded">#}
                             <img src="{{ asset(blog.picture) }}" class="img-thumbnail">
                             {{ blog.textBlog|limitWords(63, path('blog_showInfo', {'slug': blog.slug}))|raw }}
                        </div>

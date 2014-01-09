@@ -19,9 +19,7 @@ class AboutMeControllerTest extends WebTestCase
 
         $crawler = $client->request('GET', '/en/about');
 
-//        $this->assertTrue($crawler->filter('html:contains("ABOUT")')->count() > 0);
-//        $this->assertTrue($crawler->filter('html:contains("ABOUT")')->count() > 0);
-        $this->assertGreaterThan(0, $crawler->filter('html:contains("ABOUT")')->count());
+        $this->assertTrue($crawler->filter('html:contains("hello")')->count() > 0);
     }
 
 }
