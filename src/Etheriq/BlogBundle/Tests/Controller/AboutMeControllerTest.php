@@ -13,13 +13,15 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class AboutMeControllerTest extends WebTestCase
 {
-    public function testshowAboutMePage()
+    public function testShowAboutMePage()
     {
         $client = static::createClient();
 
         $crawler = $client->request('GET', '/en/about');
 
-        $this->assertTrue($crawler->filter('html:contains("ABOUT")')->count() > 0);
+//        $this->assertTrue($crawler->filter('html:contains("ABOUT")')->count() > 0);
+//        $this->assertTrue($crawler->filter('html:contains("ABOUT")')->count() > 0);
+        $this->assertGreaterThan(0, $crawler->filter('html:contains("ABOUT")')->count());
     }
 
 }
