@@ -12,16 +12,17 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class BlogControllerTest extends WebTestCase
 {
-//    public function testShowBlogMainPage()
-//    {
-//        $client = static::createClient();
-//        $crawler = $client->request('GET', '/');
-//
-//        $link = $crawler->filter('a:contains("About me")')->link();
-//        $crawler = $client->click($link);
-//
-//        $this->assertTrue($crawler->filter('html:contains("Proin vel molestie")')->count() > 0);
-//    }
+
+    public function testShowBlogMainPage()
+    {
+        $client = static::createClient();
+        $crawler = $client->request('GET', '/');
+
+        $link = $crawler->filter('a:contains("About me")')->first()->link();
+        $crawler = $client->click($link);
+
+        $this->assertTrue($crawler->filter('html:contains("Proin vel molestie")')->count() > 0);
+    }
 //
 //    public function testGuestTest()
 //    {
