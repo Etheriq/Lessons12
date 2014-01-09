@@ -23,13 +23,13 @@ class BlogControllerTest extends WebTestCase
         $this->assertTrue($crawler->filter('html:contains("Proin vel molestie")')->count() > 0);
     }
 
-    public function testGuestTest()
-    {
-        $client = static::createClient();
-        $crawler = $client->request('get', '/en/guest');
-
-        $this->assertRegExp('/More info/', $client->getResponse()->getContent());
-    }
+//    public function testGuestTest()
+//    {
+//        $client = static::createClient();
+//        $crawler = $client->request('get', '/en/guest');
+//
+//        $this->assertRegExp('/More info/', $client->getResponse()->getContent());
+//    }
 
 }
  
