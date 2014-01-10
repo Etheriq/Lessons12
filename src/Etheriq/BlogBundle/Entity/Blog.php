@@ -9,6 +9,7 @@
 namespace Etheriq\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -83,7 +84,7 @@ class Blog
 
     /**
      *
-     * @Assert\NotEqualTo(value = 0, message="blog_rating_error")
+     *  Assert\NotEqualTo(value = 0, message="blog_rating_error")
      * @ORM\Column(type="integer")
      */
     protected $rating;
@@ -103,7 +104,7 @@ class Blog
 
     /**
      *
-     * @ORM\ManyToMany(targetEntity="Tags", mappedBy="blogTags")
+     * @ORM\ManyToMany(targetEntity="Tags", inversedBy="blogTags")
      */
     protected $tags;
 
@@ -351,7 +352,7 @@ class Blog
      */
     public function __construct()
     {
-        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->tags = new ArrayCollection();
     }
 
     /**
@@ -399,5 +400,10 @@ class Blog
         });
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getTitle();
     }
 }

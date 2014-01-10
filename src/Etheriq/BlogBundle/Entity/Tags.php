@@ -8,6 +8,7 @@
 
 namespace Etheriq\BlogBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -30,7 +31,7 @@ class Tags
 
     /**
      *
-     * @ORM\Column(type="string", length=150)
+     * @ORM\Column(type="string", length=150, unique=true)
      */
     protected $tagName;
 
@@ -43,7 +44,7 @@ class Tags
 
     /**
      *
-     * @ORM\ManyToMany(targetEntity="Blog", inversedBy="tags")
+     * @ORM\ManyToMany(targetEntity="Blog", mappedBy="tags")
      */
     protected $blogTags;
 
@@ -84,7 +85,7 @@ class Tags
      */
     public function __construct()
     {
-        $this->blogTags = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->blogTags = new ArrayCollection();
     }
 
     /**
@@ -142,4 +143,10 @@ class Tags
     {
         return $this->slug;
     }
+
+    public function __toString()
+    {
+        return $this->getTagName();
+    }
+
 }

@@ -1,5 +1,13 @@
 <div class="left-sidebar tagBlog">
-        {% for item in tags %}
-            {{ item.tagName|tagView(path('blog_tag', {'slug': item.slug}))|raw }}
-        {% endfor %}
+
+    <script>
+        var wordTags = {{ tags|json_encode|raw }};
+        jQuery(function() {
+            jQuery("#cloudTags").jQCloud(wordTags);
+        });
+    </script>
+
+    <div id="cloudTags" style="width: 350px; height: 350px; margin-left: -20px; margin-top: -40px;">
+    </div>
+
 </div>

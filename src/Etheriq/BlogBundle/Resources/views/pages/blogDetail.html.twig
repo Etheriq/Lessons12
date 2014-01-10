@@ -20,7 +20,9 @@
 
                 {{ form_label(form.title, 'blog_title'|trans|raw) }}
                 {{ form_widget(form.title, { 'attr': {'class': 'form-control', 'style': 'width:80%; ', 'placeholder': 'Введите название статьи' } }) }}
-
+                <br>
+                {{ form_label(form.tags, 'blog_tags'|trans|raw) }}
+                {{ form_widget(form.tags, { 'attr': {'class': 'form-control', 'style': 'width:80%; height: 350px;'} }) }}
                 {{ form_widget(form.rating) }}
                 <br>
                 {{ form_label(form.textBlog, 'text_article'|trans|raw) }}
@@ -29,15 +31,7 @@
                 <br>
 
                 <p><strong>{{ 'category_article'|trans }}</strong></p>
-                <select name="category_article" class="form-control" style="width: 80%;">
-                    {% for category in categorys %}
-                        {% if category.id == categotyBlogId %}
-                            <option selected value="{{ category.id }}">{{ category.categoryName }}</option>
-                        {% else %}
-                            <option value="{{ category.id }}">{{ category.categoryName }}</option>
-                        {% endif %}
-                     {% endfor %}
-                </select>
+                {{ form_widget(form.category, { 'attr': {'class': 'form-control', 'style': 'width:80%;'} }) }}
 
                 <br>
                  <p><strong>{{ 'rating_article'|trans }}</strong> <span class="badge">{{ rating|rating(voters) }}</span></p>

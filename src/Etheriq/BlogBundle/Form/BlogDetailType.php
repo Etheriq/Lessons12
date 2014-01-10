@@ -25,6 +25,20 @@ class BlogDetailType  extends AbstractType
             ->add('title', 'text')
             ->add('textBlog', 'textarea')
             ->add('rating', 'hidden')
+//            ->add('tags')
+            ->add('tags', 'entity', array(
+                'class' => 'EtheriqBlogBundle:Tags',
+                'property' => 'tagName',
+                'multiple' => true,
+                'expanded' => false,
+//                'query_builder' => function(\Etheriq\BlogBundle\Repository\TagRepository $er){
+//                        return $er->createQueryBuilder('t')
+//                            ->orderBy('t.tagName', 'DESC');
+//                    },
+            ))
+            ->add('category', 'entity', array(
+                'class' => 'EtheriqBlogBundle:Category',
+                'property' => 'categoryName',))
             ->add('save', 'submit');
     }
 

@@ -58,7 +58,7 @@
                        <div class="article-body">
                            <img src="{{ blog.picture | imagine_filter('blog_main') }}" class="img-thumbnail">
                             {#<img src="{{ asset(blog.picture) }}" class="img-thumbnail">#}
-                            {{ blog.textBlog|limitWords(63, path('blog_showInfo', {'slug': blog.slug}))|raw }}
+                            {{ blog.textBlog|limitWords(5, path('blog_showInfo', {'slug': blog.slug}))|raw }}
                        </div>
 
                        <div class="article-footer">
@@ -126,7 +126,7 @@
                          <h3 class="panel-title">{{ 'Blog tags'|trans }}</h3>
                      </div>
                      <div class="panel-body">
-                         {{ render(controller('EtheriqBlogBundle:Blog:showTags')) }}
+                         {{ render(controller('EtheriqBlogBundle:Additional:showTags')) }}
                      </div>
                  </div>
 

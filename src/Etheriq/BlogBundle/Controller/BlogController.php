@@ -9,6 +9,8 @@
 
 namespace Etheriq\BlogBundle\Controller;
 
+use Etheriq\BlogBundle\Entity\Blog;
+use Etheriq\BlogBundle\Entity\Tags;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Pagerfanta\Exception\NotValidCurrentPageException;
 use Pagerfanta\Pagerfanta;
@@ -120,9 +122,6 @@ class BlogController extends Controller
         $allRequest = $request->createFromGlobals();
         $rate = $allRequest->request->all();
 
-        $categorys = $em->getRepository('EtheriqBlogBundle:Category')->findAll();
-
-
         $blogShow->setTitle($blogShow->getTitle());
         $blogShow->setTextBlog($blogShow->getTextBlog());
 
@@ -146,9 +145,6 @@ class BlogController extends Controller
                 $blogShow->setRating($ratingOld);
             }
 
-            $category = $em->getRepository('EtheriqBlogBundle:Category')->findOneById($rate['category_article']);
-            $blogShow->setCategory($category);
-
             $blogToDb->flush();
 
             return $this->redirect($this->generateUrl('homepage'));
@@ -158,10 +154,37 @@ class BlogController extends Controller
             'form' => $form->createView(),
             'rating' => $ratingOld,
             'voters' => $blogShow->getNumberOfVoters(),
-            'categorys' => $categorys,
             'categotyBlogId' => $blogShow->getCategory()->getId()
         ));
 
+    }
+
+    public function newBlogArticleAction(Request $request)
+    {
+        $blog = new Blog();
+
+        $form = $this->createForm(new BlogDetailType(), $blog);
+        $form->handleRequest($request);
+
+        if ($form->isValid())
+        {
+            $newArticle = $this->getDoctrine()->getManager();
+
+            $tags = $blog->getTags();
+
+            $blog
+                ->setTags($tags)
+                ->setPicture('img/blog/bluz.jpg')
+                ->setNumberOfVoters(1);
+            $newArticle->persist($blog);
+            $newArticle->flush();
+
+            return $this->redirect($this->generateUrl('homepage'));
+        }
+
+        return $this->render('EtheriqBlogBundle:pages:addNewBlogArticle.html.twig', array(
+            'form' => $form->createView()
+        ));
     }
 
     public function findAction(Request $request)
@@ -201,14 +224,6 @@ class BlogController extends Controller
             'blogs' => $pagerBlog,
             'filter' => $search
         ));
-    }
-
-    public function showTagsAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-        $tags = $em->getRepository('EtheriqBlogBundle:Tags')->findAll();
-
-        return $this->render('EtheriqBlogBundle:sidebar:showTagsForBlogSidebar.html.twig', array('tags' => $tags));
     }
 
 }
