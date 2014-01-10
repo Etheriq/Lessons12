@@ -15,6 +15,24 @@
 
          {% endblock breadcrumb %}
 
-         <p> ABOUT </p>
+         <div class="row">
+             <div class="col-md-4 aboutme text-center ">
+                 <img src="{{ asset('img/blog/belka.jpg') }}" alt="about me" class="img-rounded">
+             </div>
+
+             <div class="col-lg-8">
+                 <h3 class="media-heading">Hey, hello. I&#8217;m Yuriy Tarnavskiy.</h3>
+                 <p>Quisque sodales sed eros et faucibus. Nullam vehicula aliquam sem, eget tincidunt neque adipiscing sed. Integer molestie tortor turpis, eu semper quam semper in. In ac nisl ac massa faucibus vehicula. Nullam volutpat semper mauris sed fermentum. Ut vehicula mollis auctor. Nulla sagittis varius nisl, ut iaculis tortor vulputate vitae. Integer nibh leo, condimentum quis dolor non, convallis dapibus orci. Integer id odio vitae mauris accumsan blandit. Phasellus eu tempus dolor. Quisque eu vestibulum libero.</p>
+                 <p>Proin vel molestie velit. Maecenas semper lacus sit amet lobortis placerat. Sed imperdiet dictum laoreet. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce scelerisque adipiscing justo ut volutpat. Duis et risus non nibh consequat aliquam. In vel tortor diam. Sed ornare tristique mattis. Donec non porta lacus. Nullam pretium vehicula lorem, in elementum sapien pharetra eu. Etiam at scelerisque magna.</p>
+                 <p>Sed ante magna, tincidunt eleifend elementum eget, tristique sed nulla. Duis eget mauris in nunc vehicula ullamcorper. Integer imperdiet scelerisque tortor, auctor sodales lacus porta in. Donec ipsum nunc, feugiat at dolor ut, sollicitudin volutpat elit. Aenean feugiat, tortor vel auctor ullamcorper, ipsum risus tincidunt ligula, ut pharetra justo elit sed velit. Proin et orci congue, facilisis dui at, mattis mauris. Maecenas elementum nisl id mauris elementum, id ultricies metus blandit.</p>
+
+             </div>
+
+
+         </div>
 
      {% endblock wraper %}
+
+     {% block footer %}
+        <p class="text-center"> 2013</p>
+     {% endblock footer %}

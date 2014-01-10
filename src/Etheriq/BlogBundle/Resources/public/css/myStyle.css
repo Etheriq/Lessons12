@@ -50,6 +50,12 @@ body
 {
     margin-top: 15px;
 }
+.aboutme img
+{
+    width: 200px;
+    margin-bottom: 30px;
+
+}
 .article-header a strong
 {
     color: #727272;
