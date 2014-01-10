@@ -127,3 +127,11 @@ blogs:
         numOfVot: 16
         category: Drupal
         tags: [PHPStorm, WEB, HTML5]
+    17:
+        title: Привет блог
+        pictureSrc: img/blog/drupal.jpg
+        textBlog: In hac habitasse platea dictumst. Integer id arcu a sem accumsan mollis. Nullam non vestibulum massa. Interdum et malesuada fames ac ante ipsum primis in faucibus. Quisque ac tortor sit amet nibh pellentesque bibendum a a velit. Nam at urna odio. Nulla facilisi. Morbi eleifend felis et malesuada consectetur. Fusce congue eros ut erat commodo, eget rutrum ipsum sodales. Nullam lobortis magna sit amet dictum placerat. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lectus metus, pellentesque vel dui in, egestas pharetra diam. Suspendisse tempus, nulla eu ornare consectetur, mi arcu pellentesque massa, non ultrices turpis nibh nec orci.
+        rating: 33
+        numOfVot: 14
+        category: Drupal
+        tags: [PHPStorm, WEB, HTML5]
