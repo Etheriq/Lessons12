@@ -10,3 +10,4 @@ blog_text.not_blank: Статья не должна быть пустой
 blog_title_length.short: Минимальная длина названия темы - 5 символов или больше
 blog_text.minLenght_error: Минимальная длина статьи - 50 символов или больше
 blog_rating_error: Нужно указать рейтинг статьи
+blog_tatin.not_blank: Нужно указать рейтинг статьи
