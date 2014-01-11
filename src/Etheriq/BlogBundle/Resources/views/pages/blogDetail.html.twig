@@ -1,7 +1,7 @@
 {% extends 'EtheriqBlogBundle::base.html.twig' %}
 
     {% block title %}
-        About
+        Article detail
     {% endblock title %}
 
      {% block wraper %}
@@ -21,9 +21,17 @@
                 {{ form_label(form.title, 'blog_title'|trans|raw) }}
                 {{ form_widget(form.title, { 'attr': {'class': 'form-control', 'style': 'width:80%; ', 'placeholder': 'Введите название статьи' } }) }}
                 <br>
-                {{ form_label(form.tags, 'blog_tags'|trans|raw) }}
-                {{ form_widget(form.tags, { 'attr': {'class': 'form-control', 'style': 'width:80%; height: 350px;'} }) }}
+                {{ form_label(form.tags, 'Blog tags'|trans|raw) }}
+                {{ form_widget(form.tags, { 'attr': {'class': 'form-control', 'style': 'width:80%; height: 200px;'} }) }}
                 {{ form_widget(form.rating) }}
+                <br>
+                <span><strong>{{ 'add_new_tags'|trans }}</strong> </span> <img src="{{ asset('img/blog/plus.png') }}" alt="plus"  id="show-input-tags"/>
+                <div class="hidden-category" id="input-tags">
+                    {{ form_label(form.newTags, 'new_tag_name'|trans|raw) }}
+                    {{ form_widget(form.newTags, { 'attr': {'class': 'form-control', 'style': 'width:80%;', 'placeholder': 'Введите новые теги через запятую', 'value': ''} }) }}
+                </div>
+
+
                 <br>
                 {{ form_label(form.textBlog, 'text_article'|trans|raw) }}
                 {{ form_widget(form.textBlog, { 'attr': {'class': 'form-control', 'style': 'width:80%; height: 350px;', 'placeholder': 'Введите сообщение, минимальная длина 50 символом ' } }) }}
@@ -33,7 +41,14 @@
                 <p><strong>{{ 'category_article'|trans }}</strong></p>
                 {{ form_widget(form.category, { 'attr': {'class': 'form-control', 'style': 'width:80%;'} }) }}
 
-                <br>
+                 <br>
+                 <span><strong>{{ 'add_new_category'|trans }}</strong> </span> <img src="{{ asset('img/blog/plus.png') }}" alt="plus"  id="show-input-category"/>
+                 <div class="hidden-category" id="input-category">
+                     {{ form_label(form.newCategory, 'new_category_name'|trans|raw) }}
+                     {{ form_widget(form.newCategory, { 'attr': {'class': 'form-control', 'style': 'width:80%;', 'placeholder': 'Введите новые категории через запятую', 'value': ''} }) }}
+                 </div>
+
+                 <br>
                  <p><strong>{{ 'rating_article'|trans }}</strong> <span class="badge">{{ rating|rating(voters) }}</span></p>
                  <div  id = "rates">
                  <ul>
@@ -52,7 +67,20 @@
                 <p>{{ form_errors(form.textBlog) }}</p>
                 <p>{{ form_errors(form) }}</p>
 
-
          {{ form_end(form) }}
 
      {% endblock wraper %}
+
+{% block myjs %}
+    <script>
+    jQuery(function($){
+        $('#show-input-category').on('click', function(){
+            $('#input-category').removeClass('hidden-category').addClass('visible-category');
+        });
+
+        $('#show-input-tags').on('click', function(){
+            $('#input-tags').removeClass('hidden-category').addClass('visible-category');
+        });
+    });
+    </script>
+{% endblock %}

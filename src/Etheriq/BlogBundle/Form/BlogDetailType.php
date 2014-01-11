@@ -25,7 +25,8 @@ class BlogDetailType  extends AbstractType
             ->add('title', 'text')
             ->add('textBlog', 'textarea')
             ->add('rating', 'hidden')
-//            ->add('tags')
+            ->add('newCategory', 'text')
+            ->add('newTags', 'text')
             ->add('tags', 'entity', array(
                 'class' => 'EtheriqBlogBundle:Tags',
                 'property' => 'tagName',

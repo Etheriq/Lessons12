@@ -11,6 +11,7 @@ namespace Etheriq\BlogBundle\Controller;
 
 use Etheriq\BlogBundle\Entity\Blog;
 use Etheriq\BlogBundle\Entity\Tags;
+use Etheriq\BlogBundle\Entity\Category;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Pagerfanta\Exception\NotValidCurrentPageException;
 use Pagerfanta\Pagerfanta;
@@ -145,6 +146,34 @@ class BlogController extends Controller
                 $blogShow->setRating($ratingOld);
             }
 
+            if($blogShow->getNewTags() != null)
+            {
+                $newTags = explode(',', trim($blogShow->getNewTags()));
+
+                foreach ($newTags as $item)
+                {
+                    $tag = new Tags();
+                    $tag->setTagName(trim($item));
+
+                    $blogToDb->persist($tag);
+                    $blogShow->addTag($tag);
+                }
+
+            }
+            if($blogShow->getNewCategory() != null)
+            {
+                $newCategory = explode(',', trim($blogShow->getNewCategory()));
+
+                foreach ($newCategory as $item)
+                {
+                    $category = new Category();
+                    $category->setCategoryName(trim($item));
+
+                    $blogToDb->persist($category);
+                    $blogShow->setCategory($category);
+                }
+            }
+
             $blogToDb->flush();
 
             return $this->redirect($this->generateUrl('homepage'));
@@ -154,7 +183,6 @@ class BlogController extends Controller
             'form' => $form->createView(),
             'rating' => $ratingOld,
             'voters' => $blogShow->getNumberOfVoters(),
-            'categotyBlogId' => $blogShow->getCategory()->getId()
         ));
 
     }
@@ -176,6 +204,36 @@ class BlogController extends Controller
                 ->setTags($tags)
                 ->setPicture('img/blog/bluz.jpg')
                 ->setNumberOfVoters(1);
+
+            if($blog->getNewTags() != null)
+            {
+                $newTags = explode(',', trim($blog->getNewTags()));
+
+                foreach ($newTags as $item)
+                {
+                    $tag = new Tags();
+                    $tag->setTagName(trim($item));
+
+                    $newArticle->persist($tag);
+                    $blog->addTag($tag);
+                }
+
+            }
+            if($blog->getNewCategory() != null)
+            {
+                $newCategory = explode(',', trim($blog->getNewCategory()));
+
+                foreach ($newCategory as $item)
+                {
+                    $category = new Category();
+                    $category->setCategoryName(trim($item));
+
+                    $newArticle->persist($category);
+                    $blog->setCategory($category);
+                }
+            }
+
+
             $newArticle->persist($blog);
             $newArticle->flush();
 

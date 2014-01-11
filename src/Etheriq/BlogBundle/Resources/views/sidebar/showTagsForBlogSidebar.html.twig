@@ -1,5 +1,14 @@
 <div class="left-sidebar tagBlog">
 
+
+    <div id="cloudTags" style="width: 350px; height: 350px; margin-left: -20px; margin-top: -40px;">
+    </div>
+
+</div>
+
+
+{% block myjs %}
+
     <script>
         var wordTags = {{ tags|json_encode|raw }};
         jQuery(function() {
@@ -7,7 +16,4 @@
         });
     </script>
 
-    <div id="cloudTags" style="width: 350px; height: 350px; margin-left: -20px; margin-top: -40px;">
-    </div>
-
-</div>
+{% endblock %}
