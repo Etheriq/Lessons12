@@ -129,6 +129,11 @@ body
     margin-top: 10px;
     margin-bottom: 10px;
 }
+#blogDetailed_tags label
+{
+    padding-left: 3px;
+    padding-right: 13px;
+}
 /* =============   Rating CSS ==================== */
 #rates{
     position : relative;

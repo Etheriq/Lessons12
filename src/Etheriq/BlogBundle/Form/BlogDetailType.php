@@ -31,7 +31,7 @@ class BlogDetailType  extends AbstractType
                 'class' => 'EtheriqBlogBundle:Tags',
                 'property' => 'tagName',
                 'multiple' => true,
-                'expanded' => false,
+                'expanded' => true,
 //                'query_builder' => function(\Etheriq\BlogBundle\Repository\TagRepository $er){
 //                        return $er->createQueryBuilder('t')
 //                            ->orderBy('t.tagName', 'DESC');
