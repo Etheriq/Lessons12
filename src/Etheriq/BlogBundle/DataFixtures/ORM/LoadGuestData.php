@@ -21,8 +21,7 @@ class LoadGuestData extends AbstractFixture implements OrderedFixtureInterface
     {
         $dataArray = Yaml::parse(file_get_contents(__DIR__."/data/dataGuest.yml"));
 
-        foreach ($dataArray['Guests'] as $dataGuest)
-        {
+        foreach ($dataArray['Guests'] as $dataGuest) {
             $guest = new Guest();
 
             $guest->setNameGuest($dataGuest['nameGuest']);
@@ -39,4 +38,4 @@ class LoadGuestData extends AbstractFixture implements OrderedFixtureInterface
         return 1;
     }
 
-} 
+}

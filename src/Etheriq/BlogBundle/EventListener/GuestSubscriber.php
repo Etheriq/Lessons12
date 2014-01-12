@@ -13,7 +13,7 @@ class GuestSubscriber implements EventSubscriberInterface
         $this->mailer = $mailer;
     }
 
-    static public function getSubscribedEvents()
+    public static function getSubscribedEvents()
     {
         return array(
             'guest.edit'    => 'onGuestEdit',
@@ -75,4 +75,4 @@ E-mail: ".$guest->getEmailGuest()."
         $event->stopPropagation();
     }
 
-} 
+}

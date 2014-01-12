@@ -32,7 +32,7 @@ class BlogDetailType  extends AbstractType
                 'property' => 'tagName',
                 'multiple' => true,
                 'expanded' => true,
-//                'query_builder' => function(\Etheriq\BlogBundle\Repository\TagRepository $er){
+//                'query_builder' => function (\Etheriq\BlogBundle\Repository\TagRepository $er) {
 //                        return $er->createQueryBuilder('t')
 //                            ->orderBy('t.tagName', 'DESC');
 //                    },
@@ -52,5 +52,4 @@ class BlogDetailType  extends AbstractType
         );
     }
 
-
-} 
+}

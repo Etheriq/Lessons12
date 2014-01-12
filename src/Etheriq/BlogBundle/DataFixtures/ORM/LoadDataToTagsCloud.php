@@ -25,8 +25,7 @@ class LoadDataToTagsCloud extends AbstractFixture implements OrderedFixtureInter
     {
         $dataArray = Yaml::parse(file_get_contents(__DIR__."/data/dataTagCloud.yml"));
 
-        foreach ($dataArray['TagCloud'] as $dataTagCloud)
-        {
+        foreach ($dataArray['TagCloud'] as $dataTagCloud) {
             $tagsCloud = new TagsCloud();
             $tagsCloud->setTagCloudName($dataTagCloud['nameTag']);
             $tagsCloud->setTagCloudCount($dataTagCloud['countArticles']);

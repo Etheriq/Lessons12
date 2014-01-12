@@ -37,4 +37,4 @@ class GuestType extends AbstractType
             )
         );
     }
-} 
+}

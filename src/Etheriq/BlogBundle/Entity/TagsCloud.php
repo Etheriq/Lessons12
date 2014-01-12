@@ -46,7 +46,7 @@ class TagsCloud
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -56,7 +56,7 @@ class TagsCloud
     /**
      * Set tagCloudName
      *
-     * @param string $tagCloudName
+     * @param  string    $tagCloudName
      * @return TagsCloud
      */
     public function setTagCloudName($tagCloudName)
@@ -69,7 +69,7 @@ class TagsCloud
     /**
      * Get tagCloudName
      *
-     * @return string 
+     * @return string
      */
     public function getTagCloudName()
     {
@@ -79,7 +79,7 @@ class TagsCloud
     /**
      * Set tagCloudCount
      *
-     * @param integer $tagCloudCount
+     * @param  integer   $tagCloudCount
      * @return TagsCloud
      */
     public function setTagCloudCount($tagCloudCount)
@@ -92,7 +92,7 @@ class TagsCloud
     /**
      * Get tagCloudCount
      *
-     * @return integer 
+     * @return integer
      */
     public function getTagCloudCount()
     {
@@ -102,7 +102,7 @@ class TagsCloud
     /**
      * Set tagSlug
      *
-     * @param string $tagSlug
+     * @param  string    $tagSlug
      * @return TagsCloud
      */
     public function setTagSlug($tagSlug)
@@ -115,7 +115,7 @@ class TagsCloud
     /**
      * Get tagSlug
      *
-     * @return string 
+     * @return string
      */
     public function getTagSlug()
     {

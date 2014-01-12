@@ -24,4 +24,3 @@ class GuestControllerTest extends WebTestCase
 
     }
 }
- 

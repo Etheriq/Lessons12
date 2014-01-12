@@ -38,8 +38,7 @@ class BlogServices
         $platform   = $con->getDatabasePlatform();
         $con->executeUpdate($platform->getTruncateTableSQL('tagsCloud', true /* whether to cascade */));
 
-        foreach ($tagsToArray as $item)
-        {
+        foreach ($tagsToArray as $item) {
             $tagCloud = new TagsCloud();
             $tagCloud->setTagCloudName($item['tagName']);
             $tagCloud->setTagCloudCount($item['tagArticleCount']);
@@ -51,4 +50,4 @@ class BlogServices
 
     }
 
-} 
+}

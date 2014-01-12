@@ -102,7 +102,7 @@ class Guest
     /**
      * Set nameGuest
      *
-     * @param string $nameGuest
+     * @param  string $nameGuest
      * @return Guest
      */
     public function setNameGuest($nameGuest)
@@ -125,7 +125,7 @@ class Guest
     /**
      * Set emailGuest
      *
-     * @param string $emailGuest
+     * @param  string $emailGuest
      * @return Guest
      */
     public function setEmailGuest($emailGuest)
@@ -148,7 +148,7 @@ class Guest
     /**
      * Set bodyGuest
      *
-     * @param string $bodyGuest
+     * @param  string $bodyGuest
      * @return Guest
      */
     public function setBodyGuest($bodyGuest)
@@ -171,7 +171,7 @@ class Guest
     /**
      * Set created
      *
-     * @param \DateTime $created
+     * @param  \DateTime $created
      * @return Guest
      */
     public function setCreated($created)
@@ -194,7 +194,7 @@ class Guest
     /**
      * Set updated
      *
-     * @param \DateTime $updated
+     * @param  \DateTime $updated
      * @return Guest
      */
     public function setUpdated($updated)
@@ -217,7 +217,7 @@ class Guest
     /**
      * Set nameChanged
      *
-     * @param \DateTime $nameChanged
+     * @param  \DateTime $nameChanged
      * @return Guest
      */
     public function setNameChanged($nameChanged)
@@ -240,7 +240,7 @@ class Guest
     /**
      * Set slug
      *
-     * @param string $slug
+     * @param  string $slug
      * @return Guest
      */
     public function setSlug($slug)
@@ -263,7 +263,7 @@ class Guest
     /**
      * Set deletedGuest
      *
-     * @param \DateTime $deletedGuest
+     * @param  \DateTime $deletedGuest
      * @return Guest
      */
     public function setDeletedGuest($deletedGuest)

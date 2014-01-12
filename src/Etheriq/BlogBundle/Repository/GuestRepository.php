@@ -15,7 +15,6 @@ class GuestRepository extends EntityRepository
 {
     public function findDESCGuests()
     {
-
         return $this->getEntityManager()
             ->createQuery(
                 'SELECT g FROM EtheriqBlogBundle:Guest g ORDER BY g.id DESC'
@@ -24,7 +23,6 @@ class GuestRepository extends EntityRepository
 
     public function findAllGuests()
     {
-
         return $this->getEntityManager()
             ->createQuery(
                 'SELECT g FROM EtheriqBlogBundle:Guest g'
@@ -33,10 +31,9 @@ class GuestRepository extends EntityRepository
 
     public function fiveLastGuest()
     {
-
         return $this->getEntityManager()
             ->createQuery('SELECT g FROM EtheriqBlogBundle:Guest g ORDER BY g.created DESC')
             ->setMaxResults(5)
             ->getArrayResult();
     }
-} 
+}

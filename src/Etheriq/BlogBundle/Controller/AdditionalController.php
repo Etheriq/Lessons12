@@ -15,6 +15,7 @@ class AdditionalController extends Controller
     public function setLocaleAction($loc)
     {
         $this->get('request')->setLocale($loc);
+
         return $this->redirect($this->generateUrl('homepage', array('_locale' => $loc) ));
     }
 
@@ -43,4 +44,4 @@ class AdditionalController extends Controller
         return $this->render('EtheriqBlogBundle:sidebar:showTagsForBlogSidebar.html.twig', array('tags' => $tags));
     }
 
-} 
+}

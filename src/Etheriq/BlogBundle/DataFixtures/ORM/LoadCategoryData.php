@@ -47,4 +47,4 @@ class LoadCategoryData extends AbstractFixture implements OrderedFixtureInterfac
         );
     }
 
-} 
+}

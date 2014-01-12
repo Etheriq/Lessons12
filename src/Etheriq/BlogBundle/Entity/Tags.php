@@ -51,7 +51,7 @@ class Tags
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -61,7 +61,7 @@ class Tags
     /**
      * Set tagName
      *
-     * @param string $tagName
+     * @param  string $tagName
      * @return Tags
      */
     public function setTagName($tagName)
@@ -74,7 +74,7 @@ class Tags
     /**
      * Get tagName
      *
-     * @return string 
+     * @return string
      */
     public function getTagName()
     {
@@ -91,7 +91,7 @@ class Tags
     /**
      * Add blogTags
      *
-     * @param \Etheriq\BlogBundle\Entity\Blog $blogTags
+     * @param  \Etheriq\BlogBundle\Entity\Blog $blogTags
      * @return Tags
      */
     public function addBlogTag(\Etheriq\BlogBundle\Entity\Blog $blogTags)
@@ -114,7 +114,7 @@ class Tags
     /**
      * Get blogTags
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getBlogTags()
     {
@@ -124,7 +124,7 @@ class Tags
     /**
      * Set slug
      *
-     * @param string $slug
+     * @param  string $slug
      * @return Tags
      */
     public function setSlug($slug)
@@ -137,7 +137,7 @@ class Tags
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {

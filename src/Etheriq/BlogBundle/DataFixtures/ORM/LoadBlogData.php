@@ -56,6 +56,4 @@ class LoadBlogData extends AbstractFixture implements OrderedFixtureInterface
         return $outputReferences;
     }
 
-
-
 }
