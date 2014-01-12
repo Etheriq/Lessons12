@@ -117,7 +117,8 @@ body
 }
 .breadcrumb>li+li:before
 {
-    content: ">";
+    content: "";
+    margin-left: -5px;
 }
 .left-sidebar.tagBlog a span
 {

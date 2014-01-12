@@ -27,6 +27,9 @@ class BlogController extends Controller
 {
     public function showBlogMainPageAction($page)
     {
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem("Home");
+
         $em = $this->getDoctrine()->getManager();
         $query = $em->getRepository('EtheriqBlogBundle:Blog')->findBlogsDESC();  // Order by created DESC
 //        $query = $em->getRepository('EtheriqBlogBundle:Blog')->findAllBlogs();  // order by id DESC
@@ -112,6 +115,10 @@ class BlogController extends Controller
 
     public function showBlogInfoAction($slug, Request $request)
     {
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem("Home", $this->get("router")->generate("homepage"));
+        $breadcrumbs->addItem("Blog in detail");
+
         $em = $this->getDoctrine()->getManager();
         $blogShow = $em->getRepository('EtheriqBlogBundle:Blog')->findOneBySlug($slug);
 
@@ -189,6 +196,10 @@ class BlogController extends Controller
 
     public function newBlogArticleAction(Request $request)
     {
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem("Home", $this->get("router")->generate("homepage"));
+        $breadcrumbs->addItem("Blog in detail");
+
         $blog = new Blog();
 
         $form = $this->createForm(new BlogDetailType(), $blog);

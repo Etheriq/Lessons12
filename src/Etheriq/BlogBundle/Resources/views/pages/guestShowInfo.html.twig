@@ -6,9 +6,16 @@
 
      {% block wraper %}
 
+         {% block breadcrumb %}
+
+             {{ wo_render_breadcrumbs() }}
+
+         {% endblock breadcrumb %}
+
+
          <div class="row">
              <div class="col-md-5">
-                <a href="{{ path('guest') }}" class="btn btn-sm btn-default">{{ 'On Main'|trans }}</a>
+
              </div>
              <div class="col-md-5">
                  <span> {{ 'Created'|trans }}: {{ created }} </span><br>
