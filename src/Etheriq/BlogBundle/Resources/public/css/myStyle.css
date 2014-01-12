@@ -15,7 +15,22 @@ body
     list-style: none;
     margin-left: -35px;
 }
-
+.hidden-category
+{
+    display: none;
+}
+.visible-category
+{
+    display: block;
+}
+#show-input-tags:hover
+{
+    cursor: pointer;
+}
+#show-input-category:hover
+{
+    cursor: pointer;
+}
 .myCat
 {
     float: left;

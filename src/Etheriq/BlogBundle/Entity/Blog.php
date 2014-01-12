@@ -9,6 +9,7 @@
 namespace Etheriq\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -84,6 +85,7 @@ class Blog
     /**
      *
      * @Assert\NotEqualTo(value = 0, message="blog_rating_error")
+     * @Assert\NotBlank(message = "blog_tatin.not_blank")
      * @ORM\Column(type="integer")
      */
     protected $rating;
@@ -103,9 +105,21 @@ class Blog
 
     /**
      *
-     * @ORM\ManyToMany(targetEntity="Tags", mappedBy="blogTags")
+     * @ORM\ManyToMany(targetEntity="Tags", inversedBy="blogTags")
      */
     protected $tags;
+
+    /**
+     *
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    protected $newCategory;
+
+    /**
+     *
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    protected $newTags;
 
     /**
      * Get id
@@ -351,7 +365,7 @@ class Blog
      */
     public function __construct()
     {
-        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->tags = new ArrayCollection();
     }
 
     /**
@@ -399,5 +413,56 @@ class Blog
         });
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getTitle();
+    }
+
+    /**
+     * Set newCategory
+     *
+     * @param integer $newCategory
+     * @return Blog
+     */
+    public function setNewCategory($newCategory)
+    {
+        $this->newCategory = $newCategory;
+
+        return $this;
+    }
+
+    /**
+     * Get newCategory
+     *
+     * @return integer 
+     */
+    public function getNewCategory()
+    {
+        return $this->newCategory;
+    }
+
+    /**
+     * Set newTags
+     *
+     * @param integer $newTags
+     * @return Blog
+     */
+    public function setNewTags($newTags)
+    {
+        $this->newTags = $newTags;
+
+        return $this;
+    }
+
+    /**
+     * Get newTags
+     *
+     * @return integer 
+     */
+    public function getNewTags()
+    {
+        return $this->newTags;
     }
 }

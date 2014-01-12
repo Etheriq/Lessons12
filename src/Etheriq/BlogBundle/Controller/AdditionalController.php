@@ -18,4 +18,28 @@ class AdditionalController extends Controller
         return $this->redirect($this->generateUrl('homepage', array('_locale' => $loc) ));
     }
 
+    public function getArrayTags()
+    {
+        $repository = $this->getDoctrine()->getRepository('EtheriqBlogBundle:Tags');
+        $tags = $repository->findAll();
+
+        $tagsToArray = array();
+        foreach ($tags as $tag) {
+            $tagsToArray[] = array(
+                'text' => $tag->getTagName(),
+                'weight' => count($tag->getBlogTags()),
+                'link' => $this->generateUrl('blog_tag', array('slug' => $tag->getSlug()))
+            );
+        }
+
+        return $tagsToArray;
+    }
+
+    public function showTagsAction()
+    {
+        $tags = $this->getArrayTags();
+
+        return $this->render('EtheriqBlogBundle:sidebar:showTagsForBlogSidebar.html.twig', array('tags' => $tags));
+    }
+
 } 

@@ -49,7 +49,7 @@ class BlogRepository extends EntityRepository
     {
 
         return $this->getEntityManager()
-            ->createQuery('SELECT b FROM EtheriqBlogBundle:Blog b where b.title like :titleSearch ')
+            ->createQuery('SELECT b FROM EtheriqBlogBundle:Blog b where b.title like :titleSearch or b.textBlog like :titleSearch')
             ->setParameter('titleSearch', '%'.$title.'%')
             ->execute();
     }
