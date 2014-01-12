@@ -22,6 +22,7 @@ use Etheriq\BlogBundle\Form\BlogDetailType;
 use Pagerfanta\Adapter\FixedAdapter;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 
 class BlogController extends Controller
 {
@@ -181,7 +182,11 @@ class BlogController extends Controller
                 }
             }
 
+            $blogShow->setNewTags(null);
+            $blogShow->setNewCategory(null);
             $blogToDb->flush();
+
+            $this->get('etheriq.tagscloud')->update();
 
             return $this->redirect($this->generateUrl('homepage'));
         }
@@ -244,12 +249,16 @@ class BlogController extends Controller
                 }
             }
 
-
+            $blog->setNewTags(null);
+            $blog->setNewCategory(null);
             $newArticle->persist($blog);
             $newArticle->flush();
 
+            $this->get('etheriq.tagscloud')->update();
+
             return $this->redirect($this->generateUrl('homepage'));
         }
+
 
         return $this->render('EtheriqBlogBundle:pages:addNewBlogArticle.html.twig', array(
             'form' => $form->createView()
@@ -258,6 +267,7 @@ class BlogController extends Controller
 
     public function findAction(Request $request)
     {
+        try {
         $allRequest = $request->createFromGlobals();
         $s = $allRequest->request->all();
 
@@ -271,10 +281,15 @@ class BlogController extends Controller
 
 
         return $this->redirect($this->generateUrl('blog_search', array('search' => $search)));
+        } catch (NotFoundHttpException $e) {
+
+            return $this->render('EtheriqBlogBundle:pages:guestPageNotFound.html.twig', array('pageNumber' => ''));
+        }
     }
 
     public function searchBlogsByTitleAction($search=null, $page)
     {
+        try {
         $em = $this->getDoctrine()->getManager();
         $searchedBlogs = $em->getRepository('EtheriqBlogBundle:Blog')->searchArticlesByTitle($search);
 
@@ -282,9 +297,12 @@ class BlogController extends Controller
         $pagerBlog = new Pagerfanta($adapter);
         $pagerBlog->setMaxPerPage(5);
 
-        try {
+
             $pagerBlog->setCurrentPage($page);
         } catch (NotValidCurrentPageException $e) {
+
+            return $this->render('EtheriqBlogBundle:pages:guestPageNotFound.html.twig', array('pageNumber' => $page));
+        } catch (NotFoundHttpException $e) {
 
             return $this->render('EtheriqBlogBundle:pages:guestPageNotFound.html.twig', array('pageNumber' => $page));
         }
