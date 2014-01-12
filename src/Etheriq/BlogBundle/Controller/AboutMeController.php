@@ -14,6 +14,10 @@ class AboutMeController extends Controller
 {
     public function showAboutMePageAction()
     {
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem("Home", $this->get("router")->generate("homepage"));
+        $breadcrumbs->addItem("About me");
+
         return $this->render('EtheriqBlogBundle:pages:about.html.twig');
     }
 

@@ -9,9 +9,7 @@
          <div class="col-md-10">
              {% block breadcrumb %}
 
-                 <ol class="breadcrumb">
-                     <li class="active">{{ 'Home'|trans }}</li>
-                 </ol>
+                 {{ wo_render_breadcrumbs() }}
 
              {% endblock breadcrumb %}
          </div>

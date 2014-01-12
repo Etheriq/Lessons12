@@ -8,10 +8,7 @@
 
          {% block breadcrumb %}
 
-             <ol class="breadcrumb">
-                 <li><a href="{{ path('homepage') }}">{{ 'Home'|trans }}</a></li>
-                 <li class="active">{{ 'Blog in detail'|trans }}</li>
-             </ol>
+             {{ wo_render_breadcrumbs() }}
 
          {% endblock breadcrumb %}
 
