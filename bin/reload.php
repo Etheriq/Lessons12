@@ -5,11 +5,7 @@ require_once __DIR__.'/base_script.php';
 build_bootstrap();
 
 show_run("Changing permissions", "chmod -R 777 app/cache app/logs web/");
-<<<<<<< HEAD
 show_run("database:drop", "app/console doctrine:database:drop --force");
-=======
-//show_run("database:drop", "app/console doctrine:database:drop --force");
->>>>>>> 98af380cd8d77332e95aad6f1d5f588c1d27051f
 show_run("database:create", "app/console doctrine:database:create");
 show_run("generate:entities", "app/console doctrine:generate:entities Etheriq");
 show_run("schema:update", "app/console doctrine:schema:update --force");
