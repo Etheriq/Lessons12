@@ -17,6 +17,7 @@ use Pagerfanta\Exception\NotValidCurrentPageException;
 use Pagerfanta\Pagerfanta;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Adapter\DoctrineCollectionAdapter;
+use Symfony\Component\Debug\Exception\FatalErrorException;
 use Symfony\Component\HttpFoundation\Request;
 use Etheriq\BlogBundle\Form\BlogDetailType;
 use Pagerfanta\Adapter\FixedAdapter;
@@ -70,12 +71,16 @@ class BlogController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $cat = $em->getRepository('EtheriqBlogBundle:Category')->findOneBySlug($slug);
+        if($cat == null)
+        {
+            return $this->render('EtheriqBlogBundle:pages:guestPageNotFound.html.twig', array('pageNumber' => $slug));
+        }
         $catName = $cat->getCategoryName();
         $blogs = $cat->getBlogs();
 
         $adapter = new DoctrineCollectionAdapter($blogs);
         $pagerBlog = new Pagerfanta($adapter);
-        $pagerBlog->setMaxPerPage(2);
+        $pagerBlog->setMaxPerPage(5);
 
         try {
             $pagerBlog->setCurrentPage($page);
@@ -94,6 +99,10 @@ class BlogController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $tag = $em->getRepository('EtheriqBlogBundle:Tags')->findOneBySlug($slug);
+        if($tag == null)
+        {
+            return $this->render('EtheriqBlogBundle:pages:guestPageNotFound.html.twig', array('pageNumber' => $slug));
+        }
         $tagName = $tag->getTagName();
         $blogs = $tag->getBlogTags();
 
@@ -259,7 +268,6 @@ class BlogController extends Controller
             return $this->redirect($this->generateUrl('homepage'));
         }
 
-
         return $this->render('EtheriqBlogBundle:pages:addNewBlogArticle.html.twig', array(
             'form' => $form->createView()
         ));
@@ -279,7 +287,6 @@ class BlogController extends Controller
             return $this->redirect($this->generateUrl('homepage'));
         }
 
-
         return $this->redirect($this->generateUrl('blog_search', array('search' => $search)));
         } catch (NotFoundHttpException $e) {
 
@@ -289,7 +296,6 @@ class BlogController extends Controller
 
     public function searchBlogsByTitleAction($search=null, $page)
     {
-        try {
         $em = $this->getDoctrine()->getManager();
         $searchedBlogs = $em->getRepository('EtheriqBlogBundle:Blog')->searchArticlesByTitle($search);
 
@@ -299,13 +305,6 @@ class BlogController extends Controller
 
 
             $pagerBlog->setCurrentPage($page);
-        } catch (NotValidCurrentPageException $e) {
-
-            return $this->render('EtheriqBlogBundle:pages:guestPageNotFound.html.twig', array('pageNumber' => $page));
-        } catch (NotFoundHttpException $e) {
-
-            return $this->render('EtheriqBlogBundle:pages:guestPageNotFound.html.twig', array('pageNumber' => $page));
-        }
 
         return $this->render('EtheriqBlogBundle:pages:homepage.html.twig', array(
             'blogs' => $pagerBlog,

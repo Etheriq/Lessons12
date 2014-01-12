@@ -19,7 +19,7 @@
                 {{ form_widget(form.title, { 'attr': {'class': 'form-control', 'style': 'width:80%; ', 'placeholder': 'Введите название статьи' } }) }}
                 <br>
                 {{ form_label(form.tags, 'Blog tags'|trans|raw) }}
-                {{ form_widget(form.tags, { 'attr': {'class': 'form-control', 'style': 'width:80%; height: 200px;'} }) }}
+                {{ form_widget(form.tags, { 'attr': {'style': 'width:80%;'} }) }}
                 {{ form_widget(form.rating) }}
                 <br>
                 <span><strong>{{ 'add_new_tags'|trans }}</strong> </span> <img src="{{ asset('img/blog/plus.png') }}" alt="plus"  id="show-input-tags"/>
