@@ -9,7 +9,6 @@
 namespace Etheriq\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\PersistentCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -124,7 +123,7 @@ class Blog
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -134,7 +133,7 @@ class Blog
     /**
      * Set deletedBlog
      *
-     * @param \DateTime $deletedBlog
+     * @param  \DateTime $deletedBlog
      * @return Blog
      */
     public function setDeletedBlog($deletedBlog)
@@ -147,7 +146,7 @@ class Blog
     /**
      * Get deletedBlog
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDeletedBlog()
     {
@@ -157,7 +156,7 @@ class Blog
     /**
      * Set created
      *
-     * @param \DateTime $created
+     * @param  \DateTime $created
      * @return Blog
      */
     public function setCreated($created)
@@ -170,7 +169,7 @@ class Blog
     /**
      * Get created
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreated()
     {
@@ -180,7 +179,7 @@ class Blog
     /**
      * Set updated
      *
-     * @param \DateTime $updated
+     * @param  \DateTime $updated
      * @return Blog
      */
     public function setUpdated($updated)
@@ -193,7 +192,7 @@ class Blog
     /**
      * Get updated
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdated()
     {
@@ -203,7 +202,7 @@ class Blog
     /**
      * Set slug
      *
-     * @param string $slug
+     * @param  string $slug
      * @return Blog
      */
     public function setSlug($slug)
@@ -216,7 +215,7 @@ class Blog
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
@@ -226,7 +225,7 @@ class Blog
     /**
      * Set title
      *
-     * @param string $title
+     * @param  string $title
      * @return Blog
      */
     public function setTitle($title)
@@ -239,7 +238,7 @@ class Blog
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -249,7 +248,7 @@ class Blog
     /**
      * Set textBlog
      *
-     * @param string $textBlog
+     * @param  string $textBlog
      * @return Blog
      */
     public function setTextBlog($textBlog)
@@ -262,7 +261,7 @@ class Blog
     /**
      * Get textBlog
      *
-     * @return string 
+     * @return string
      */
     public function getTextBlog()
     {
@@ -272,7 +271,7 @@ class Blog
     /**
      * Set picture
      *
-     * @param string $picture
+     * @param  string $picture
      * @return Blog
      */
     public function setPicture($picture)
@@ -285,7 +284,7 @@ class Blog
     /**
      * Get picture
      *
-     * @return string 
+     * @return string
      */
     public function getPicture()
     {
@@ -295,7 +294,7 @@ class Blog
     /**
      * Set rating
      *
-     * @param string $rating
+     * @param  string $rating
      * @return Blog
      */
     public function setRating($rating)
@@ -308,7 +307,7 @@ class Blog
     /**
      * Get rating
      *
-     * @return string 
+     * @return string
      */
     public function getRating()
     {
@@ -318,7 +317,7 @@ class Blog
     /**
      * Set numberOfVoters
      *
-     * @param integer $numberOfVoters
+     * @param  integer $numberOfVoters
      * @return Blog
      */
     public function setNumberOfVoters($numberOfVoters)
@@ -331,7 +330,7 @@ class Blog
     /**
      * Get numberOfVoters
      *
-     * @return integer 
+     * @return integer
      */
     public function getNumberOfVoters()
     {
@@ -341,7 +340,7 @@ class Blog
     /**
      * Set category
      *
-     * @param \Etheriq\BlogBundle\Entity\Category $category
+     * @param  \Etheriq\BlogBundle\Entity\Category $category
      * @return Blog
      */
     public function setCategory(\Etheriq\BlogBundle\Entity\Category $category = null)
@@ -354,7 +353,7 @@ class Blog
     /**
      * Get category
      *
-     * @return \Etheriq\BlogBundle\Entity\Category 
+     * @return \Etheriq\BlogBundle\Entity\Category
      */
     public function getCategory()
     {
@@ -371,7 +370,7 @@ class Blog
     /**
      * Add tags
      *
-     * @param \Etheriq\BlogBundle\Entity\Tags $tags
+     * @param  \Etheriq\BlogBundle\Entity\Tags $tags
      * @return Blog
      */
     public function addTag(\Etheriq\BlogBundle\Entity\Tags $tags)
@@ -394,7 +393,7 @@ class Blog
     /**
      * Get tags
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getTags()
     {
@@ -423,7 +422,7 @@ class Blog
     /**
      * Set newCategory
      *
-     * @param integer $newCategory
+     * @param  integer $newCategory
      * @return Blog
      */
     public function setNewCategory($newCategory)
@@ -436,7 +435,7 @@ class Blog
     /**
      * Get newCategory
      *
-     * @return integer 
+     * @return integer
      */
     public function getNewCategory()
     {
@@ -446,7 +445,7 @@ class Blog
     /**
      * Set newTags
      *
-     * @param integer $newTags
+     * @param  integer $newTags
      * @return Blog
      */
     public function setNewTags($newTags)
@@ -459,7 +458,7 @@ class Blog
     /**
      * Get newTags
      *
-     * @return integer 
+     * @return integer
      */
     public function getNewTags()
     {

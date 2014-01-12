@@ -58,7 +58,7 @@ class Category
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -68,7 +68,7 @@ class Category
     /**
      * Set categoryName
      *
-     * @param string $categoryName
+     * @param  string   $categoryName
      * @return Category
      */
     public function setCategoryName($categoryName)
@@ -81,7 +81,7 @@ class Category
     /**
      * Get categoryName
      *
-     * @return string 
+     * @return string
      */
     public function getCategoryName()
     {
@@ -91,7 +91,7 @@ class Category
     /**
      * Add blogs
      *
-     * @param \Etheriq\BlogBundle\Entity\Blog $blogs
+     * @param  \Etheriq\BlogBundle\Entity\Blog $blogs
      * @return Category
      */
     public function addBlog(\Etheriq\BlogBundle\Entity\Blog $blogs)
@@ -114,7 +114,7 @@ class Category
     /**
      * Get blogs
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getBlogs()
     {
@@ -124,7 +124,7 @@ class Category
     /**
      * Set slug
      *
-     * @param string $slug
+     * @param  string   $slug
      * @return Category
      */
     public function setSlug($slug)
@@ -137,7 +137,7 @@ class Category
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
@@ -146,7 +146,6 @@ class Category
 
     public function __toString()
     {
-
         return $this->getCategoryName();
     }
 }

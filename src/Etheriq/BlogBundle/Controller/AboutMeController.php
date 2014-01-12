@@ -21,6 +21,4 @@ class AboutMeController extends Controller
         return $this->render('EtheriqBlogBundle:pages:about.html.twig');
     }
 
-
-
-} 
+}

@@ -18,7 +18,6 @@ use Pagerfanta\Pagerfanta;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Etheriq\BlogBundle\Form\GuestType;
 use Etheriq\BlogBundle\EventListener\GuestEvent;
-use Symfony\Component\HttpFoundation\Response;
 
 class GuestController extends Controller
 {
@@ -27,7 +26,6 @@ class GuestController extends Controller
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem("Home", $this->get("router")->generate("homepage"));
         $breadcrumbs->addItem("Guest book");
-
 
         $em = $this->getDoctrine()->getManager();
 //        $em->getFilters()->disable('softdeleteable');  // to display removed data
@@ -41,7 +39,6 @@ class GuestController extends Controller
         try {
             $pagerFanta->setCurrentPage($page);
         } catch (NotValidCurrentPageException $e) {
-
             return $this->render('EtheriqBlogBundle:pages:guestPageNotFound.html.twig', array('pageNumber' => $page));
         }
 

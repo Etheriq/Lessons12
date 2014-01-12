@@ -30,16 +30,14 @@ class EtheriqTwigExtention extends \Twig_Extension
         $str = explode(' ', $string);
         $countWords = count($str);
 
-        if ($countWords <= $limit)
-        {
+        if ($countWords <= $limit) {
             $lim = $countWords;
         } else {
             $lim = $limit;
         }
 
         $strResult = '';
-        for ($i = 0; $i < $lim; $i++)
-        {
+        for ($i = 0; $i < $lim; $i++) {
             $strResult = $strResult.$str[$i]. ' ';
         }
 
@@ -48,11 +46,10 @@ class EtheriqTwigExtention extends \Twig_Extension
 
     public function rating($rating, $voters)
     {
-
         return round($rating / $voters, 1);
     }
 
-    public function tagView($string, $link )
+    public function tagView($string, $link)
     {
         $scale = mt_rand(80, 150);
 
