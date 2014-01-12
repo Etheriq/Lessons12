@@ -89,3 +89,6 @@ liip_imagine:
             filters:
                 relative_resize: { heighten: 60 }
 #                thumbnail: { size: [120, 90], mode: outbound }
+
+white_october_breadcrumbs:
+    separator:  ' > '

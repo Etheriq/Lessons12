@@ -31,7 +31,14 @@ blog_find:
 
 blog_search:
     pattern:  /{_locale}/blog/search/{search}/{page}
-    defaults: { _controller: EtheriqBlogBundle:Blog:searchBlogsByTitle, page: 1 }
+    defaults: { _controller: EtheriqBlogBundle:Blog:searchBlogsByTitle, page: 1, search: '' }
+    requirements:
+            page:  \d+
+            _locale: en|ru|ua
+
+blog_search_error:
+    pattern:  /{_locale}/blog/search/
+    defaults: { _controller: EtheriqBlogBundle:Blog:showBlogMainPage, page: 1  }
     requirements:
             _locale: en|ru|ua
 

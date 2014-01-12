@@ -24,6 +24,11 @@ class GuestController extends Controller
 {
     public function showGuestAction($page, Request $request)
     {
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem("Home", $this->get("router")->generate("homepage"));
+        $breadcrumbs->addItem("Guest book");
+
+
         $em = $this->getDoctrine()->getManager();
 //        $em->getFilters()->disable('softdeleteable');  // to display removed data
         $query = $em->getRepository('EtheriqBlogBundle:Guest')->findDESCGuests();  // Order by DESC
@@ -65,6 +70,11 @@ class GuestController extends Controller
 
     public function showGuestInfoAction($slug, Request $request)
     {
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem("Home", $this->get("router")->generate("homepage"));
+        $breadcrumbs->addItem("Guest book", $this->get("router")->generate("guest"));
+        $breadcrumbs->addItem("Guest book detail");
+
         $em = $this->getDoctrine()->getManager();
         $guestShow = $em->getRepository('EtheriqBlogBundle:Guest')->findOneBySlug($slug);
 
