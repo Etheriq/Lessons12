@@ -20,15 +20,16 @@ class AdditionalController extends Controller
 
     public function getArrayTags()
     {
-        $repository = $this->getDoctrine()->getRepository('EtheriqBlogBundle:Tags');
+
+        $repository = $this->getDoctrine()->getRepository('EtheriqBlogBundle:TagsCloud');
         $tags = $repository->findAll();
 
         $tagsToArray = array();
         foreach ($tags as $tag) {
             $tagsToArray[] = array(
-                'text' => $tag->getTagName(),
-                'weight' => count($tag->getBlogTags()),
-                'link' => $this->generateUrl('blog_tag', array('slug' => $tag->getSlug()))
+                'text' => $tag->getTagCloudName(),
+                'weight' => $tag->getTagCloudCount(),
+                'link' => $this->generateUrl('blog_tag', array('slug' => $tag->getTagSlug()))
             );
         }
 

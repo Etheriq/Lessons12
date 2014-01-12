@@ -1,0 +1,41 @@
+TagCloud:
+    1:
+        nameTag: WEB
+        countArticles: 17
+        tagSlug: web
+    2:
+        nameTag: HTML5
+        countArticles: 7
+        tagSlug: html5
+    3:
+        nameTag: CSS3
+        countArticles: 6
+        tagSlug: css3
+    4:
+        nameTag: PHP
+        countArticles: 0
+        tagSlug: php
+    5:
+        nameTag: Linux
+        countArticles: 1
+        tagSlug: linux
+    6:
+        nameTag: Other
+        countArticles: 0
+        tagSlug: other
+    7:
+        nameTag: Apache
+        countArticles: 0
+        tagSlug: apache
+    8:
+        nameTag: Doctrine
+        countArticles: 5
+        tagSlug: doctrine
+    9:
+        nameTag: Twig
+        countArticles: 9
+        tagSlug: twig
+    10:
+        nameTag: PHPStorm
+        countArticles: 15
+        tagSlug: phpstorm

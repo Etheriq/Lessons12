@@ -6,6 +6,7 @@
     <parameters>
         <parameter key="fantaView">Pagerfanta\View\TwitterBootstrap3View</parameter>
         <parameter key="guestSubscriber">Etheriq\BlogBundle\EventListener\GuestSubscriber</parameter>
+        <parameter key="tagsCloudUpdater">Etheriq\BlogBundle\Service\BlogServices</parameter>
     </parameters>
 
     <services>
@@ -22,6 +23,10 @@
 
         <service id="twig.extention.str.limit" class="Etheriq\BlogBundle\Twig\Extention\EtheriqTwigExtention">
             <tag name="twig.extension" />
+        </service>
+
+        <service id="etheriq.tagsCloud" class="%tagsCloudUpdater%">
+            <argument type="service" id="doctrine" />
         </service>
     </services>
 </container>
