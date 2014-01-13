@@ -12,6 +12,56 @@
 
          {% endblock breadcrumb %}
 
+         <div class="row">
+             <div class="col-md-10">
+                <div class="article-header">
+                    <div class="row">
+                        <div class="col-md-6">
+                           <span class="text-left showArticleTitle"> {{ article.title }} </span>
+                            <div class="text-left">
+                                {{ form(edit_form) }}
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <strong> {{ 'Category'|trans }} </strong>
+                            <span class="label label-primary">
+                                {{ article.category.categoryName }}
+                              </span>
+                            &nbsp;
+                            <strong> {{ 'Tags'|trans }} </strong>
+                            {% for tag in article.tags %}
+                                <label class="tagsInShow">
+                                    <span class="label label-info"> {{ tag.tagName }} </span>
+                                </label>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                 <div class="article-body">
+
+                     <img src="{{ article.picture | imagine_filter('blog_show') }}" class="img-thumbnail">
+
+                     {{ article.textBlog }}
+                 </div>
+                </div>
+
+                 <div class="article-footer">
+                     <div class="row">
+                         <div class="col-md-6 text-left">
+                             <strong>{{ 'Rating'|trans }}</strong>
+                             <span class="badge">{{ article.rating|rating(article.numberOfVoters) }}</span>
+                         </div>
+                         <div class="col-md-6 text-right">
+                             <span>{{ 'Published'|trans }} {{ article.created|date("d.m.Y") }}</span>
+                         </div>
+                     </div>
+                 </div>
+
+
+             </div>
+         </div>
 
      {% endblock wraper %}
 
