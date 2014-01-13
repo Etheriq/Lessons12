@@ -87,8 +87,12 @@ liip_imagine:
         blog_main:
             quality: 60
             filters:
-                relative_resize: { heighten: 60 }
+                relative_resize: { widen: 60 }
 #                thumbnail: { size: [120, 90], mode: outbound }
+        blog_show:
+            quality: 60
+            filters:
+                relative_resize: { widen: 160 }
 
 white_october_breadcrumbs:
     separator:  ' > '

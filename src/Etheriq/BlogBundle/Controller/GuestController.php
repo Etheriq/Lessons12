@@ -101,10 +101,12 @@ class GuestController extends Controller
             return $this->redirect($this->generateUrl('guest'));
         }
 
+        $deleteForm = $this->createDeleteForm($slug);
         return $this->render('EtheriqBlogBundle:pages:guestShowInfo.html.twig', array(
             'form' => $form->createView(),
             'created' => $created,
-            'updated' => $updated
+            'updated' => $updated,
+            'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -129,5 +131,14 @@ class GuestController extends Controller
         $guests = $em->getRepository('EtheriqBlogBundle:Guest')->fiveLastGuest();
 
         return $this->render('EtheriqBlogBundle:sidebar:lastGuest.html.twig', array('guests' => $guests));
+    }
+
+    private function createDeleteForm($slug)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('guest_deleteItem', array('slug' => $slug)))
+            ->setMethod('DELETE')
+            ->add('delete', 'submit', array('label' => 'Delete', 'attr' => array('class' => "btn btn-danger")))
+            ->getForm();
     }
 }

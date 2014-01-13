@@ -11,6 +11,20 @@ blog_showInfo:
     requirements:
             _locale: en|ru|ua
 
+blog_edit:
+    pattern:  /{_locale}/blog/edit/{slug}
+    defaults: { _controller: EtheriqBlogBundle:Blog:editBlogInfo }
+    requirements:
+            _locale: en|ru|ua
+            _method: post|put
+
+blog_delete:
+    pattern:  /{_locale}/blog/delete/{slug}
+    defaults: { _controller: EtheriqBlogBundle:Blog:deleteBlogInfo }
+    requirements:
+            _locale: en|ru|ua
+            _method: post|delete
+
 blog_category:
     pattern:  /{_locale}/blog/category/{slug}/{page}
     defaults: { _controller: EtheriqBlogBundle:Blog:showBlogsByCategory, page: 1 }
@@ -66,6 +80,7 @@ guest_deleteItem:
     defaults: { _controller: EtheriqBlogBundle:Guest:deleteGuestItem }
     requirements:
             _locale: en|ru|ua
+            _method: post|delete
 
 about:
     pattern:  /{_locale}/about
