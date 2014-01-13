@@ -16,21 +16,21 @@
          {{ form_start(form, {'attr': {'role': 'form', 'novalidate': 'novalidate' }}) }}
 
          {{ form_label(form.title, 'blog_title'|trans|raw) }}
-         {{ form_widget(form.title, { 'attr': {'class': 'form-control', 'style': 'width:80%; ', 'placeholder': 'Введите название статьи' } }) }}
+         {{ form_widget(form.title, { 'attr': {'class': 'form-control width80', 'placeholder': 'Введите название статьи' } }) }}
          <br>
          {{ form_label(form.tags, 'Blog tags'|trans|raw) }}
-         {{ form_widget(form.tags, { 'attr': {'style': 'width:80%;'} }) }}
+         {{ form_widget(form.tags, { 'attr': {'class': 'width80'} }) }}
          {{ form_widget(form.rating) }}
          <br>
          <span><strong>{{ 'add_new_tags'|trans }}</strong> </span> <img src="{{ asset('img/blog/plus.png') }}" alt="plus"  id="show-input-tags"/>
          <div class="hidden-category" id="input-tags">
              {{ form_label(form.newTags, 'new_tag_name'|trans|raw) }}
-             {{ form_widget(form.newTags, { 'attr': {'class': 'form-control', 'style': 'width:80%;', 'placeholder': 'Введите новые теги через запятую'} }) }}
+             {{ form_widget(form.newTags, { 'attr': {'class': 'form-control width80', 'placeholder': 'Введите новые теги через запятую'} }) }}
          </div>
 
          <br><br>
          {{ form_label(form.textBlog, 'text_article'|trans|raw) }}
-         {{ form_widget(form.textBlog, { 'attr': {'class': 'form-control', 'style': 'width:80%; height: 350px;', 'placeholder': 'Введите сообщение, минимальная длина 50 символом ' } }) }}
+         {{ form_widget(form.textBlog, { 'attr': {'class': 'form-control width80 height350', 'placeholder': 'Введите сообщение, минимальная длина 50 символом ' } }) }}
 
          <br>
 

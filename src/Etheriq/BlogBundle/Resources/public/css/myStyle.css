@@ -56,7 +56,26 @@ body
     text-align: center;
     margin-left: 15%;
 }
-
+.width80
+{
+    width: 80%;
+}
+.article-header span.showArticleTitle
+{
+    float: left;
+    padding-right: 25px;
+    margin-top: -9px;
+    font-size: 190%;
+    color: #212527;
+}
+textarea.form-control.height350
+{
+    height: 300px;
+}
+label.tagsInShow
+{
+    margin-bottom: -2px;
+}
 .myTags
 {
     float: right;
@@ -84,16 +103,14 @@ body
 
     margin-bottom: 15px;
 }
-.article-header span
-{
-    float: right;
-}
-
 .article-body img
 {
-    width: 60px;
     float: left;
     margin-right: 5px;
+}
+.col-md-6 h3
+{
+    margin-top: -5px;
 }
 .list-group-item
 {

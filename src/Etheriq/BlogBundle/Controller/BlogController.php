@@ -30,6 +30,7 @@ class BlogController extends Controller
         $breadcrumbs->addItem("Home");
 
         $em = $this->getDoctrine()->getManager();
+//        $em->getFilters()->disable('softdeleteable');  // to display removed data
         $query = $em->getRepository('EtheriqBlogBundle:Blog')->findBlogsDESC();  // Order by created DESC
 //        $query = $em->getRepository('EtheriqBlogBundle:Blog')->findAllBlogs();  // order by id DESC
         $adapter = new DoctrineORMAdapter($query);
@@ -129,69 +130,10 @@ class BlogController extends Controller
             exit;
         }
 
-        $allRequest = $request->createFromGlobals();
-        $rate = $allRequest->request->all();
-
-        $blogShow->setTitle($blogShow->getTitle());
-        $blogShow->setTextBlog($blogShow->getTextBlog());
-
-        $ratingOld = $blogShow->getRating();
-        $blogShow->setRating(0);
-
-        $form = $this->createForm(new BlogDetailType(), $blogShow);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $blogToDb = $this->getDoctrine()->getManager();
-
-            if ($rate['blogDetailed']['rating'] != 0) {
-                $ratingNew = $ratingOld + $rate['blogDetailed']['rating'];
-                $voters = $blogShow->getNumberOfVoters();
-
-                $blogShow->setRating($ratingNew);
-                $blogShow->setNumberOfVoters($voters + 1);
-
-            } else {
-                $blogShow->setRating($ratingOld);
-            }
-
-            if ($blogShow->getNewTags() != null) {
-                $newTags = explode(',', trim($blogShow->getNewTags()));
-
-                foreach ($newTags as $item) {
-                    $tag = new Tags();
-                    $tag->setTagName(trim($item));
-
-                    $blogToDb->persist($tag);
-                    $blogShow->addTag($tag);
-                }
-
-            }
-            if ($blogShow->getNewCategory() != null) {
-                $newCategory = explode(',', trim($blogShow->getNewCategory()));
-
-                foreach ($newCategory as $item) {
-                    $category = new Category();
-                    $category->setCategoryName(trim($item));
-
-                    $blogToDb->persist($category);
-                    $blogShow->setCategory($category);
-                }
-            }
-
-            $blogShow->setNewTags(null);
-            $blogShow->setNewCategory(null);
-            $blogToDb->flush();
-
-            $this->get('etheriq.tagscloud')->update();
-
-            return $this->redirect($this->generateUrl('homepage'));
-        }
-
-        return $this->render('EtheriqBlogBundle:pages:blogDetail.html.twig', array(
-            'form' => $form->createView(),
-            'rating' => $ratingOld,
-            'voters' => $blogShow->getNumberOfVoters(),
+        $editForm = $this->createEditForm($slug);
+        return $this->render('EtheriqBlogBundle:pages:blogShow.html.twig', array(
+            'article' => $blogShow,
+            'edit_form' => $editForm->createView(),
         ));
 
     }
@@ -289,6 +231,127 @@ class BlogController extends Controller
             'blogs' => $pagerBlog,
             'filter' => $search
         ));
+    }
+
+    public function editBlogInfoAction($slug, Request $request)
+    {
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem("Home", $this->get("router")->generate("homepage"));
+        $breadcrumbs->addItem("Blog in detail", $this->get("router")->generate("blog_showInfo", array('slug' => $slug)));
+        $breadcrumbs->addItem("Edit Article");
+
+        $em = $this->getDoctrine()->getManager();
+        $blogShow = $em->getRepository('EtheriqBlogBundle:Blog')->findOneBySlug($slug);
+
+        if (!$blogShow) {
+            return $this->render('EtheriqBlogBundle:pages:guestPageNotFound.html.twig', array('pageNumber' => $slug));
+            exit;
+        }
+
+        $allRequest = $request->createFromGlobals();
+        $rate = $allRequest->request->all();
+
+        $blogShow->setTitle($blogShow->getTitle());
+        $blogShow->setTextBlog($blogShow->getTextBlog());
+
+        $ratingOld = $blogShow->getRating();
+        $blogShow->setRating(0);
+
+        $form = $this->createForm(new BlogDetailType(), $blogShow);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $blogToDb = $this->getDoctrine()->getManager();
+
+            if ($rate['blogDetailed']['rating'] != 0) {
+                $ratingNew = $ratingOld + $rate['blogDetailed']['rating'];
+                $voters = $blogShow->getNumberOfVoters();
+
+                $blogShow->setRating($ratingNew);
+                $blogShow->setNumberOfVoters($voters + 1);
+
+            } else {
+                $blogShow->setRating($ratingOld);
+            }
+
+            if ($blogShow->getNewTags() != null) {
+                $newTags = explode(',', trim($blogShow->getNewTags()));
+
+                foreach ($newTags as $item) {
+                    $tag = new Tags();
+                    $tag->setTagName(trim($item));
+
+                    $blogToDb->persist($tag);
+                    $blogShow->addTag($tag);
+                }
+
+            }
+            if ($blogShow->getNewCategory() != null) {
+                $newCategory = explode(',', trim($blogShow->getNewCategory()));
+
+                foreach ($newCategory as $item) {
+                    $category = new Category();
+                    $category->setCategoryName(trim($item));
+
+                    $blogToDb->persist($category);
+                    $blogShow->setCategory($category);
+                }
+            }
+
+            $blogShow->setNewTags(null);
+            $blogShow->setNewCategory(null);
+            $blogToDb->flush();
+
+            $this->get('etheriq.tagscloud')->update();
+
+            return $this->redirect($this->generateUrl('homepage'));
+        }
+
+            $deleteForm = $this->createDeleteForm($slug);
+
+        return $this->render('EtheriqBlogBundle:pages:blogEdit.html.twig', array(
+            'form' => $form->createView(),
+            'rating' => $ratingOld,
+            'voters' => $blogShow->getNumberOfVoters(),
+            'delete_form' => $deleteForm->createView(),
+        ));
+
+    }
+
+    public function deleteBlogInfoAction(Request $request, $slug)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $article = $em->getRepository('EtheriqBlogBundle:Blog')->findOneBy(array('slug' => $slug));
+
+        if (!$article) {
+            throw $this->createNotFoundException("Not found entity $slug.");
+        }
+
+        $em->remove($article);
+        $em->flush();
+
+        $this->get('etheriq.tagscloud')->update();
+
+        return $this->redirect($this->generateUrl('homepage'));
+    }
+
+
+    private function createEditForm($slug)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('blog_edit', array('slug' => $slug)))
+            ->setMethod('PUT')
+            ->add('edit', 'submit', array('label' => 'Edit', 'attr' => array('class' => "btn btn-warning btn-xs")))
+            ->getForm();
+    }
+
+    private function createDeleteForm($slug)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('blog_delete', array('slug' => $slug)))
+            ->setMethod('DELETE')
+            ->add('delete', 'submit', array('label' => 'Delete', 'attr' => array('class' => "btn btn-danger")))
+            ->getForm();
     }
 
 }
