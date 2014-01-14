@@ -40,6 +40,7 @@ class BlogDetailType  extends AbstractType
             ->add('category', 'entity', array(
                 'class' => 'EtheriqBlogBundle:Category',
                 'property' => 'categoryName',))
+            ->add('blogImage', 'file')
             ->add('save', 'submit');
     }
 

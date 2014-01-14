@@ -21,6 +21,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Etheriq\BlogBundle\Form\BlogDetailType;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class BlogController extends Controller
 {
@@ -183,6 +184,8 @@ class BlogController extends Controller
                 }
             }
 
+            $blog->uploadImage('new');
+
             $blog->setNewTags(null);
             $blog->setNewCategory(null);
             $newArticle->persist($blog);
@@ -298,6 +301,7 @@ class BlogController extends Controller
                 }
             }
 
+            $blogShow->uploadImage('edit');
             $blogShow->setNewTags(null);
             $blogShow->setNewCategory(null);
             $blogToDb->flush();
@@ -314,6 +318,7 @@ class BlogController extends Controller
             'rating' => $ratingOld,
             'voters' => $blogShow->getNumberOfVoters(),
             'delete_form' => $deleteForm->createView(),
+            'oldImage' => $blogShow->getPathImage()
         ));
 
     }
@@ -353,5 +358,7 @@ class BlogController extends Controller
             ->add('delete', 'submit', array('label' => 'Delete', 'attr' => array('class' => "btn btn-danger")))
             ->getForm();
     }
+
+
 
 }
