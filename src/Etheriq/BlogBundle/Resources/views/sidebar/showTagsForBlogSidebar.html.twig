@@ -12,7 +12,10 @@
     <script>
         var wordTags = {{ tags|json_encode|raw }};
         jQuery(function() {
-            jQuery("#cloudTags").jQCloud(wordTags);
+            jQuery("#cloudTags").jQCloud(wordTags,
+                    {
+//                        shape: 'rectangular'
+                    });
         });
     </script>
 
