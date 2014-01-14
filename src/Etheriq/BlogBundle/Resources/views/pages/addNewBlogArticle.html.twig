@@ -43,6 +43,11 @@
              {{ form_label(form.newCategory, 'new_category_name'|trans|raw) }}
              {{ form_widget(form.newCategory, { 'attr': {'class': 'form-control', 'style': 'width:80%;', 'placeholder': 'Введите новые категории через запятую'} }) }}
          </div>
+         <br>
+         <div>
+             {{ form_label(form.blogImage, 'upload_file'|trans|raw) }}
+             {{ form_widget(form.blogImage) }}
+         </div>
 
          <br><br>
          {#<p><strong>{{ 'rating_article'|trans }}</strong> <span class="badge">{{ rating|rating(voters) }}</span></p>#}
@@ -61,6 +66,7 @@
 
          <p>{{ form_errors(form.title) }}</p>
          <p>{{ form_errors(form.textBlog) }}</p>
+         <p>{{ form_errors(form.blogImage) }}</p>
          <p>{{ form_errors(form) }}</p>
 
          {{ form_end(form) }}
