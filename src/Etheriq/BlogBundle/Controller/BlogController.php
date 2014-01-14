@@ -206,7 +206,7 @@ class BlogController extends Controller
         $allRequest = $request->createFromGlobals();
         $s = $allRequest->request->all();
 
-        $search = trim($s['search']);
+        $search = strip_tags(trim($s['search']));
 
         if ($search == null or $search == ' ') {
             return $this->redirect($this->generateUrl('homepage'));
