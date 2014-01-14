@@ -157,7 +157,6 @@ class BlogController extends Controller
 
             $blog
                 ->setTags($tags)
-                ->setPicture('img/blog/bluz.jpg')
                 ->setNumberOfVoters(1);
 
             if ($blog->getNewTags() != null) {
@@ -207,7 +206,7 @@ class BlogController extends Controller
         $allRequest = $request->createFromGlobals();
         $s = $allRequest->request->all();
 
-        $search = trim($s['search']);
+        $search = strip_tags(trim($s['search']));
 
         if ($search == null or $search == ' ') {
             return $this->redirect($this->generateUrl('homepage'));

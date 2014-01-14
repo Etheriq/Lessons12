@@ -483,12 +483,11 @@ class Blog
     public function uploadImage($role)
     {
         if($role == 'new') {
-        // the file property can be empty if the field is not required
-        if (null === $this->getBlogImage()) {
-            $this->pathImage = $this->getUploadDir().'/default.jpg';
-            $this->nameImage = 'default.jpg';
-            return;
-        }
+            if (null === $this->getBlogImage()) {
+                $this->pathImage = $this->getUploadDir().'/default.jpg';
+                $this->nameImage = 'default.jpg';
+                return;
+            }
         }
 
         if($role == 'edit') {
@@ -499,24 +498,16 @@ class Blog
 
         }
 
-        // use the original file name here but you should
-        // sanitize it at least to avoid any security issues
-
-        // move takes the target directory and then the
-        // target filename to move to
-
-        $randSuffix = mt_rand(1, 9999);
+        $randPrefix = mt_rand(1, 9999);
 
         $this->getBlogImage()->move(
             $this->getUploadRootDir(),
-            $randSuffix.'-'.$this->getBlogImage()->getClientOriginalName()
+            $randPrefix.'-'.$this->getBlogImage()->getClientOriginalName()
         );
 
-        // set the path property to the filename where you've saved the file
-        $this->pathImage = $this->getUploadDir().'/'.$randSuffix.'-'.$this->getBlogImage()->getClientOriginalName();
-        $this->nameImage = $randSuffix.'-'.$this->getBlogImage()->getClientOriginalName();
+        $this->pathImage = $this->getUploadDir().'/'.$randPrefix.'-'.$this->getBlogImage()->getClientOriginalName();
+        $this->nameImage = $randPrefix.'-'.$this->getBlogImage()->getClientOriginalName();
 
-        // clean up the file property as you won't need it anymore
         $this->blogImage = null;
     }
 
@@ -536,15 +527,11 @@ class Blog
 
     protected function getUploadRootDir()
     {
-        // the absolute directory path where uploaded
-        // documents should be saved
         return __DIR__.'/../../../../web/'.$this->getUploadDir();
     }
 
     protected function getUploadDir()
     {
-        // get rid of the __DIR__ so it doesn't screw up
-        // when displaying uploaded doc/image in the view.
         return 'img/blog';
     }
 
