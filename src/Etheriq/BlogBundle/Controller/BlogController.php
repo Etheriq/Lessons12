@@ -157,7 +157,6 @@ class BlogController extends Controller
 
             $blog
                 ->setTags($tags)
-                ->setPicture('img/blog/bluz.jpg')
                 ->setNumberOfVoters(1);
 
             if ($blog->getNewTags() != null) {
