@@ -12,6 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Class Blog
@@ -34,7 +36,7 @@ class Blog
 
     /**
      *
-     * @ORM\Column(name="deletedGuest", type="datetime", nullable=true)
+     * @ORM\Column(name="deletedArticle", type="datetime", nullable=true)
      */
     protected $deletedBlog;
 
@@ -77,9 +79,25 @@ class Blog
 
     /**
      *
-     * @ORM\Column(type="string", length=240)
+     * @Assert\File(
+     *     maxSize = "3M",
+     *     mimeTypes = {"image/*"},
+     *     mimeTypesMessage = "uploadMimeType.error",
+     *     maxSizeMessage = "maxSize.error"
+     * )
      */
-    protected $picture;
+    protected $blogImage;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * Assert\NotBlank
+     */
+    public $nameImage;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    public $pathImage;
 
     /**
      *
@@ -119,6 +137,26 @@ class Blog
      * @ORM\Column(type="integer", nullable=true)
      */
     protected $newTags;
+
+    /**
+     * Sets file.
+     *
+     * @param UploadedFile $file
+     */
+    public function setBlogImage(UploadedFile $file = null)
+    {
+        $this->blogImage = $file;
+    }
+
+    /**
+     * Get file.
+     *
+     * @return UploadedFile
+     */
+    public function getBlogImage()
+    {
+        return $this->blogImage;
+    }
 
     /**
      * Get id
@@ -266,29 +304,6 @@ class Blog
     public function getTextBlog()
     {
         return $this->textBlog;
-    }
-
-    /**
-     * Set picture
-     *
-     * @param  string $picture
-     * @return Blog
-     */
-    public function setPicture($picture)
-    {
-        $this->picture = $picture;
-
-        return $this;
-    }
-
-    /**
-     * Get picture
-     *
-     * @return string
-     */
-    public function getPicture()
-    {
-        return $this->picture;
     }
 
     /**
@@ -463,5 +478,119 @@ class Blog
     public function getNewTags()
     {
         return $this->newTags;
+    }
+
+    public function uploadImage($role)
+    {
+        if($role == 'new') {
+        // the file property can be empty if the field is not required
+        if (null === $this->getBlogImage()) {
+            $this->pathImage = $this->getUploadDir().'/default.jpg';
+            $this->nameImage = 'default.jpg';
+            return;
+        }
+        }
+
+        if($role == 'edit') {
+            if (null === $this->getBlogImage()) {
+
+                return;
+            }
+
+        }
+
+        // use the original file name here but you should
+        // sanitize it at least to avoid any security issues
+
+        // move takes the target directory and then the
+        // target filename to move to
+
+        $randSuffix = mt_rand(1, 9999);
+
+        $this->getBlogImage()->move(
+            $this->getUploadRootDir(),
+            $randSuffix.'-'.$this->getBlogImage()->getClientOriginalName()
+        );
+
+        // set the path property to the filename where you've saved the file
+        $this->pathImage = $this->getUploadDir().'/'.$randSuffix.'-'.$this->getBlogImage()->getClientOriginalName();
+        $this->nameImage = $randSuffix.'-'.$this->getBlogImage()->getClientOriginalName();
+
+        // clean up the file property as you won't need it anymore
+        $this->blogImage = null;
+    }
+
+    public function getAbsolutePath()
+    {
+        return null === $this->pathImage
+            ? null
+            : $this->getUploadRootDir().'/'.$this->pathImage;
+    }
+
+    public function getWebPath()
+    {
+        return null === $this->pathImage
+            ? null
+            : $this->getUploadDir().'/'.$this->pathImage;
+    }
+
+    protected function getUploadRootDir()
+    {
+        // the absolute directory path where uploaded
+        // documents should be saved
+        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+    }
+
+    protected function getUploadDir()
+    {
+        // get rid of the __DIR__ so it doesn't screw up
+        // when displaying uploaded doc/image in the view.
+        return 'img/blog';
+    }
+
+    /**
+     * Set nameImage
+     *
+     * @param string $nameImage
+     * @return Blog
+     */
+    public function setNameImage($nameImage)
+    {
+        $this->nameImage = $nameImage;
+
+        return $this;
+    }
+
+    /**
+     * Get nameImage
+     *
+     * @return string 
+     */
+    public function getNameImage()
+    {
+        return $this->nameImage;
+    }
+
+    /**
+     * Set pathImage
+     *
+     * @param string $pathImage
+     * @return Blog
+     */
+    public function setPathImage($pathImage)
+    {
+        $this->pathImage = $pathImage;
+
+        return $this;
+    }
+
+    /**
+     * Get pathImage
+     *
+     * @return string 
+     */
+    public function getPathImage()
+    {
+        return $this->pathImage;
     }
 }

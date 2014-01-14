@@ -31,7 +31,8 @@ class LoadBlogData extends AbstractFixture implements OrderedFixtureInterface
 
             $blog
                 ->setTitle($item['title'])
-                ->setPicture($item['pictureSrc'])
+                ->setPathImage($item['pictureSrc'])
+                ->setNameImage($item['pictureName'])
                 ->setTextBlog($item['textBlog'])
                 ->setRating($item['rating'])
                 ->setNumberOfVoters($item['numOfVot'])
