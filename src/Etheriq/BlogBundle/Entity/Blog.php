@@ -92,12 +92,12 @@ class Blog
      * @ORM\Column(type="string", length=255, nullable=true)
      * Assert\NotBlank
      */
-    public $nameImage;
+    protected $nameImage;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    public $pathImage;
+    protected $pathImage;
 
     /**
      *

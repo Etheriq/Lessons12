@@ -3,6 +3,17 @@ language: php
 php:
   - 5.4
 
-before_script: composer install -n
+env:
+  - SYMFONY_VERSION=2.3.*
+  - SYMFONY_VERSION=2.4.*
 
-script: phpunit -c app
+before_script:
+  - sudo apt-get update
+  - sudo apt-get install -y --force-yes apache2 libapache2-mod-php5 php5-curl php5-intl php5-cli php5-dev phpunit
+  - sudo a2enmod actions
+  - sudo a2enmod rewrite
+  - composer install -n
+
+
+script:
+  - phpunit -c app
