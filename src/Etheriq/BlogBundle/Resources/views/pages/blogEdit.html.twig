@@ -54,9 +54,6 @@
                          <img src="{{ oldImage | imagine_filter('blog_main') }}" class="img-thumbnail">
                      </div>
                  </div>
-
-
-                 <br>
                  <p><strong>{{ 'rating_article'|trans }}</strong> <span class="badge">{{ rating|rating(voters) }}</span></p>
                  <div  id = "rates">
                  <ul>
@@ -67,17 +64,12 @@
                      <li class="defaultRating"></li>
                  </ul>
                 </div>
-
                 <br><br>
                 {{ form_widget(form.save, { 'attr': {'class': 'btn btn-success'} }) }}
-
-
-
                 <p>{{ form_errors(form.title) }}</p>
                 <p>{{ form_errors(form.textBlog) }}</p>
                 <p>{{ form_errors(form.blogImage) }}</p>
                 <p>{{ form_errors(form) }}</p>
-
          {{ form_end(form) }}
 
          {{ form(delete_form) }}

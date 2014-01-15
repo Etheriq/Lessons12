@@ -47,11 +47,17 @@
 
                  {% endif %}
                     {% for blog in blogs %}
-                       <div class="article-header">
-                       <a href="{{ path('blog_showInfo', {'slug': blog.slug})|raw }}">
-                       <strong>{{ blog.title }}</strong>
-                       </a>
-                       <span>{{ 'Published'|trans }} {{ blog.created|date("d.m.Y") }}</span>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="article-header">
+                                    <a href="{{ path('blog_showInfo', {'slug': blog.slug})|raw }}">
+                                        <strong>{{ blog.title }}</strong>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-4 text-right">
+                                <span>{{ 'Published'|trans }} {{ blog.created|date("d.m.Y") }}</span>
+                            </div>
                        </div>
                        <div class="article-body">
 
