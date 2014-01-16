@@ -25,7 +25,7 @@ class EtheriqTwigExtention extends \Twig_Extension
         );
     }
 
-    public function limitWords($string, $limit=5, $link='#')
+    public function limitWords($string, $limit = 5, $link = null)
     {
         $str = explode(' ', $string);
         $countWords = count($str);
@@ -41,7 +41,12 @@ class EtheriqTwigExtention extends \Twig_Extension
             $strResult = $strResult.$str[$i]. ' ';
         }
 
-        return $strResult.' <a href="'.$link.'"> ..... </a>';
+        if($link != null) {
+            return $strResult.' <a href="'.$link.'"> ..... </a>';
+        } else {
+            return $strResult;
+        }
+
     }
 
     public function rating($rating, $voters)

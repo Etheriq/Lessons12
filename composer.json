@@ -25,7 +25,8 @@
         "doctrine/doctrine-fixtures-bundle": "v2.2.0",
         "stof/doctrine-extensions-bundle": "v1.1.0",
         "liip/imagine-bundle": "dev-master",
-        "whiteoctober/breadcrumbs-bundle": "1.0.0"
+        "whiteoctober/breadcrumbs-bundle": "1.0.0",
+        "phpunit/phpunit": "3.7.*"
     },
     "scripts": {
         "post-install-cmd": [

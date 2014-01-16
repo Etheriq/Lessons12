@@ -19,8 +19,8 @@ class GuestControllerTest extends WebTestCase
 
         $crawler = $client->request('GET', '/en/guest');
 
-        $this->assertGreaterThan(0, $crawler->filter('html:contains("Created:")')->count());
-//        $this->assertEquals(5, $crawler->filter('a:contains("More info")')->count());
+//        $this->assertGreaterThan(0, $crawler->filter('html:contains("Created:")')->count());
+        $this->assertEquals(5, $crawler->filter('a:contains("More info")')->count());
 
     }
 }
