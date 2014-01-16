@@ -484,17 +484,17 @@ class Blog
     */
     public function uploadImage($role)
     {
-        if($role == 'new') {
+        if ($role == 'new') {
             if (null === $this->getBlogImage()) {
                 $this->pathImage = $this->getUploadDir().'/default.jpg';
                 $this->nameImage = 'default.jpg';
+
                 return;
             }
         }
 
-        if($role == 'edit') {
+        if ($role == 'edit') {
             if (null === $this->getBlogImage()) {
-
                 return;
             }
 
@@ -540,7 +540,7 @@ class Blog
     /**
      * Set nameImage
      *
-     * @param string $nameImage
+     * @param  string $nameImage
      * @return Blog
      */
     public function setNameImage($nameImage)
@@ -553,7 +553,7 @@ class Blog
     /**
      * Get nameImage
      *
-     * @return string 
+     * @return string
      */
     public function getNameImage()
     {
@@ -563,7 +563,7 @@ class Blog
     /**
      * Set pathImage
      *
-     * @param string $pathImage
+     * @param  string $pathImage
      * @return Blog
      */
     public function setPathImage($pathImage)
@@ -576,7 +576,7 @@ class Blog
     /**
      * Get pathImage
      *
-     * @return string 
+     * @return string
      */
     public function getPathImage()
     {

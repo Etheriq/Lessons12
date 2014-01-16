@@ -32,4 +32,3 @@ class EtheriqTwigExtentionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(2.6, $rating->rating(18, 7));
     }
 }
- 

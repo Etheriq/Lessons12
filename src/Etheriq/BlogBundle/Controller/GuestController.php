@@ -101,6 +101,7 @@ class GuestController extends Controller
         }
 
         $deleteForm = $this->createDeleteForm($slug);
+
         return $this->render('EtheriqBlogBundle:pages:guestShowInfo.html.twig', array(
             'form' => $form->createView(),
             'created' => $created,

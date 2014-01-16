@@ -41,7 +41,7 @@ class EtheriqTwigExtention extends \Twig_Extension
             $strResult = $strResult.$str[$i]. ' ';
         }
 
-        if($link != null) {
+        if ($link != null) {
             return $strResult.' <a href="'.$link.'"> ..... </a>';
         } else {
             return $strResult;
