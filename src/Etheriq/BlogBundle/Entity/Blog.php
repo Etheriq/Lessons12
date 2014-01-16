@@ -12,7 +12,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
@@ -480,19 +479,22 @@ class Blog
         return $this->newTags;
     }
 
+   /**
+    * @param string $role
+    */
     public function uploadImage($role)
     {
-        if($role == 'new') {
+        if ($role == 'new') {
             if (null === $this->getBlogImage()) {
                 $this->pathImage = $this->getUploadDir().'/default.jpg';
                 $this->nameImage = 'default.jpg';
+
                 return;
             }
         }
 
-        if($role == 'edit') {
+        if ($role == 'edit') {
             if (null === $this->getBlogImage()) {
-
                 return;
             }
 
@@ -538,7 +540,7 @@ class Blog
     /**
      * Set nameImage
      *
-     * @param string $nameImage
+     * @param  string $nameImage
      * @return Blog
      */
     public function setNameImage($nameImage)
@@ -551,7 +553,7 @@ class Blog
     /**
      * Get nameImage
      *
-     * @return string 
+     * @return string
      */
     public function getNameImage()
     {
@@ -561,7 +563,7 @@ class Blog
     /**
      * Set pathImage
      *
-     * @param string $pathImage
+     * @param  string $pathImage
      * @return Blog
      */
     public function setPathImage($pathImage)
@@ -574,7 +576,7 @@ class Blog
     /**
      * Get pathImage
      *
-     * @return string 
+     * @return string
      */
     public function getPathImage()
     {

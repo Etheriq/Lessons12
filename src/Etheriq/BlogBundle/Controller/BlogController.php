@@ -21,7 +21,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Etheriq\BlogBundle\Form\BlogDetailType;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class BlogController extends Controller
 {
@@ -132,6 +131,7 @@ class BlogController extends Controller
         }
 
         $editForm = $this->createEditForm($slug);
+
         return $this->render('EtheriqBlogBundle:pages:blogShow.html.twig', array(
             'article' => $blogShow,
             'edit_form' => $editForm->createView(),
@@ -339,7 +339,6 @@ class BlogController extends Controller
         return $this->redirect($this->generateUrl('homepage'));
     }
 
-
     private function createEditForm($slug)
     {
         return $this->createFormBuilder()
@@ -357,7 +356,5 @@ class BlogController extends Controller
             ->add('delete', 'submit', array('label' => 'Delete', 'attr' => array('class' => "btn btn-danger")))
             ->getForm();
     }
-
-
 
 }

@@ -12,7 +12,6 @@ namespace Etheriq\BlogBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Etheriq\BlogBundle\Entity\Guest;
-use Etheriq\BlogBundle\EventListener\RegisterEvent;
 use Pagerfanta\Exception\NotValidCurrentPageException;
 use Pagerfanta\Pagerfanta;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
@@ -102,6 +101,7 @@ class GuestController extends Controller
         }
 
         $deleteForm = $this->createDeleteForm($slug);
+
         return $this->render('EtheriqBlogBundle:pages:guestShowInfo.html.twig', array(
             'form' => $form->createView(),
             'created' => $created,

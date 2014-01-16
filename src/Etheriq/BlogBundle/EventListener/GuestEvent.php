@@ -22,7 +22,7 @@ class GuestEvent extends Event
     }
 
     /**
-     * @return mixed
+     * @return Guest
      */
     public function getGuest()
     {

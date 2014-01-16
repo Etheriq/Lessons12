@@ -63,6 +63,7 @@
 
                             <img src="{{ blog.pathImage | imagine_filter('blog_main') }}" class="img-thumbnail">
                             {#<img src="{{ asset(blog.pathImage) }}" class="img-thumbnail">#}
+                            {#{{ blog.textBlog|limitWords(63) }}#}
                             {{ blog.textBlog|limitWords(63, path('blog_showInfo', {'slug': blog.slug}))|raw }}
                        </div>
 
