@@ -12,7 +12,6 @@ namespace Etheriq\BlogBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Etheriq\BlogBundle\Entity\Guest;
-use Etheriq\BlogBundle\EventListener\RegisterEvent;
 use Pagerfanta\Exception\NotValidCurrentPageException;
 use Pagerfanta\Pagerfanta;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
