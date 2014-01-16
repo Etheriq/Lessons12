@@ -25,6 +25,10 @@ class EtheriqTwigExtention extends \Twig_Extension
         );
     }
 
+    /**
+     *
+     * @param string $string
+     */
     public function limitWords($string, $limit = 5, $link = null)
     {
         $str = explode(' ', $string);
@@ -49,11 +53,21 @@ class EtheriqTwigExtention extends \Twig_Extension
 
     }
 
+    /**
+     *
+     * @param integer $rating
+     * @param integer $voters
+     */
     public function rating($rating, $voters)
     {
         return round($rating / $voters, 1);
     }
 
+    /**
+     *
+     * @param string $string
+     * @param string $link
+     */
     public function tagView($string, $link)
     {
         $scale = mt_rand(80, 150);
