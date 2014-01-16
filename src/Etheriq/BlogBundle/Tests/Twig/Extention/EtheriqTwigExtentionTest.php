@@ -21,6 +21,7 @@ class EtheriqTwigExtentionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('lorem ipsum', trim($te->limitWords('lorem ipsum dolar siptic', 2)));
         $this->assertEquals('Sed', trim($te->limitWords('Sed ante magna, tincidunt eleifend elementum', 1)));
         $this->assertEquals('Proin et orci congue,', trim($te->limitWords('Proin et orci congue, facilisis dui at, mattis mauris.', 4)));
+        $this->assertEquals('Proin et orci', trim($te->limitWords('Proin et orci', 6)));
     }
 
     public function testRating()
