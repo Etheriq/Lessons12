@@ -16,10 +16,8 @@ class AboutMeControllerTest extends WebTestCase
     public function testShowAboutMePage()
     {
         $client = static::createClient();
-
         $crawler = $client->request('GET', '/en/about');
 
         $this->assertTrue($crawler->filter('html:contains("hello")')->count() > 0);
     }
-
 }
