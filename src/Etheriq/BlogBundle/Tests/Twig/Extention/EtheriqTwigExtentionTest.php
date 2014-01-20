@@ -9,26 +9,53 @@
 
 namespace Etheriq\BlogBundle\Tests\Twig\Extention;
 
-use Etheriq\BlogBundle\Twig\Extention\EtheriqTwigExtention;
-
 class EtheriqTwigExtentionTest extends \PHPUnit_Framework_TestCase
 {
-    public function testLimitWords()
+    /**
+     *
+     * @dataProvider limitWordsData
+     */
+    public function testLimitWords($result, $inData)
     {
+        $te = $this->getMockBuilder('Etheriq\BlogBundle\Twig\Extention\EtheriqTwigExtention')
+            ->disableOriginalConstructor()
+            ->setMethods(null)
+            ->getMock();
 
-        $te = new EtheriqTwigExtention(null);
+        $this->assertEquals($result, trim($te->limitWords($inData[0], $inData[1])));
 
-        $this->assertEquals('lorem ipsum', trim($te->limitWords('lorem ipsum dolar siptic', 2)));
-        $this->assertEquals('Sed', trim($te->limitWords('Sed ante magna, tincidunt eleifend elementum', 1)));
-        $this->assertEquals('Proin et orci congue,', trim($te->limitWords('Proin et orci congue, facilisis dui at, mattis mauris.', 4)));
     }
 
-    public function testRating()
+    /**
+     *
+     * @dataProvider ratingData
+     */
+    public function testRating($resultData, $inData)
     {
-        $rating = new EtheriqTwigExtention(null);
+        $rating = $this->getMockBuilder('Etheriq\BlogBundle\Twig\Extention\EtheriqTwigExtention')
+            ->disableOriginalConstructor()
+            ->setMethods(null)
+            ->getMock();
 
-        $this->assertEquals(6.4, $rating->rating(32, 5));
-        $this->assertEquals(1.3, $rating->rating(4, 3));
-        $this->assertEquals(2.6, $rating->rating(18, 7));
+        $this->assertEquals($resultData, $rating->rating($inData[0], $inData[1]));
+    }
+
+    public function ratingData()
+    {
+        return array(
+            array(6.4, array(32, 5)),
+            array(1.3, array(4, 3) ),
+            array(2.6, array(18, 7))
+        );
+    }
+
+    public function limitWordsData()
+    {
+        return array(
+            array('lorem ipsum', array('lorem ipsum dolar siptic', 2)),
+            array('Sed', array('Sed ante magna, tincidunt eleifend elementum', 1)),
+            array('Proin et orci congue,', array('Proin et orci congue, facilisis dui at, mattis mauris.', 4)),
+            array('Proin et orci', array('Proin et orci', 6))
+        );
     }
 }
