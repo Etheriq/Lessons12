@@ -24,8 +24,18 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class BlogController extends Controller
 {
+    private function setLocale()
+    {
+        $session = $this->get('session');
+        if ($session->get('blog_locale')) {
+            $this->get('request')->setLocale($session->get('blog_locale'));
+        }
+    }
+
     public function showBlogMainPageAction($page)
     {
+        $this->setLocale();
+
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem("Home");
 
@@ -66,6 +76,7 @@ class BlogController extends Controller
 
     public function showBlogsByCategoryAction($page, $slug)
     {
+        $this->setLocale();
         $em = $this->getDoctrine()->getManager();
         $cat = $em->getRepository('EtheriqBlogBundle:Category')->findOneBySlug($slug);
         if ($cat == null) {
@@ -92,6 +103,7 @@ class BlogController extends Controller
 
     public function showBlogsByTagAction($page, $slug)
     {
+        $this->setLocale();
         $em = $this->getDoctrine()->getManager();
         $tag = $em->getRepository('EtheriqBlogBundle:Tags')->findOneBySlug($slug);
         if ($tag == null) {
@@ -118,6 +130,7 @@ class BlogController extends Controller
 
     public function showBlogInfoAction($slug, Request $request)
     {
+        $this->setLocale();
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem("Home", $this->get("router")->generate("homepage"));
         $breadcrumbs->addItem("Blog in detail");
@@ -141,6 +154,7 @@ class BlogController extends Controller
 
     public function newBlogArticleAction(Request $request)
     {
+        $this->setLocale();
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem("Home", $this->get("router")->generate("homepage"));
         $breadcrumbs->addItem("Blog in detail");
@@ -203,6 +217,7 @@ class BlogController extends Controller
     public function findAction(Request $request)
     {
         try {
+        $this->setLocale();
         $allRequest = $request->createFromGlobals();
         $s = $allRequest->request->all();
 
@@ -220,6 +235,7 @@ class BlogController extends Controller
 
     public function searchBlogsByTitleAction($search=null, $page)
     {
+        $this->setLocale();
         $em = $this->getDoctrine()->getManager();
         $searchedBlogs = $em->getRepository('EtheriqBlogBundle:Blog')->searchArticlesByTitle($search);
 
@@ -237,6 +253,7 @@ class BlogController extends Controller
 
     public function editBlogInfoAction($slug, Request $request)
     {
+        $this->setLocale();
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem("Home", $this->get("router")->generate("homepage"));
         $breadcrumbs->addItem("Blog in detail", $this->get("router")->generate("blog_showInfo", array('slug' => $slug)));
@@ -324,6 +341,7 @@ class BlogController extends Controller
 
     public function deleteBlogInfoAction(Request $request, $slug)
     {
+        $this->setLocale();
         $em = $this->getDoctrine()->getManager();
         $article = $em->getRepository('EtheriqBlogBundle:Blog')->findOneBy(array('slug' => $slug));
 

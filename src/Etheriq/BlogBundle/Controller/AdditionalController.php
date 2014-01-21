@@ -14,9 +14,14 @@ class AdditionalController extends Controller
 {
     public function setLocaleAction($loc)
     {
-        $this->get('request')->setLocale($loc);
+//        $this->get('request')->setLocale($loc);
+//
+//        return $this->redirect($this->generateUrl('homepage', array('_locale' => $loc) ));
 
-        return $this->redirect($this->generateUrl('homepage', array('_locale' => $loc) ));
+        $session = $this->get('session');
+        $session->set('blog_locale', $loc);
+
+        return $this->redirect($this->generateUrl('homepage'));
     }
 
     public function getArrayTags()
