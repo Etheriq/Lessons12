@@ -42,6 +42,7 @@ layout.logged_in_as: Вы вошли как %username%
 layout.login: Войти
 layout.logout: Выйти
 username: Логин
+email: E-mail
 password: Пароль
 login.to.site: Форма аутентификации
 register.to.site: Форма регистрации

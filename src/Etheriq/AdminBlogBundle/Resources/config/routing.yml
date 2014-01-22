@@ -6,6 +6,10 @@ admin_blog_registeer_user:
     pattern:  /register
     defaults: { _controller: EtheriqAdminBlogBundle:Registration:registerr }
 
+admin_blog_showProfile_user:
+    pattern: /profile
+    defaults: { _controller: EtheriqAdminBlogBundle:BlogSecurity:showProfileInfo }
+
 #admin_blog_login_check:
 #    pattern:  /login_check
 #

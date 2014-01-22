@@ -43,6 +43,7 @@ layout.login: Enter
 layout.logout: Logout
 username: Login
 password: Password
+email: E-mail
 login.to.site: Authentication form
 register.to.site: Registration form
 register.new.user: Register new user
