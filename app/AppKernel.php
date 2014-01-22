@@ -22,6 +22,8 @@ class AppKernel extends Kernel
             new Etheriq\BlogBundle\EtheriqBlogBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
             new WhiteOctober\BreadcrumbsBundle\WhiteOctoberBreadcrumbsBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
+            new Etheriq\AdminBlogBundle\EtheriqAdminBlogBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

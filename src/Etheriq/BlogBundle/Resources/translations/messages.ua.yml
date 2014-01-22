@@ -38,3 +38,17 @@ add_new_tags: Додати нові теги
 Guest book detail: Обліковий запис
 New Article: Нова стаття
 upload_file: Виберіть зображення для завантаження(макс розмір 3Мб)
+layout.logged_in_as: Ви увійшли як %username%
+layout.login: Увійти
+layout.logout: Вийти
+username: Логін
+password: Пароль
+login.to.site: Форма аутентентифікації
+register.to.site: Форма регістрації
+register.new.user: Регістрація
+login.remember_me: Запам'ятати мене
+form.password: Пароль
+password_confirmation: Повторіть пароль
+fos_user:
+    password:
+        mismatch: Паролі не співпадають

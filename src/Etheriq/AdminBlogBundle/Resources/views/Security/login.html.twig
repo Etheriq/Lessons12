@@ -1,0 +1,39 @@
+{% extends "EtheriqBlogBundle::base.html.twig" %}
+
+{% block fos_user_content %}
+
+    <div class="col-md-6 col-md-offset-3">
+        <div class="panel panel-default" style="margin: 50px auto;">
+            <div class="panel-heading">
+                {{ 'login.to.site'|trans }}
+                <a class="pull-right" href="{{ path('admin_blog_registeer_user') }}">{{ 'register.new.user'|trans }}</a>
+            </div>
+            <div class="panel-body">
+                {% if error %}
+                    <div class="alert alert-danger">{{ error }}</div>
+                {% endif %}
+                <form action="{{ path("fos_user_security_check") }}" method="post">
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                    <div class="form-group">
+                        <label for="username">{{ 'username'|trans }}:</label>
+                        <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">{{ 'password'|trans }}:</label>
+                        <input type="password" id="password" name="_password" class="form-control" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="remember_me">{{ 'login.remember_me'|trans }}</label>
+                        <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-default">{{ 'layout.login'|trans }}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock fos_user_content %}

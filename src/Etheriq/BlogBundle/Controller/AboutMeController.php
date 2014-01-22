@@ -14,6 +14,7 @@ class AboutMeController extends Controller
 {
     public function showAboutMePageAction()
     {
+        $this->setLocale();
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem("Home", $this->get("router")->generate("homepage"));
         $breadcrumbs->addItem("About me");
@@ -21,4 +22,11 @@ class AboutMeController extends Controller
         return $this->render('EtheriqBlogBundle:pages:about.html.twig');
     }
 
+    private function setLocale()
+    {
+        $session = $this->get('session');
+        if ($session->get('blog_locale')) {
+            $this->get('request')->setLocale($session->get('blog_locale'));
+        }
+    }
 }
