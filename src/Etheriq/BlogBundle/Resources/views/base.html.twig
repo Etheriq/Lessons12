@@ -44,9 +44,11 @@
                     </form>
                     <div style="margin-top: 10px;" class="text-right">
                         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                            {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}) }}
+                            <a href="{{ path('admin_blog_showProfile_user') }}" style="margin-right: 20px;">
+                                {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}) }}
+                            </a>
                             <a href="{{ path('fos_user_security_logout') }}" class="btn btn-sm btn-warning">
-                                {{ 'layout.logout'|trans() }}
+                                 {{ 'layout.logout'|trans() }}
                             </a>
                         {% else %}
                             <a href="{{ path('fos_user_security_login') }}" class="btn btn-sm btn-info">{{ 'layout.login'|trans() }}</a>
