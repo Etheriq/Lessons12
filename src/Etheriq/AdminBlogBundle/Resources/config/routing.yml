@@ -12,10 +12,6 @@ admin_blog_registeer_user:
 #admin_blog_logout:
 #    pattern:  /logout
 
-admin_blog_register_confirmed:
-    pattern:  /confirmed
-    defaults: { _controller: EtheriqAdminBlogBundle:Registration:confirmedd }
-
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 

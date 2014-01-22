@@ -29,5 +29,4 @@ class AboutMeController extends Controller
             $this->get('request')->setLocale($session->get('blog_locale'));
         }
     }
-
 }

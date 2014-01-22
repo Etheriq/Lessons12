@@ -22,6 +22,7 @@ class BlogSecurityController extends Controller
 //        }
         // *******************************************************
 
+        $this->setLocale();
         /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
         $session = $request->getSession();
 
@@ -55,5 +56,13 @@ class BlogSecurityController extends Controller
             'error'         => $error,
             'csrf_token' => $csrfToken,
         ));
+    }
+
+    private function setLocale()
+    {
+        $session = $this->get('session');
+        if ($session->get('blog_locale')) {
+            $this->get('request')->setLocale($session->get('blog_locale'));
+        }
     }
 }
