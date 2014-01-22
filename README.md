@@ -5,8 +5,13 @@ Subject: Blog
 
 git clone https://github.com/Etheriq/Lessons12.git /path
 
+cd to path
+
 composer.update
 
-sudo php bin/reload.php
+sudo sh bin/reload.sh
+
+
+Alternative: sudo php bin/reload.php
 
 

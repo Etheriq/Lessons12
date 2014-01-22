@@ -50,3 +50,5 @@ login.to.site: Форма аутентификации
 register.to.site: Форма регистрации
 register.new.user: Регистрация
 login.remember_me: Запомнить меня
+profile.update: Форма редактирования профиля
+cancel: Отмена

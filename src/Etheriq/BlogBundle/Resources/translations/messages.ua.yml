@@ -47,6 +47,8 @@ password: Пароль
 role: Роль
 Field: Поле
 Value: Значення
+profile.update: Форма редагування профілю
+cancel: Відміна
 login.to.site: Форма аутентентифікації
 register.to.site: Форма регістрації
 register.new.user: Регістрація

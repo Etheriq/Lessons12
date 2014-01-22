@@ -16,7 +16,7 @@ class GuestControllerTest extends WebTestCase
     public function testShowGuest()
     {
         $client = static::createClient();
-        $crawler = $client->request('GET', '/en/guest');
+        $crawler = $client->request('GET', '/guest');
 
         $this->assertGreaterThan(0, $crawler->filter('html:contains("Created:")')->count());
         $this->assertEquals(5, $crawler->filter('a:contains("More info")')->count());

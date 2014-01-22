@@ -35,7 +35,7 @@ class BlogControllerTest extends WebTestCase
     public function testGuestTest()
     {
         $client = static::createClient();
-        $crawler = $client->request('get', '/en/guest');
+        $client->request('get', '/guest');
 
         $this->assertRegExp('/More info/', $client->getResponse()->getContent());
     }
@@ -43,7 +43,7 @@ class BlogControllerTest extends WebTestCase
     public function testCountLinkInGuest()
     {
         $client = static::createClient();
-        $crawler = $client->request('GET', '/en/guest');
+        $crawler = $client->request('GET', '/guest');
 
         $this->assertEquals(5, $crawler->filter('a:contains("More info")')->count());
     }
