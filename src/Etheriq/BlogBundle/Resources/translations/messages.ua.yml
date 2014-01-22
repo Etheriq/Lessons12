@@ -44,6 +44,9 @@ layout.logout: Вийти
 username: Логін
 email: E-mail
 password: Пароль
+role: Роль
+Field: Поле
+Value: Значення
 login.to.site: Форма аутентентифікації
 register.to.site: Форма регістрації
 register.new.user: Регістрація

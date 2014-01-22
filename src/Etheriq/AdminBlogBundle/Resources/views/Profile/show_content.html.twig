@@ -1,13 +1,10 @@
-{#{% trans_default_domain 'FOSUserBundle' %}#}
-
 <div class="col-md-6 col-md-offset-3">
 
-    {#<div class="table-responsive">#}
     <br>
         <table class="table table-condensed table-hover">
             <tr>
-                <th>Field</th>
-                <th>Value</th>
+                <th>{{ 'Field'|trans }}</th>
+                <th>{{ 'Value'|trans }}</th>
             </tr>
 
             <tr>
@@ -20,20 +17,10 @@
             </tr>
             {% for role in user.roles %}
                 <tr>
-                    <td>Role</td>
+                    <td>{{ 'role'|trans }}</td>
                     <td>{{ role }}</td>
                 </tr>
             {% endfor %}
         </table>
-    {#</div>#}
-
-
-
-    {#<p>{{ 'username'|trans }}: {{ user.username }}</p>#}
-    {#<p>{{ 'email'|trans }}: {{ user.email }}</p>#}
-    {#<p>{{ 'last.login'|trans }}: {{ user.lastLogin|date('d.m.Y') }}</p>#}
-    {#{% for role in user.roles %}#}
-        {#<p>Role: {{ role }}</p>#}
-    {#{% endfor %}#}
 
 </div>
