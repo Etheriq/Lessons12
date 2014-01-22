@@ -38,3 +38,12 @@ add_new_tags: Добавить новые теги
 Guest book detail: Учетная запись
 New Article: Новая статья
 upload_file: Выберите изображение для загрузки (макс размер 3Мб)
+layout.logged_in_as: Вы вошли как %username%
+layout.login: Войти
+layout.logout: Выйти
+username: Логин
+password: Пароль
+login.to.site: Форма аутентификации
+register.to.site: Форма регистрации
+register.new.user: Регистрация
+login.remember_me: Запомнить меня

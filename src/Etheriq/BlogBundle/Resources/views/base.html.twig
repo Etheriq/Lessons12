@@ -44,7 +44,7 @@
                     </form>
                     <div style="margin-top: 10px;" class="text-right">
                         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                            {{ 'logged_in_as'|trans() }} {{ app.user.username }}
+                            {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}) }}
                             <a href="{{ path('fos_user_security_logout') }}" class="btn btn-sm btn-warning">
                                 {{ 'layout.logout'|trans() }}
                             </a>

@@ -10,18 +10,6 @@ class BlogSecurityController extends Controller
 {
     public function loginAction(Request $request)
     {
-//        $session = $request->getSession();
-//
-//        if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
-//            $error = $request->attributes->get(
-//                SecurityContext::AUTHENTICATION_ERROR
-//            );
-//        } else {
-//            $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
-//            $session->remove(SecurityContext::AUTHENTICATION_ERROR);
-//        }
-        // *******************************************************
-
         $this->setLocale();
         /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
         $session = $request->getSession();
@@ -40,12 +28,6 @@ class BlogSecurityController extends Controller
             // TODO: this is a potential security risk (see http://trac.symfony-project.org/ticket/9523)
             $error = $error->getMessage();
         }
-        // last username entered by the user
-
-
-        // *******************************************************
-
-
 
         $csrfToken = $this->container->has('form.csrf_provider')
             ? $this->container->get('form.csrf_provider')->generateCsrfToken('authenticate')
