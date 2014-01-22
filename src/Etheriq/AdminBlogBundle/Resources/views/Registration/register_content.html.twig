@@ -26,18 +26,20 @@
                 <div class="text-center">
                     <button type="submit" class="btn btn-default">{{ 'layout.register'|trans }}</button>
                 </div>
-                <br>
                 {% if  form_errors(form.username) %}
+                    <br>
                     <div class="alert alert-danger">
                         {{ form_errors(form.username) }}
                     </div>
                 {% endif %}
                 {% if  form_errors(form.email) %}
+                    <br>
                     <div class="alert alert-danger">
                         {{ form_errors(form.email) }}
                     </div>
                 {% endif %}
                 {% if  form_errors(form.plainPassword) %}
+                    <br>
                     <div class="alert alert-danger">
                         {{ form_errors(form.plainPassword) }}
                     </div>

@@ -5,6 +5,7 @@ namespace Etheriq\AdminBlogBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContext;
+use FOS\UserBundle\Model\UserInterface;
 
 class BlogSecurityController extends Controller
 {
@@ -38,6 +39,16 @@ class BlogSecurityController extends Controller
             'error'         => $error,
             'csrf_token' => $csrfToken,
         ));
+    }
+
+    public function showProfileInfoAction()
+    {
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            throw new AccessDeniedException('This user does not have access to this section.');
+        }
+
+        return $this->render('EtheriqAdminBlogBundle:Profile:show.html.twig', array('user' => $user));
     }
 
     private function setLocale()
