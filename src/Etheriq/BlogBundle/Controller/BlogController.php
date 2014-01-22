@@ -21,6 +21,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Etheriq\BlogBundle\Form\BlogDetailType;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class BlogController extends Controller
 {
@@ -45,7 +46,7 @@ class BlogController extends Controller
 //        $query = $em->getRepository('EtheriqBlogBundle:Blog')->findAllBlogs();  // order by id DESC
         $adapter = new DoctrineORMAdapter($query);
         $pagerBlog = new Pagerfanta($adapter);
-        $pagerBlog->setMaxPerPage(5);
+        $pagerBlog->setMaxPerPage($this->get('service_container')->getParameter('fantaPager_max_per_page'));
 
         try {
             $pagerBlog->setCurrentPage($page);
@@ -87,7 +88,7 @@ class BlogController extends Controller
 
         $adapter = new DoctrineCollectionAdapter($blogs);
         $pagerBlog = new Pagerfanta($adapter);
-        $pagerBlog->setMaxPerPage(5);
+        $pagerBlog->setMaxPerPage($this->get('service_container')->getParameter('fantaPager_max_per_page'));
 
         try {
             $pagerBlog->setCurrentPage($page);
@@ -114,7 +115,7 @@ class BlogController extends Controller
 
         $adapter = new DoctrineCollectionAdapter($blogs);
         $pagerBlog = new Pagerfanta($adapter);
-        $pagerBlog->setMaxPerPage(5);
+        $pagerBlog->setMaxPerPage($this->get('service_container')->getParameter('fantaPager_max_per_page'));
 
         try {
             $pagerBlog->setCurrentPage($page);
@@ -154,6 +155,10 @@ class BlogController extends Controller
 
     public function newBlogArticleAction(Request $request)
     {
+        if (false === $this->get('security.context')->isGranted('ROLE_USER')) {
+            throw new AccessDeniedException();
+        }
+
         $this->setLocale();
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem("Home", $this->get("router")->generate("homepage"));
@@ -241,7 +246,7 @@ class BlogController extends Controller
 
         $adapter = new ArrayAdapter($searchedBlogs);
         $pagerBlog = new Pagerfanta($adapter);
-        $pagerBlog->setMaxPerPage(5);
+        $pagerBlog->setMaxPerPage($this->get('service_container')->getParameter('fantaPager_max_per_page'));
 
             $pagerBlog->setCurrentPage($page);
 
@@ -253,6 +258,9 @@ class BlogController extends Controller
 
     public function editBlogInfoAction($slug, Request $request)
     {
+        if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
+            throw new AccessDeniedException();
+        }
         $this->setLocale();
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem("Home", $this->get("router")->generate("homepage"));
@@ -341,6 +349,9 @@ class BlogController extends Controller
 
     public function deleteBlogInfoAction(Request $request, $slug)
     {
+        if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
+            throw new AccessDeniedException();
+        }
         $this->setLocale();
         $em = $this->getDoctrine()->getManager();
         $article = $em->getRepository('EtheriqBlogBundle:Blog')->findOneBy(array('slug' => $slug));

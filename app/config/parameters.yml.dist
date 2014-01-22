@@ -13,3 +13,4 @@ parameters:
 
     locale:            en
     secret:            ThisTokenIsNotSoSecretChangeIt
+    fantaPager_max_per_page: 5
