@@ -34,7 +34,7 @@ class GuestController extends Controller
         $adapter = new DoctrineORMAdapter($query);
         $pagerFanta = new Pagerfanta($adapter);
 
-        $pagerFanta->setMaxPerPage(5);
+        $pagerFanta->setMaxPerPage($this->get('service_container')->getParameter('fantaPager_max_per_page'));
 
         try {
             $pagerFanta->setCurrentPage($page);
