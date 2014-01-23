@@ -12,3 +12,4 @@
 .idea/
 /components/
 composer.lock
+/web/img/blog/media/cache/*
