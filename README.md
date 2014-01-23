@@ -3,12 +3,20 @@
 Lesson #12.
 Subject: Blog
 ========================
+
+## Instalation: ##
 ```
 git clone https://github.com/Etheriq/Lessons12.git /path
 cd to path
 composer.update
 sudo sh bin/reload.sh
 ```
+
+### Alternative: ###
+```
+sudo php bin/reload.php
+```
+
 ## USERS List: ##
 1.
 - Login: user
@@ -23,7 +31,3 @@ sudo sh bin/reload.sh
 - Role: ROLE_SUPER_ADMIN
 
 
-### Alternative: ###
-```
-sudo php bin/reload.php
-```
