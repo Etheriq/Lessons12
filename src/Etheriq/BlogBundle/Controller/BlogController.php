@@ -22,6 +22,9 @@ use Etheriq\BlogBundle\Form\BlogDetailType;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Security\Acl\Domain\ObjectIdentity;
+use Symfony\Component\Security\Acl\Domain\UserSecurityIdentity;
+use Symfony\Component\Security\Acl\Permission\MaskBuilder;
 
 class BlogController extends Controller
 {
@@ -211,6 +214,22 @@ class BlogController extends Controller
 
             $this->get('etheriq.tagscloud')->update();
 
+            //  *******************************************************************
+            // creating the ACL
+            $aclProvider = $this->get('security.acl.provider');
+            $objectIdentity = ObjectIdentity::fromDomainObject($blog);
+            $acl = $aclProvider->createAcl($objectIdentity);
+
+            // retrieving the security identity of the currently logged-in user
+            $securityContext = $this->get('security.context');
+            $user = $securityContext->getToken()->getUser();
+            $securityIdentity = UserSecurityIdentity::fromAccount($user);
+
+            // grant owner access
+            $acl->insertObjectAce($securityIdentity, MaskBuilder::MASK_OWNER);
+            $aclProvider->updateAcl($acl);
+            //  *******************************************************************
+
             return $this->redirect($this->generateUrl('homepage'));
         }
 
@@ -232,17 +251,17 @@ class BlogController extends Controller
             return $this->redirect($this->generateUrl('homepage'));
         }
 
-        return $this->redirect($this->generateUrl('blog_search', array('search' => $search)));
+        return $this->redirect($this->generateUrl('blog_search', array('slug' => $search)));
         } catch (NotFoundHttpException $e) {
             return $this->render('EtheriqBlogBundle:pages:guestPageNotFound.html.twig', array('pageNumber' => ''));
         }
     }
 
-    public function searchBlogsByTitleAction($search=null, $page)
+    public function searchBlogsByTitleAction($slug = null, $page)
     {
         $this->setLocale();
         $em = $this->getDoctrine()->getManager();
-        $searchedBlogs = $em->getRepository('EtheriqBlogBundle:Blog')->searchArticlesByTitle($search);
+        $searchedBlogs = $em->getRepository('EtheriqBlogBundle:Blog')->searchArticlesByTitle($slug);
 
         $adapter = new ArrayAdapter($searchedBlogs);
         $pagerBlog = new Pagerfanta($adapter);
@@ -252,13 +271,15 @@ class BlogController extends Controller
 
         return $this->render('EtheriqBlogBundle:pages:homepage.html.twig', array(
             'blogs' => $pagerBlog,
-            'filter' => $search
+            'filter' => $slug
         ));
     }
 
-    public function editBlogInfoAction($slug, Request $request)
+    public function editBlogInfoAction($slug, Request $request, Blog $blog)
     {
-        if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
+        $securityContext = $this->get('security.context');
+        if (false === $securityContext->isGranted('EDIT', $blog)) {
+//        if ((false === $securityContext->isGranted('ROLE_ADMIN')) or (false === $securityContext->isGranted('EDIT', $blog))) {
             throw new AccessDeniedException();
         }
         $this->setLocale();

@@ -25,6 +25,36 @@ class EtheriqTwigExtention extends \Twig_Extension
         );
     }
 
+    public function getFunctions()
+    {
+        return array(
+            new \Twig_SimpleFunction('setLocaleImg', array($this, 'setLocaleImg'), array('is_safe' => array('html'))),
+        );
+    }
+
+    public function setLocaleImg($string)
+    {
+        switch ($string) {
+            case 'en':
+                $img = 'img/flag_great_britain.png';
+                $alt = 'English';
+                break;
+            case 'ru':
+                $img = 'img/flag_russia.png';
+                $alt = 'Russian';
+                break;
+            case 'ua':
+                $img = 'img/flag_ukraine.png';
+                $alt = 'Ukrainian';
+                break;
+            default:
+                $img = 'img/flag_great_britain.png';
+                $alt = 'English';
+        }
+
+        return $img;
+    }
+
     /**
      *
      * @param string $string
