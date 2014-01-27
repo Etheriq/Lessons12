@@ -10,6 +10,8 @@
 namespace Etheriq\BlogBundle\Controller;
 
 use Etheriq\BlogBundle\Entity\Blog;
+use Etheriq\BlogBundle\Entity\Comments;
+use Etheriq\BlogBundle\Form\CommentType;
 use Etheriq\BlogBundle\Entity\Tags;
 use Etheriq\BlogBundle\Entity\Category;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -139,6 +141,8 @@ class BlogController extends Controller
         $breadcrumbs->addItem("Home", $this->get("router")->generate("homepage"));
         $breadcrumbs->addItem("Blog in detail");
 
+
+
         $em = $this->getDoctrine()->getManager();
         $blogShow = $em->getRepository('EtheriqBlogBundle:Blog')->findOneBySlug($slug);
 
@@ -147,11 +151,54 @@ class BlogController extends Controller
             exit;
         }
 
+        $comment = new Comments();
+
+        $formComment = $this->createForm(new CommentType(), $comment);
+        $formComment->handleRequest($request);
+
+        if($formComment->isValid()) {
+
+            if (false === $this->get('security.context')->isGranted('ROLE_USER')) {
+                throw new AccessDeniedException();
+            }
+            $newComment = $this->getDoctrine()->getManager();
+
+//            var_dump($user, $comment); exit;
+
+            $securityContext = $this->get('security.context');
+            $user = $securityContext->getToken()->getUser();
+
+            $comment->setAuthor($user);
+            $comment->setBlog($blogShow);
+
+
+            $newComment->persist($comment);
+            $newComment->flush();
+
+            //  *******************************************************************
+            // creating the ACL
+            $aclProvider = $this->get('security.acl.provider');
+            $objectIdentity = ObjectIdentity::fromDomainObject($comment);
+            $acl = $aclProvider->createAcl($objectIdentity);
+
+            // retrieving the security identity of the currently logged-in user
+            $securityIdentity = UserSecurityIdentity::fromAccount($user);
+
+            // grant owner access
+            $acl->insertObjectAce($securityIdentity, MaskBuilder::MASK_OWNER);
+            $aclProvider->updateAcl($acl);
+            //  *******************************************************************
+
+            return $this->redirect($this->generateUrl('blog_showInfo', array('slug' => $blogShow->getSlug())));
+        }
+
+
         $editForm = $this->createEditForm($slug);
 
         return $this->render('EtheriqBlogBundle:pages:blogShow.html.twig', array(
             'article' => $blogShow,
             'edit_form' => $editForm->createView(),
+            'comment_form' => $formComment->createView()
         ));
 
     }

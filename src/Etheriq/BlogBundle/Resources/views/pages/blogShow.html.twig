@@ -65,4 +65,33 @@
              </div>
          </div>
 
+         <div>
+
+             {{ form_start(comment_form, {'attr': {'role': 'form', 'novalidate': 'novalidate'  } } ) }}
+
+             {{ form_label(comment_form.textComment, 'Name'|trans|raw) }}
+             {{ form_widget(comment_form.textComment, { 'attr': {'class': 'form-control', 'style': 'width:30%; ', 'placeholder': 'Введите coment' } }) }}
+
+             {{ form_widget(comment_form.send) }}
+
+             {{ form_errors(comment_form.textComment) }}
+
+             {{ form_end(comment_form) }}
+
+         </div>
+
+         <div>
+             {% for comment in article.comments %}
+                <div>
+                    <br>
+                    <p>{{ comment.author  }}</p>
+                    {% if is_granted('EDIT', comment ) %}
+                        EDIT
+                    {% endif %}
+                    <p>{{ comment.created|date('d.m.Y') }}</p>
+                    <p>{{ comment.textComment }}</p>
+                </div>
+             {% endfor %}
+         </div>
+
      {% endblock wraper %}

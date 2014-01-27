@@ -69,15 +69,7 @@ class Comments
      */
     protected $textComment;
 
-    public function setAuthor(UserInterface $author)
-    {
-        $this->author = $author;
-    }
 
-    public function getAuthor()
-    {
-        return $this->author;
-    }
 
     public function getAuthorName()
     {
@@ -188,5 +180,28 @@ class Comments
     public function getBlog()
     {
         return $this->blog;
+    }
+
+    /**
+     * Set author
+     *
+     * @param \Etheriq\AdminBlogBundle\Entity\User $author
+     * @return Comments
+     */
+    public function setAuthor(\Etheriq\AdminBlogBundle\Entity\User $author = null)
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    /**
+     * Get author
+     *
+     * @return \Etheriq\AdminBlogBundle\Entity\User 
+     */
+    public function getAuthor()
+    {
+        return $this->author;
     }
 }
