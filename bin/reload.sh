@@ -21,4 +21,5 @@ php app/console assets:install --symlink
 php app/console assetic:dump
 php app/console fos:user:create --super-admin admin admin@tt.tt admin
 php app/console fos:user:create user user@tt.tt user
+php app/console init:acl
 php app/console cache:clear

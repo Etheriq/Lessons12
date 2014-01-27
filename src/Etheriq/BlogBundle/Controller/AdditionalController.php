@@ -9,10 +9,11 @@
 namespace Etheriq\BlogBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class AdditionalController extends Controller
 {
-    public function setLocaleAction($loc)
+    public function setLocaleAction($loc = 'en', Request $request)
     {
 //        $this->get('request')->setLocale($loc);
 //
@@ -21,7 +22,16 @@ class AdditionalController extends Controller
         $session = $this->get('session');
         $session->set('blog_locale', $loc);
 
-        return $this->redirect($this->generateUrl('homepage'));
+        $src = $request->get('src');
+        $params = $this->get('router')->match($src);
+
+        if(isset($params['slug'])) {
+
+            return $this->redirect($this->generateUrl($params['_route'], array('slug' => $params['slug'])));
+        } else {
+
+            return $this->redirect($this->generateUrl($params['_route']));
+        }
     }
 
     public function getArrayTags()
