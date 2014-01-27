@@ -138,6 +138,13 @@ class Blog
     protected $newTags;
 
     /**
+     * @var arrayCollection() comments
+     *
+     * @ORM\OneToMany(targetEntity="Comments", mappedBy="blog")
+     */
+    protected $comments;
+
+    /**
      * Sets file.
      *
      * @param UploadedFile $file
@@ -379,6 +386,7 @@ class Blog
     public function __construct()
     {
         $this->tags = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     /**
@@ -581,5 +589,38 @@ class Blog
     public function getPathImage()
     {
         return $this->pathImage;
+    }
+
+    /**
+     * Add comments
+     *
+     * @param \Etheriq\BlogBundle\Entity\Comments $comments
+     * @return Blog
+     */
+    public function addComment(\Etheriq\BlogBundle\Entity\Comments $comments)
+    {
+        $this->comments[] = $comments;
+
+        return $this;
+    }
+
+    /**
+     * Remove comments
+     *
+     * @param \Etheriq\BlogBundle\Entity\Comments $comments
+     */
+    public function removeComment(\Etheriq\BlogBundle\Entity\Comments $comments)
+    {
+        $this->comments->removeElement($comments);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }
