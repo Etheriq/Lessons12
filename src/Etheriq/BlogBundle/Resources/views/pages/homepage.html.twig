@@ -53,6 +53,9 @@
                                     <a href="{{ path('blog_showInfo', {'slug': blog.slug})|raw }}">
                                         <strong>{{ blog.title }}</strong>
                                     </a>
+                                    <strong>{{ 'coments'|trans }}</strong>
+                                    <span class="badge"> 0</span>
+                                    {#<span class="badge"> {{ count(blog.comments) }}</span>#}
                                 </div>
                             </div>
                             <div class="col-md-4 text-right">
