@@ -64,34 +64,65 @@
 
              </div>
          </div>
-
-         <div>
-
-             {{ form_start(comment_form, {'attr': {'role': 'form', 'novalidate': 'novalidate'  } } ) }}
-
-             {{ form_label(comment_form.textComment, 'Name'|trans|raw) }}
-             {{ form_widget(comment_form.textComment, { 'attr': {'class': 'form-control', 'style': 'width:30%; ', 'placeholder': 'Введите coment' } }) }}
-
-             {{ form_widget(comment_form.send) }}
-
-             {{ form_errors(comment_form.textComment) }}
-
-             {{ form_end(comment_form) }}
-
-         </div>
-
-         <div>
-             {% for comment in article.comments %}
-                <div>
-                    <br>
-                    <p>{{ comment.author  }}</p>
-                    {% if is_granted('EDIT', comment ) %}
-                        EDIT
-                    {% endif %}
-                    <p>{{ comment.created|date('d.m.Y') }}</p>
-                    <p>{{ comment.textComment }}</p>
+        <br><br>
+         <div class="row">
+            <div class="col-md-6">
+            {{ form_start(comment_form, {'attr': {'role': 'form', 'novalidate': 'novalidate'  } } ) }}
+                <div class="form-group">
+                    {{ form_label(comment_form.textComment, 'enter_comment'|trans) }}
+                    {{ form_widget(comment_form.textComment, { 'attr': {'class': 'form-control', 'placeholder': 'Comment' } }) }}
                 </div>
-             {% endfor %}
+                <div class="form-group text-right">
+                    <input type="submit" name="sendComment" value="send" class="btn btn-default">
+                </div>
+                {% if form_errors(comment_form.textComment) %}
+                    <br>
+                    <div class="alert alert-danger">
+                        {{ form_errors(comment_form.textComment) }}
+                    </div>
+                {% endif %}
+            {{ form_end(comment_form) }}
+            </div>
          </div>
+
+         {% if getCountComments(article) > 0  %}
+             <div class="panel panel-info">
+                 <div class="panel-heading">
+                     <strong>{{ 'comments_list'|trans }}</strong>
+                 </div>
+                 {% for comment in article.comments %}
+                    <div class="panel panel-default" style="margin: 15px;">
+                        <div class="panel-heading">
+                            #{{ loop.index }}:
+                            <span> <strong>{{ 'Author'|trans }} </strong>
+                                {% if comment.author is null %}
+                                    Fixture loader
+                                {% else %}
+                                    {{ comment.author  }}
+                                {% endif %}
+                            </span>
+                            <span class="pull-right"> <strong>{{ 'Published'|trans }} </strong>
+                                {{ comment.created|date('d.m.Y') }}
+                            </span>
+                        </div>
+                        <div class="panel-body">
+                                {{ comment.textComment|trim }}
+                        </div>
+                        {% if is_granted('EDIT', comment ) %}
+                            <div class="panel-footer">
+                                <a href="{{ path('comment_edit', {'id': comment.id, 'slug': article.slug}) }}" class="btn btn-sm btn-warning">
+                                    {{ 'Save'|trans }}
+                                </a>
+
+                                <a href="{{ path('comment_delete', {'id': comment.id, 'slug': article.slug}) }}" class="btn btn-sm btn-danger pull-right">
+                                    {{ 'Delete'|trans }}
+                                </a>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <hr>
+                 {% endfor %}
+             </div>
+        {% endif %}
 
      {% endblock wraper %}

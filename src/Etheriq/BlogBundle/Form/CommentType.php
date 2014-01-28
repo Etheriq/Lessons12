@@ -23,8 +23,7 @@ class CommentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('textComment', 'textarea')
-            ->add('send', 'submit');
+            ->add('textComment', 'textarea');
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

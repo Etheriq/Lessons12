@@ -49,7 +49,8 @@ class BlogController extends Controller
 //        $em->getFilters()->disable('softdeleteable');  // to display removed data
         $query = $em->getRepository('EtheriqBlogBundle:Blog')->findBlogsDESC();  // Order by created DESC
 //        $query = $em->getRepository('EtheriqBlogBundle:Blog')->findAllBlogs();  // order by id DESC
-        $adapter = new DoctrineORMAdapter($query);
+        $adapter = new ArrayAdapter($query);
+//        $adapter = new DoctrineORMAdapter($query);
         $pagerBlog = new Pagerfanta($adapter);
         $pagerBlog->setMaxPerPage($this->get('service_container')->getParameter('fantaPager_max_per_page'));
 
@@ -59,9 +60,68 @@ class BlogController extends Controller
             return $this->render('EtheriqBlogBundle:pages:guestPageNotFound.html.twig', array('pageNumber' => $page));
         }
 
+//        var_dump($pagerBlog); exit;
         return $this->render('EtheriqBlogBundle:pages:homepage.html.twig', array(
             'blogs' => $pagerBlog
         ));
+    }
+
+    public function editCommentAction($id, $slug, Comments $comment, Request $request)
+    {
+        $securityContext = $this->get('security.context');
+        if (false === $securityContext->isGranted('EDIT', $comment)) {
+//        if ((false === $securityContext->isGranted('ROLE_ADMIN')) or (false === $securityContext->isGranted('EDIT', $blog))) {
+            throw new AccessDeniedException();
+        }
+        $this->setLocale();
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem("Home", $this->get("router")->generate("homepage"));
+        $breadcrumbs->addItem("Blog in detail", $this->get("router")->generate("blog_showInfo", array('slug' => $slug)));
+        $breadcrumbs->addItem("Edit comment");
+
+        $em = $this->getDoctrine()->getManager();
+        $editComment = $em->getRepository('EtheriqBlogBundle:Comments')->findOneById($id);
+
+        if (!$editComment) {
+            return $this->render('EtheriqBlogBundle:pages:guestPageNotFound.html.twig', array('pageNumber' => $id));
+            exit;
+        }
+
+        $formEditComment = $this->createForm(new CommentType(), $editComment);
+        $formEditComment->handleRequest($request);
+
+        if ($formEditComment->isValid()) {
+            $commentToBd = $this->getDoctrine()->getManager();
+
+            $commentToBd->flush();
+
+            return $this->redirect($this->generateUrl('blog_showInfo', array('slug' => $slug)));
+        }
+
+        return $this->render('EtheriqBlogBundle:pages:commentEdit.html.twig', array(
+            'comment_form' => $formEditComment->createView(),
+        ));
+    }
+
+    public function deleteCommentAction($id, $slug, Comments $comment)
+    {
+        $this->setLocale();
+        $securityContext = $this->get('security.context');
+        if (false === $securityContext->isGranted('EDIT', $comment)) {
+//        if ((false === $securityContext->isGranted('ROLE_ADMIN')) or (false === $securityContext->isGranted('EDIT', $blog))) {
+            throw new AccessDeniedException();
+        }
+        $em = $this->getDoctrine()->getManager();
+        $comment = $em->getRepository('EtheriqBlogBundle:Comments')->findOneById((int)$id);
+
+        if (!$comment) {
+            throw $this->createNotFoundException("Not found entity $comment.");
+        }
+
+        $em->remove($comment);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('blog_showInfo', array('slug' => $slug)));
     }
 
     public function showLastArticlesAction()
@@ -415,7 +475,7 @@ class BlogController extends Controller
 
     }
 
-    public function deleteBlogInfoAction(Request $request, $slug)
+    public function deleteBlogInfoAction($slug)
     {
         if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
             throw new AccessDeniedException();

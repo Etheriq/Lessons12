@@ -8,6 +8,14 @@ blog_showInfo:
     pattern:  /blog/show/{slug}
     defaults: { _controller: EtheriqBlogBundle:Blog:showBlogInfo }
 
+comment_edit:
+    pattern:  /blog/comment/edit/{id}/{slug}
+    defaults: { _controller: EtheriqBlogBundle:Blog:editComment }
+
+comment_delete:
+    pattern:  /blog/comment/delete/{id}/{slug}
+    defaults: { _controller: EtheriqBlogBundle:Blog:deleteComment }
+
 blog_edit:
     pattern:  /blog/edit/{slug}
     defaults: { _controller: EtheriqBlogBundle:Blog:editBlogInfo }

@@ -9,6 +9,8 @@
 
 namespace Etheriq\BlogBundle\Twig\Extention;
 
+use Etheriq\BlogBundle\Entity\Blog;
+
 class EtheriqTwigExtention extends \Twig_Extension
 {
     public function getName()
@@ -29,7 +31,14 @@ class EtheriqTwigExtention extends \Twig_Extension
     {
         return array(
             new \Twig_SimpleFunction('setLocaleImg', array($this, 'setLocaleImg'), array('is_safe' => array('html'))),
+            new \Twig_SimpleFunction('getCountComments', array($this, 'getCountComments'), array('is_safe' => array('html'))),
         );
+    }
+
+    public function getCountComments(Blog $blogComments)
+    {
+        $comments = $blogComments->getComments();
+        return count($comments);
     }
 
     public function setLocaleImg($string)
@@ -80,7 +89,6 @@ class EtheriqTwigExtention extends \Twig_Extension
         } else {
             return $strResult;
         }
-
     }
 
     /**
@@ -91,18 +99,6 @@ class EtheriqTwigExtention extends \Twig_Extension
     public function rating($rating, $voters)
     {
         return round($rating / $voters, 1);
-    }
-
-    /**
-     *
-     * @param string $string
-     * @param string $link
-     */
-    public function tagView($string, $link)
-    {
-        $scale = mt_rand(80, 150);
-
-        return "<a href=".$link."><span style='font-size: $scale%'>$string</span></a>";
     }
 
 }

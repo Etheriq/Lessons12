@@ -50,6 +50,11 @@ body
     text-decoration: none;
 
 }
+.comment
+{
+    display: inline;
+    margin-left: 20px;
+}
 .myRating
 {
     float: left;

@@ -53,9 +53,10 @@
                                     <a href="{{ path('blog_showInfo', {'slug': blog.slug})|raw }}">
                                         <strong>{{ blog.title }}</strong>
                                     </a>
-                                    <strong>{{ 'coments'|trans }}</strong>
-                                    <span class="badge"> 0</span>
-                                    {#<span class="badge"> {{ count(blog.comments) }}</span>#}
+                                    <div class="comment">
+                                        <strong>{{ 'coments'|trans }}</strong>
+                                        <span class="badge"> {{ getCountComments(blog) }}</span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-4 text-right">
@@ -63,9 +64,8 @@
                             </div>
                        </div>
                        <div class="article-body">
-
                             <img src="{{ blog.pathImage | imagine_filter('blog_main') }}" class="img-thumbnail">
-                            {#<img src="{{ asset(blog.pathImage) }}" class="img-thumbnail">#}
+
                             {#{{ blog.textBlog|limitWords(63) }}#}
                             {{ blog.textBlog|limitWords(63, path('blog_showInfo', {'slug': blog.slug}))|raw }}
                        </div>
