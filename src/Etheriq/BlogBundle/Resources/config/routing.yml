@@ -1,79 +1,107 @@
 homepage:
-    pattern:  /{page}
-    defaults: { _controller: EtheriqBlogBundle:Blog:showBlogMainPage, page: 1 }
+    pattern:  /{_locale}/{page}
+    defaults: { _controller: EtheriqBlogBundle:Blog:showBlogMainPage, page: 1, _locale: en }
     requirements:
             page:  \d+
+            _locale: en|ru|ua
 
 blog_showInfo:
-    pattern:  /blog/show/{slug}
+    pattern:  /{_locale}/blog/show/{slug}
     defaults: { _controller: EtheriqBlogBundle:Blog:showBlogInfo }
+    requirements:
+            _locale: en|ru|ua
 
 comment_edit:
-    pattern:  /blog/comment/edit/{id}/{slug}
+    pattern:  /{_locale}/blog/comment/edit/{id}/{slug}
     defaults: { _controller: EtheriqBlogBundle:Blog:editComment }
+    requirements:
+            _locale: en|ru|ua
 
 comment_delete:
-    pattern:  /blog/comment/delete/{id}/{slug}
+    pattern:  /{_locale}/blog/comment/delete/{id}/{slug}
     defaults: { _controller: EtheriqBlogBundle:Blog:deleteComment }
+    requirements:
+            _locale: en|ru|ua
 
 blog_edit:
-    pattern:  /blog/edit/{slug}
+    pattern:  /{_locale}/blog/edit/{slug}
     defaults: { _controller: EtheriqBlogBundle:Blog:editBlogInfo }
     requirements:
             _method: post|put
+            _locale: en|ru|ua
 
 blog_delete:
-    pattern:  /blog/delete/{slug}
+    pattern:  /{_locale}/blog/delete/{slug}
     defaults: { _controller: EtheriqBlogBundle:Blog:deleteBlogInfo }
     requirements:
             _method: post|delete
+            _locale: en|ru|ua
 
 blog_category:
-    pattern:  /blog/category/{slug}/{page}
+    pattern:  /{_locale}/blog/category/{slug}/{page}
     defaults: { _controller: EtheriqBlogBundle:Blog:showBlogsByCategory, page: 1 }
+    requirements:
+            _locale: en|ru|ua
 
 blog_tag:
-    pattern:  /blog/tag/{slug}/{page}
+    pattern:  /{_locale}/blog/tag/{slug}/{page}
     defaults: { _controller: EtheriqBlogBundle:Blog:showBlogsByTag, page: 1 }
+    requirements:
+            _locale: en|ru|ua
 
 blog_find:
-    pattern:  /blog/find
+    pattern:  /{_locale}/blog/find
     defaults: { _controller: EtheriqBlogBundle:Blog:find }
+    requirements:
+            _locale: en|ru|ua
 
 blog_search:
-    pattern:  /blog/search/{slug}/{page}
+    pattern:  /{_locale}/blog/search/{slug}/{page}
     defaults: { _controller: EtheriqBlogBundle:Blog:searchBlogsByTitle, page: 1, slug: '' }
     requirements:
             page:  \d+
+            _locale: en|ru|ua
 
 blog_search_error:
-    pattern:  /blog/search/
+    pattern:  /{_locale}/blog/search/
     defaults: { _controller: EtheriqBlogBundle:Blog:showBlogMainPage, page: 1  }
+    requirements:
+            _locale: en|ru|ua
 
 blog_new_article:
-    pattern:  /blog/new
+    pattern:  /{_locale}/blog/new
     defaults: { _controller: EtheriqBlogBundle:Blog:newBlogArticle }
+    requirements:
+            _locale: en|ru|ua
 
 guest:
-    pattern:  /guest/{page}
+    pattern:  /{_locale}/guest/{page}
     defaults: { _controller: EtheriqBlogBundle:Guest:showGuest, page: 1 }
     requirements:
             page:  \d+
+            _locale: en|ru|ua
 
 guest_showInfo:
-    pattern:  /guest/show/{slug}
+    pattern:  /{_locale}/guest/show/{slug}
     defaults: { _controller: EtheriqBlogBundle:Guest:showGuestInfo }
+    requirements:
+            _locale: en|ru|ua
 
 guest_deleteItem:
-    pattern:  /guest/delete/{slug}
+    pattern:  /{_locale}/guest/delete/{slug}
     defaults: { _controller: EtheriqBlogBundle:Guest:deleteGuestItem }
     requirements:
             _method: post|delete
+            _locale: en|ru|ua
 
 about:
-    pattern:  /about
+    pattern:  /{_locale}/about
     defaults: { _controller: EtheriqBlogBundle:AboutMe:showAboutMePage }
+    requirements:
+            _locale: en|ru|ua
 
 set_locale:
-    pattern: /setLocale/{loc}
+    pattern: /{_locale}/setLocale/{loc}
     defaults: { _controller: EtheriqBlogBundle:Additional:setLocale }
+    requirements:
+            _locale: en|ru|ua

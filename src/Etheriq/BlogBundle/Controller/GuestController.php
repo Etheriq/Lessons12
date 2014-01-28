@@ -22,7 +22,6 @@ class GuestController extends Controller
 {
     public function showGuestAction($page, Request $request)
     {
-        $this->setLocale();
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem("Home", $this->get("router")->generate("homepage"));
         $breadcrumbs->addItem("Guest book");
@@ -67,7 +66,6 @@ class GuestController extends Controller
 
     public function showGuestInfoAction($slug, Request $request)
     {
-        $this->setLocale();
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem("Home", $this->get("router")->generate("homepage"));
         $breadcrumbs->addItem("Guest book", $this->get("router")->generate("guest"));
@@ -114,7 +112,6 @@ class GuestController extends Controller
 
     public function deleteGuestItemAction($slug)
     {
-        $this->setLocale();
         $em = $this->getDoctrine()->getManager();
         $guestDelete = $em->getRepository('EtheriqBlogBundle:Guest')->findOneBySlug($slug);
 
@@ -143,13 +140,5 @@ class GuestController extends Controller
             ->setMethod('DELETE')
             ->add('delete', 'submit', array('label' => 'Delete', 'attr' => array('class' => "btn btn-danger")))
             ->getForm();
-    }
-
-    private function setLocale()
-    {
-        $session = $this->get('session');
-        if ($session->get('blog_locale')) {
-            $this->get('request')->setLocale($session->get('blog_locale'));
-        }
     }
 }

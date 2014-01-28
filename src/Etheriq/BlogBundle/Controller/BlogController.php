@@ -30,18 +30,8 @@ use Symfony\Component\Security\Acl\Permission\MaskBuilder;
 
 class BlogController extends Controller
 {
-    private function setLocale()
-    {
-        $session = $this->get('session');
-        if ($session->get('blog_locale')) {
-            $this->get('request')->setLocale($session->get('blog_locale'));
-        }
-    }
-
     public function showBlogMainPageAction($page)
     {
-        $this->setLocale();
-
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem("Home");
 
@@ -50,7 +40,6 @@ class BlogController extends Controller
         $query = $em->getRepository('EtheriqBlogBundle:Blog')->findBlogsDESC();  // Order by created DESC
 //        $query = $em->getRepository('EtheriqBlogBundle:Blog')->findAllBlogs();  // order by id DESC
         $adapter = new ArrayAdapter($query);
-//        $adapter = new DoctrineORMAdapter($query);
         $pagerBlog = new Pagerfanta($adapter);
         $pagerBlog->setMaxPerPage($this->get('service_container')->getParameter('fantaPager_max_per_page'));
 
@@ -60,7 +49,6 @@ class BlogController extends Controller
             return $this->render('EtheriqBlogBundle:pages:guestPageNotFound.html.twig', array('pageNumber' => $page));
         }
 
-//        var_dump($pagerBlog); exit;
         return $this->render('EtheriqBlogBundle:pages:homepage.html.twig', array(
             'blogs' => $pagerBlog
         ));
@@ -73,7 +61,6 @@ class BlogController extends Controller
 //        if ((false === $securityContext->isGranted('ROLE_ADMIN')) or (false === $securityContext->isGranted('EDIT', $blog))) {
             throw new AccessDeniedException();
         }
-        $this->setLocale();
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem("Home", $this->get("router")->generate("homepage"));
         $breadcrumbs->addItem("Blog in detail", $this->get("router")->generate("blog_showInfo", array('slug' => $slug)));
@@ -105,7 +92,6 @@ class BlogController extends Controller
 
     public function deleteCommentAction($id, $slug, Comments $comment)
     {
-        $this->setLocale();
         $securityContext = $this->get('security.context');
         if (false === $securityContext->isGranted('EDIT', $comment)) {
 //        if ((false === $securityContext->isGranted('ROLE_ADMIN')) or (false === $securityContext->isGranted('EDIT', $blog))) {
@@ -142,7 +128,6 @@ class BlogController extends Controller
 
     public function showBlogsByCategoryAction($page, $slug)
     {
-        $this->setLocale();
         $em = $this->getDoctrine()->getManager();
         $cat = $em->getRepository('EtheriqBlogBundle:Category')->findOneBySlug($slug);
         if ($cat == null) {
@@ -169,7 +154,6 @@ class BlogController extends Controller
 
     public function showBlogsByTagAction($page, $slug)
     {
-        $this->setLocale();
         $em = $this->getDoctrine()->getManager();
         $tag = $em->getRepository('EtheriqBlogBundle:Tags')->findOneBySlug($slug);
         if ($tag == null) {
@@ -196,12 +180,9 @@ class BlogController extends Controller
 
     public function showBlogInfoAction($slug, Request $request)
     {
-        $this->setLocale();
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem("Home", $this->get("router")->generate("homepage"));
         $breadcrumbs->addItem("Blog in detail");
-
-
 
         $em = $this->getDoctrine()->getManager();
         $blogShow = $em->getRepository('EtheriqBlogBundle:Blog')->findOneBySlug($slug);
@@ -218,20 +199,25 @@ class BlogController extends Controller
 
         if($formComment->isValid()) {
 
-            if (false === $this->get('security.context')->isGranted('ROLE_USER')) {
-                throw new AccessDeniedException();
-            }
+//            if (false === $this->get('security.context')->isGranted('ROLE_USER')) {
+//                throw new AccessDeniedException();
+//            }
             $newComment = $this->getDoctrine()->getManager();
-
-//            var_dump($user, $comment); exit;
 
             $securityContext = $this->get('security.context');
             $user = $securityContext->getToken()->getUser();
 
+            if ( $user == 'anon.') {
+
+                $comment->setBlog($blogShow);
+                $newComment->persist($comment);
+                $newComment->flush();
+
+                return $this->redirect($this->generateUrl('blog_showInfo', array('slug' => $blogShow->getSlug())));
+            }
+
             $comment->setAuthor($user);
             $comment->setBlog($blogShow);
-
-
             $newComment->persist($comment);
             $newComment->flush();
 
@@ -269,7 +255,6 @@ class BlogController extends Controller
             throw new AccessDeniedException();
         }
 
-        $this->setLocale();
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem("Home", $this->get("router")->generate("homepage"));
         $breadcrumbs->addItem("Blog in detail");
@@ -348,7 +333,6 @@ class BlogController extends Controller
     public function findAction(Request $request)
     {
         try {
-        $this->setLocale();
         $allRequest = $request->createFromGlobals();
         $s = $allRequest->request->all();
 
@@ -366,7 +350,6 @@ class BlogController extends Controller
 
     public function searchBlogsByTitleAction($slug = null, $page)
     {
-        $this->setLocale();
         $em = $this->getDoctrine()->getManager();
         $searchedBlogs = $em->getRepository('EtheriqBlogBundle:Blog')->searchArticlesByTitle($slug);
 
@@ -389,7 +372,6 @@ class BlogController extends Controller
 //        if ((false === $securityContext->isGranted('ROLE_ADMIN')) or (false === $securityContext->isGranted('EDIT', $blog))) {
             throw new AccessDeniedException();
         }
-        $this->setLocale();
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem("Home", $this->get("router")->generate("homepage"));
         $breadcrumbs->addItem("Blog in detail", $this->get("router")->generate("blog_showInfo", array('slug' => $slug)));
@@ -480,7 +462,6 @@ class BlogController extends Controller
         if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
             throw new AccessDeniedException();
         }
-        $this->setLocale();
         $em = $this->getDoctrine()->getManager();
         $article = $em->getRepository('EtheriqBlogBundle:Blog')->findOneBy(array('slug' => $slug));
 

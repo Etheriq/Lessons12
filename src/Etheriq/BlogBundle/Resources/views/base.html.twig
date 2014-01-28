@@ -76,7 +76,8 @@
                                  {{ 'layout.logout'|trans() }}
                             </a>
                         {% else %}
-                            <a href="{{ path('fos_user_security_login') }}" class="btn btn-sm btn-info">{{ 'layout.login'|trans() }}</a>
+                            <a href="{{ path('admin_blog_login') }}" class="btn btn-sm btn-info">{{ 'layout.login'|trans() }}</a>
+                            {#<a href="{{ path('fos_user_security_login') }}" class="btn btn-sm btn-info">{{ 'layout.login'|trans() }}</a>#}
                         {% endif %}
                     </div>
                 </div>
