@@ -51,6 +51,8 @@ class LoadCommentsToBlogData  extends AbstractFixture implements OrderedFixtureI
                 ->findOneById($randomBlogId);
             $comment->setBlog($blog);
             $comment->setTextComment($commentText);
+            $randomRating = mt_rand(-5, 5);
+            $comment->setRating($randomRating);
 
             $manager->persist($comment);
         }

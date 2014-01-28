@@ -49,6 +49,7 @@ username: Логін
 email: E-mail
 password: Пароль
 role: Роль
+set_rating: встановив рейтинг
 Field: Поле
 Value: Значення
 profile.update: Форма редагування профілю

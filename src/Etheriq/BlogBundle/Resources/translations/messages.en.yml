@@ -49,6 +49,7 @@ username: Login
 password: Password
 email: E-mail
 role: Role
+set_rating: set rating
 login.to.site: Authentication form
 register.to.site: Registration form
 register.new.user: Register new user

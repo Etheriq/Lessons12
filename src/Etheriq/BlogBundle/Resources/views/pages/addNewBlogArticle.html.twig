@@ -20,7 +20,7 @@
          <br>
          {{ form_label(form.tags, 'Blog tags'|trans|raw) }}
          {{ form_widget(form.tags, { 'attr': {'class': 'width80'} }) }}
-         {{ form_widget(form.rating) }}
+         {{ form_widget(form.rating, {'attr': {'value': 0 } }) }}
          <br>
          <span><strong>{{ 'add_new_tags'|trans }}</strong> </span> <img src="{{ asset('img/blog/plus.png') }}" alt="plus"  id="show-input-tags"/>
          <div class="hidden-category" id="input-tags">
@@ -43,7 +43,7 @@
              {{ form_label(form.newCategory, 'new_category_name'|trans|raw) }}
              {{ form_widget(form.newCategory, { 'attr': {'class': 'form-control', 'style': 'width:80%;', 'placeholder': 'Введите новые категории через запятую'} }) }}
          </div>
-         <br>
+         <br><br>
          <div>
              {{ form_label(form.blogImage, 'upload_file'|trans|raw) }}
              {{ form_widget(form.blogImage) }}
@@ -51,13 +51,13 @@
 
          <br>
          <p><strong>{{ 'rating_article'|trans }}</strong> <span class="badge">0</span></p>
-         <div  id = "rates">
-             <ul>
-                 <li class="defaultRating"></li>
-                 <li class="defaultRating"></li>
-                 <li class="defaultRating"></li>
-                 <li class="defaultRating"></li>
-                 <li class="defaultRating"></li>
+         <div>
+             <ul id = "rates"
+                 data-min-rating = "-5"
+                 data-max-rating = "5"
+                 data-step = "1"
+                     >
+                 <li class="defaultRating" id="prototype-star"></li>
              </ul>
          </div>
 

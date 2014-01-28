@@ -51,6 +51,7 @@ Field: Поле
 Value: Значение
 email: E-mail
 password: Пароль
+set_rating: установил рейтинг
 login.to.site: Форма аутентификации
 register.to.site: Форма регистрации
 register.new.user: Регистрация
