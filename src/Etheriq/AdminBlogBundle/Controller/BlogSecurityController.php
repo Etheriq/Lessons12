@@ -17,7 +17,6 @@ class BlogSecurityController extends Controller
 {
     public function loginAction(Request $request)
     {
-        $this->setLocale();
         /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
         $session = $request->getSession();
 
@@ -49,7 +48,6 @@ class BlogSecurityController extends Controller
 
     public function showProfileInfoAction()
     {
-        $this->setLocale();
         $user = $this->container->get('security.context')->getToken()->getUser();
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
@@ -60,7 +58,6 @@ class BlogSecurityController extends Controller
 
     public function editAction(Request $request)
     {
-        $this->setLocale();
         $user = $this->container->get('security.context')->getToken()->getUser();
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
@@ -111,11 +108,14 @@ class BlogSecurityController extends Controller
         );
     }
 
-    private function setLocale()
+    public function loginCheckAction()
     {
-        $session = $this->get('session');
-        if ($session->get('blog_locale')) {
-            $this->get('request')->setLocale($session->get('blog_locale'));
-        }
+        throw new \RuntimeException('You must configure the check path to be handled by the firewall using form_login in your security firewall configuration.');
     }
+
+    public function logoutAction()
+    {
+        throw new \RuntimeException('You must configure the check path to be handled by the firewall using form_login in your security firewall configuration.');
+    }
+
 }

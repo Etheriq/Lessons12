@@ -13,24 +13,19 @@ use Symfony\Component\HttpFoundation\Request;
 
 class AdditionalController extends Controller
 {
-    public function setLocaleAction($loc = 'en', Request $request)
+    public function setLocaleAction($loc, Request $request)
     {
-//        $this->get('request')->setLocale($loc);
-//
-//        return $this->redirect($this->generateUrl('homepage', array('_locale' => $loc) ));
-
-        $session = $this->get('session');
-        $session->set('blog_locale', $loc);
+        $this->get('request')->setLocale($loc);
 
         $src = $request->get('src');
         $params = $this->get('router')->match($src);
 
         if(isset($params['slug'])) {
 
-            return $this->redirect($this->generateUrl($params['_route'], array('slug' => $params['slug'])));
+            return $this->redirect($this->generateUrl($params['_route'], array('_locale' => $loc, 'slug' => $params['slug'])));
         } else {
 
-            return $this->redirect($this->generateUrl($params['_route']));
+            return $this->redirect($this->generateUrl($params['_route'], array('_locale' => $loc)));
         }
     }
 

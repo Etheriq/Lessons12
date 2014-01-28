@@ -96,7 +96,7 @@
                             #{{ loop.index }}:
                             <span> <strong>{{ 'Author'|trans }} </strong>
                                 {% if comment.author is null %}
-                                    Fixture loader
+                                    Anonymous
                                 {% else %}
                                     {{ comment.author  }}
                                 {% endif %}
