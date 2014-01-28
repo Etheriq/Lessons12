@@ -207,6 +207,13 @@ class BlogController extends Controller
             $securityContext = $this->get('security.context');
             $user = $securityContext->getToken()->getUser();
 
+            if ($comment->getRating() != 0 ) {
+                $blogShow->setRating($blogShow->getRating() + $comment->getRating());
+                $blogShow->setNumberOfVoters($blogShow->getNumberOfVoters() + 1);
+
+                $newComment->persist($blogShow);
+            }
+
             if ( $user == 'anon.') {
 
                 $comment->setBlog($blogShow);
@@ -238,7 +245,6 @@ class BlogController extends Controller
             return $this->redirect($this->generateUrl('blog_showInfo', array('slug' => $blogShow->getSlug())));
         }
 
-
         $editForm = $this->createEditForm($slug);
 
         return $this->render('EtheriqBlogBundle:pages:blogShow.html.twig', array(
@@ -269,9 +275,9 @@ class BlogController extends Controller
 
             $tags = $blog->getTags();
 
-            $blog
-                ->setTags($tags)
-                ->setNumberOfVoters(1);
+            $blog->setTags($tags)
+                ->setNumberOfVoters(1)
+                ->setRating($blog->getRating());
 
             if ($blog->getNewTags() != null) {
                 $newTags = explode(',', trim($blog->getNewTags()));
@@ -283,7 +289,6 @@ class BlogController extends Controller
                     $newArticle->persist($tag);
                     $blog->addTag($tag);
                 }
-
             }
             if ($blog->getNewCategory() != null) {
                 $newCategory = explode(',', trim($blog->getNewCategory()));
@@ -301,6 +306,7 @@ class BlogController extends Controller
 
             $blog->setNewTags(null);
             $blog->setNewCategory(null);
+
             $newArticle->persist($blog);
             $newArticle->flush();
 
@@ -385,31 +391,14 @@ class BlogController extends Controller
             exit;
         }
 
-        $allRequest = $request->createFromGlobals();
-        $rate = $allRequest->request->all();
-
         $blogShow->setTitle($blogShow->getTitle());
         $blogShow->setTextBlog($blogShow->getTextBlog());
-
-        $ratingOld = $blogShow->getRating();
-        $blogShow->setRating(0);
 
         $form = $this->createForm(new BlogDetailType(), $blogShow);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $blogToDb = $this->getDoctrine()->getManager();
-
-            if ($rate['blogDetailed']['rating'] != 0) {
-                $ratingNew = $ratingOld + $rate['blogDetailed']['rating'];
-                $voters = $blogShow->getNumberOfVoters();
-
-                $blogShow->setRating($ratingNew);
-                $blogShow->setNumberOfVoters($voters + 1);
-
-            } else {
-                $blogShow->setRating($ratingOld);
-            }
 
             if ($blogShow->getNewTags() != null) {
                 $newTags = explode(',', trim($blogShow->getNewTags()));
@@ -449,7 +438,6 @@ class BlogController extends Controller
 
         return $this->render('EtheriqBlogBundle:pages:blogEdit.html.twig', array(
             'form' => $form->createView(),
-            'rating' => $ratingOld,
             'voters' => $blogShow->getNumberOfVoters(),
             'delete_form' => $deleteForm->createView(),
             'oldImage' => $blogShow->getPathImage()

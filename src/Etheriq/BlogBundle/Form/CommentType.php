@@ -17,13 +17,14 @@ class CommentType extends AbstractType
 {
     public function getName()
     {
-        return 'blogComment';
+        return 'blog';
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('textComment', 'textarea');
+            ->add('textComment', 'textarea')
+            ->add('rating', 'hidden');
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

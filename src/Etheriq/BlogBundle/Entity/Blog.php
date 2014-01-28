@@ -100,15 +100,15 @@ class Blog
 
     /**
      *
-     * @Assert\NotEqualTo(value = 0, message="blog_rating_error")
-     * @Assert\NotBlank(message = "blog_tatin.not_blank")
-     * @ORM\Column(type="integer")
+     *   Assert\NotEqualTo(value = 0, message="blog_rating_error")
+     *   Assert\NotBlank(message = "blog_tatin.not_blank")
+     * @ORM\Column(type="integer", nullable=true)
      */
     protected $rating;
 
     /**
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     protected $numberOfVoters;
 

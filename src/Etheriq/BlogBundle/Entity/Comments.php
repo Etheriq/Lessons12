@@ -68,6 +68,11 @@ class Comments
      * @ORM\Column(type="text")
      */
     protected $textComment;
+    /**
+     *
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    protected $rating;
 
 
 
@@ -203,5 +208,28 @@ class Comments
     public function getAuthor()
     {
         return $this->author;
+    }
+
+    /**
+     * Set rating
+     *
+     * @param integer $rating
+     * @return Comments
+     */
+    public function setRating($rating)
+    {
+        $this->rating = $rating;
+
+        return $this;
+    }
+
+    /**
+     * Get rating
+     *
+     * @return integer 
+     */
+    public function getRating()
+    {
+        return $this->rating;
     }
 }
