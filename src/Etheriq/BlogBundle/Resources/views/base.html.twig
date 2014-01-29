@@ -35,6 +35,31 @@
                         <li><a href="{{ path('about') }}"><span class="glyphicon glyphicon-user"> </span> {{ 'About me'|trans }}</a></li>
                         <li><a href="{{ path('guest') }}"><span class="glyphicon glyphicon-book"> </span> {{ 'Guest book'|trans }}</a></li>
                         <li><a href="{{ path('blog_new_article') }}"><span class="glyphicon glyphicon-plus"> </span> {{ 'New Article'|trans }}</a></li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img src="{{ asset(setLocaleImg(app.request.locale)) }}" alt="" style="margin-top: -5px;"> <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="{{ path('set_locale', {'loc': 'en', 'src': app.request.PathInfo }) }}">
+                                        <img src="{{ asset('img/flag_great_britain.png') }}" alt="English">
+                                        English
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('set_locale', {'loc': 'ru', 'src': app.request.PathInfo }) }}">
+                                        <img src="{{ asset('img/flag_russia.png') }}" alt="Russian">
+                                        Русский
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('set_locale', {'loc': 'ua', 'src': app.request.PathInfo }) }}">
+                                        <img src="{{ asset('img/flag_ukraine.png') }}" alt="Ukrainian">
+                                        Українська
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
                     </ul>
                     <form class="navbar-form navbar-right" role="search" action="{{ path('blog_find') }}" method="post">
                         <div class="form-group">
@@ -51,7 +76,8 @@
                                  {{ 'layout.logout'|trans() }}
                             </a>
                         {% else %}
-                            <a href="{{ path('fos_user_security_login') }}" class="btn btn-sm btn-info">{{ 'layout.login'|trans() }}</a>
+                            <a href="{{ path('admin_blog_login') }}" class="btn btn-sm btn-info">{{ 'layout.login'|trans() }}</a>
+                            {#<a href="{{ path('fos_user_security_login') }}" class="btn btn-sm btn-info">{{ 'layout.login'|trans() }}</a>#}
                         {% endif %}
                     </div>
                 </div>

@@ -20,8 +20,6 @@ class RegistrationController extends BaseController
 {
     public function registerrAction(Request $request)
     {
-        $this->setLocale();
-        // ********************************************************************
         /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
         $formFactory = $this->container->get('fos_user.registration.form.factory');
         /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
@@ -66,13 +64,5 @@ class RegistrationController extends BaseController
         return $this->container->get('templating')->renderResponse('EtheriqAdminBlogBundle:Registration:register.html.'.$this->getEngine(), array(
                 'form' => $form->createView(),
             ));
-    }
-
-    private function setLocale()
-    {
-        $session = $this->container->get('session');
-        if ($session->get('blog_locale')) {
-            $this->container->get('request')->setLocale($session->get('blog_locale'));
-        }
     }
 }

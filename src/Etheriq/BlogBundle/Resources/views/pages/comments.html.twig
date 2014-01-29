@@ -1,0 +1,12 @@
+{#<form action="{{ path('blog_add_comment', {'blog': 'f'}) }}" {{ form_enctype(comment_form) }} method="POST" >#}
+{{ form_start(comment_form, {'attr': {'role': 'form', 'novalidate': 'novalidate', 'action':  }}) }}
+
+{{ form_label(comment_form.textComment, 'Name'|trans|raw) }}
+{{ form_widget(comment_form.textComment, { 'attr': {'class': 'form-control', 'style': 'width:30%; ', 'placeholder': 'Введите coment' } }) }}
+
+{{ form_widget(comment_form.send) }}
+
+{{ form_errors(comment_form.textComment) }}
+
+{{ form_end(comment_form) }}
+{#</form>#}

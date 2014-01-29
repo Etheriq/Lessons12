@@ -12,6 +12,7 @@ blog_text.minLenght_error: Мінімальна довжина статті - 50
 blog_rating_error: Потрібно визначити рейтинг статті
 blog_tatin.not_blank: Потрібно визначити рейтинг статті
 uploadMimeType.error: Дозволяється завантажувати лише зображення
+comment_text.minLength_error: Мінімальна довжина коментара - 5 символів або більше
 maxSize.error: Перевищений максимальний розмір (3 Мб) завантаженого файла
 fos_user:
     username:

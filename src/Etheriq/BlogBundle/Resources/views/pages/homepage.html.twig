@@ -13,27 +13,27 @@
 
              {% endblock breadcrumb %}
          </div>
-         <div class="col-md-2">
-             <div class="translate">
-             <ul class="locale_change">
-                 <li>
-                     <a href="{{ path('set_locale', {'loc': 'en'}) }}">
-                         <img src="{{ asset('img/flag_great_britain.png') }}" alt="English">
-                     </a>
-                 </li>
-                 <li>
-                     <a href="{{ path('set_locale', {'loc': 'ru'}) }}">
-                         <img src="{{ asset('img/flag_russia.png') }}" alt="Russian">
-                     </a>
-                 </li>
-                 <li>
-                     <a href="{{ path('set_locale', {'loc': 'ua'}) }}">
-                         <img src="{{ asset('img/flag_ukraine.png') }}" alt="Ukrainian">
-                     </a>
-                 </li>
-             </ul>
-             </div>
-         </div>
+         {#<div class="col-md-2">#}
+             {#<div class="translate">#}
+             {#<ul class="locale_change">#}
+                 {#<li>#}
+                     {#<a href="{{ path('set_locale', {'loc': 'en'}) }}">#}
+                         {#<img src="{{ asset('img/flag_great_britain.png') }}" alt="English">#}
+                     {#</a>#}
+                 {#</li>#}
+                 {#<li>#}
+                     {#<a href="{{ path('set_locale', {'loc': 'ru'}) }}">#}
+                         {#<img src="{{ asset('img/flag_russia.png') }}" alt="Russian">#}
+                     {#</a>#}
+                 {#</li>#}
+                 {#<li>#}
+                     {#<a href="{{ path('set_locale', {'loc': 'ua'}) }}">#}
+                         {#<img src="{{ asset('img/flag_ukraine.png') }}" alt="Ukrainian">#}
+                     {#</a>#}
+                 {#</li>#}
+             {#</ul>#}
+             {#</div>#}
+         {#</div>#}
 </div>
      <div class="row">
          <div class="col-md-8">
@@ -53,6 +53,10 @@
                                     <a href="{{ path('blog_showInfo', {'slug': blog.slug})|raw }}">
                                         <strong>{{ blog.title }}</strong>
                                     </a>
+                                    <div class="comment">
+                                        <strong>{{ 'coments'|trans }}</strong>
+                                        <span class="badge"> {{ getCountComments(blog) }}</span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-4 text-right">
@@ -60,9 +64,8 @@
                             </div>
                        </div>
                        <div class="article-body">
-
                             <img src="{{ blog.pathImage | imagine_filter('blog_main') }}" class="img-thumbnail">
-                            {#<img src="{{ asset(blog.pathImage) }}" class="img-thumbnail">#}
+
                             {#{{ blog.textBlog|limitWords(63) }}#}
                             {{ blog.textBlog|limitWords(63, path('blog_showInfo', {'slug': blog.slug}))|raw }}
                        </div>

@@ -14,6 +14,7 @@
                 {% endif %}
                 <form action="{{ path("fos_user_security_check") }}" method="post">
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                    <input type="hidden" name="_target_path" value="{{ url('homepage') }}" />
                     <div class="form-group">
                         <label for="username">{{ 'username'|trans }}:</label>
                         <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" />
