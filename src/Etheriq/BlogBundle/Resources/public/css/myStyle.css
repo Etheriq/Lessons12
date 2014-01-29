@@ -156,6 +156,14 @@ label.tagsInShow
     padding-left: 3px;
     padding-right: 13px;
 }
+#rating
+{
+    /*border: solid 1px #000000;*/
+    margin: 0;
+    font-size: 130%;
+    color: #6d6d6d;
+    padding: 3px;
+}
 /* =============   Rating CSS ==================== */
 #rates{
     position: relative;
