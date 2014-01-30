@@ -23,8 +23,6 @@ show_run("fixtures:load", "app/console doctrine:fixtures:load --no-interaction")
 show_run("assets:install", "app/console assets:install --symlink");
 show_run("assets:dump", "app/console assetic:dump");
 
-show_run("fos:user:create admin", "app/console fos:user:create --super-admin admin admin@tt.tt admin");
-show_run("fos:user:create user", "app/console fos:user:create user user@tt.tt user");
 show_run("init:acl", "app/console init:acl");
 
 show_run("Warming up dev cache", "php app/console --env=dev cache:clear --no-warmup");

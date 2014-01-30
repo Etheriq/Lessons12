@@ -15,6 +15,9 @@ use Etheriq\BlogBundle\Entity\Comments;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Security\Acl\Domain\ObjectIdentity;
+use Symfony\Component\Security\Acl\Domain\UserSecurityIdentity;
+use Symfony\Component\Security\Acl\Permission\MaskBuilder;
 
 class LoadCommentsToBlogData  extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
@@ -22,7 +25,7 @@ class LoadCommentsToBlogData  extends AbstractFixture implements OrderedFixtureI
 
     public function getOrder()
     {
-        return 6;
+        return 7;
     }
 
     public function setContainer(ContainerInterface $container = null)
@@ -32,17 +35,15 @@ class LoadCommentsToBlogData  extends AbstractFixture implements OrderedFixtureI
 
     public function load(ObjectManager $manager)
     {
-
+        $users = $this->getUsers();
         foreach ($this->getCommentsArray() as $commentText) {
 
             $comment = new Comments();
-//            $randomAuthorId = mt_rand(1, 2);
-//            $user = $this->container
-//                ->get('doctrine')
-//                ->getManager()
-//                ->getRepository('EtheriqAdminBlogBundle:User')
-//                ->findOneById($randomAuthorId);
-//            $comment->setAuthor($user);
+
+            $randomAuthorId = mt_rand(0, 1);
+            $randomUser = $users[$randomAuthorId];
+            $comment->setAuthor($randomUser);
+
             $randomBlogId = mt_rand(1, 17);
             $blog = $this->container
                 ->get('doctrine')
@@ -55,9 +56,37 @@ class LoadCommentsToBlogData  extends AbstractFixture implements OrderedFixtureI
             $comment->setRating($randomRating);
 
             $manager->persist($comment);
+            $manager->flush();
+
+            //  *******************************************************************
+            // creating the ACL
+            $aclProvider = $this->container->get('security.acl.provider');
+            $objectIdentity = ObjectIdentity::fromDomainObject($comment);
+            $acl = $aclProvider->createAcl($objectIdentity);
+
+            // retrieving the security identity of the currently logged-in user
+            $securityIdentity = UserSecurityIdentity::fromAccount($randomUser);
+
+            // grant owner access
+            $acl->insertObjectAce($securityIdentity, MaskBuilder::MASK_OWNER);
+            $aclProvider->updateAcl($acl);
+            //  *******************************************************************
         }
 
-        $manager->flush();
+    }
+
+    protected function getUsers()
+    {
+        $fosUserManager = $this->container->get('fos_user.user_manager');
+
+        $user = $fosUserManager->findUserBy(array('id' => 1));
+        $admin = $fosUserManager->findUserBy(array('id' => 2));
+
+        $users = array();
+        $users[] = $user;
+        $users[] = $admin;
+
+        return $users;
     }
 
     protected function getCommentsArray()
