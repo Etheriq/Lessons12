@@ -145,6 +145,14 @@ class Blog
     protected $comments;
 
     /**
+     * Author of the comment
+     *
+     * @ORM\ManyToOne(targetEntity="Etheriq\AdminBlogBundle\Entity\User")
+     * @var User
+     */
+    protected $author;
+
+    /**
      * Sets file.
      *
      * @param UploadedFile $file
@@ -622,5 +630,37 @@ class Blog
     public function getComments()
     {
         return $this->comments;
+    }
+
+    /**
+     * Set author
+     *
+     * @param \Etheriq\AdminBlogBundle\Entity\User $author
+     * @return Blog
+     */
+    public function setAuthor(\Etheriq\AdminBlogBundle\Entity\User $author = null)
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    /**
+     * Get author
+     *
+     * @return \Etheriq\AdminBlogBundle\Entity\User 
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    public function getAuthorName()
+    {
+        if (null === $this->getAuthor()) {
+            return 'Anonymous';
+        }
+
+        return $this->getAuthor()->getUsername();
     }
 }

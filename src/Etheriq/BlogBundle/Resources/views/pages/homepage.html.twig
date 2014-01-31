@@ -60,41 +60,44 @@
                                 </div>
                             </div>
                             <div class="col-md-4 text-right">
-                                <span>{{ 'Published'|trans }} {{ blog.created|date("d.m.Y") }}</span>
+                                <span>{{ 'Published'|trans }} {{ blog.created|date("d.m.Y") }} {{ 'by'|trans }} {{ blog.author.username }}</span>
                             </div>
-                       </div>
-                       <div class="article-body">
-                            <img src="{{ blog.pathImage | imagine_filter('blog_main') }}" class="img-thumbnail">
+                        </div>
+                        <div class="row">
+                            <div class="article-body">
+                                <img src="{{ blog.pathImage | imagine_filter('blog_main') }}" class="img-thumbnail">
 
-                            {#{{ blog.textBlog|limitWords(63) }}#}
-                            {{ blog.textBlog|limitWords(63, path('blog_showInfo', {'slug': blog.slug}))|raw }}
-                       </div>
+                                {#{{ blog.textBlog|limitWords(63) }}#}
+                                {{ blog.textBlog|limitWords(63, path('blog_showInfo', {'slug': blog.slug}))|raw }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="article-footer">
+                              <div class="text-left myCat">
+                                  <strong>{{ 'Category'|trans }} </strong>
+                                  <span class="label label-primary">
+                                      <a href="{{ path('blog_category', {'slug': blog.category.slug}) }}">
+                                        {{ blog.category.categoryName }}
+                                      </a>
+                                  </span>
+                              </div>
 
-                       <div class="article-footer">
-                          <div class="text-left myCat">
-                              <strong>{{ 'Category'|trans }} </strong>
-                              <span class="label label-primary">
-                                  <a href="{{ path('blog_category', {'slug': blog.category.slug}) }}">
-                                    {{ blog.category.categoryName }}
-                                  </a>
-                              </span>
-                          </div>
+                               <div class="myRating">
+                                   <strong>{{ 'Rating'|trans }}</strong>
+                                   <span class="badge">{{ blog.rating|rating(blog.numberOfVoters) }}</span>
+                               </div>
 
-                           <div class="myRating">
-                               <strong>{{ 'Rating'|trans }}</strong>
-                               <span class="badge">{{ blog.rating|rating(blog.numberOfVoters) }}</span>
-                           </div>
-
-                           <div class="text-right myTags">
-                               <strong>{{ 'Tags'|trans }} </strong>
-                              {% for tag in blog.tags %}
-                                  <a href="{{ path('blog_tag', {'slug': tag.slug}) }}">
-                                    <span class="label label-info">{{ tag.tagName }}</span>
-                                  </a>
-                              {% endfor %}
-                           </div>
-                       </div>
-                       <br><hr>
+                               <div class="text-right myTags">
+                                   <strong>{{ 'Tags'|trans }} </strong>
+                                  {% for tag in blog.tags %}
+                                      <a href="{{ path('blog_tag', {'slug': tag.slug}) }}">
+                                        <span class="label label-info">{{ tag.tagName }}</span>
+                                      </a>
+                                  {% endfor %}
+                               </div>
+                            </div>
+                        </div>
+                       <hr>
                     {% endfor %}
 
              {% endblock content %}
