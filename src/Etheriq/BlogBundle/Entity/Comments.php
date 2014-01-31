@@ -62,7 +62,7 @@ class Comments
 
     /**
      *
-     * @Assert\NotBlank(message = "blog_title.not_blank")
+     * @Assert\NotBlank(message = "comment.not_blank")
      * @Assert\Length(min = "5", minMessage = "comment_text.minLength_error")
      * @ORM\Column(type="text")
      */

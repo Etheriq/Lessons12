@@ -13,6 +13,7 @@ blog_rating_error: Нужно указать рейтинг статьи
 blog_tatin.not_blank: Нужно указать рейтинг статьи
 uploadMimeType.error: Загрузка возможна только изображений
 comment_text.minLength_error: Минимальная длина комментария - 5 символов или больше
+comment.not_blank: Комментарий не должен быть пустым
 maxSize.error: Превышен максимальный размер (3 Мб) загружаемого файла
 fos_user:
     username:
