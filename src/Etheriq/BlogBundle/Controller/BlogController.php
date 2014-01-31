@@ -17,16 +17,12 @@ use Etheriq\BlogBundle\Entity\Category;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Pagerfanta\Exception\NotValidCurrentPageException;
 use Pagerfanta\Pagerfanta;
-use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Adapter\DoctrineCollectionAdapter;
 use Symfony\Component\HttpFoundation\Request;
 use Etheriq\BlogBundle\Form\BlogDetailType;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Component\Security\Acl\Domain\ObjectIdentity;
-use Symfony\Component\Security\Acl\Domain\UserSecurityIdentity;
-use Symfony\Component\Security\Acl\Permission\MaskBuilder;
 
 class BlogController extends Controller
 {
@@ -199,7 +195,7 @@ class BlogController extends Controller
         $formComment = $this->createForm(new CommentType(), $comment);
         $formComment->handleRequest($request);
 
-        if($formComment->isValid()) {
+        if ($formComment->isValid()) {
 
             $newComment = $this->getDoctrine()->getManager();
 
@@ -235,7 +231,6 @@ class BlogController extends Controller
             'edit_form' => $editForm->createView(),
             'comment_form' => $formComment->createView()
         ));
-
     }
 
     public function newBlogArticleAction(Request $request)
@@ -352,9 +347,6 @@ class BlogController extends Controller
         $breadcrumbs->addItem("Home", $this->get("router")->generate("homepage"));
         $breadcrumbs->addItem("Blog in detail", $this->get("router")->generate("blog_showInfo", array('slug' => $slug)));
         $breadcrumbs->addItem("Edit Article");
-
-
-
 
         if (!$blogShow) {
             return $this->render('EtheriqBlogBundle:pages:guestPageNotFound.html.twig', array('pageNumber' => $slug));

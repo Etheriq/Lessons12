@@ -36,5 +36,4 @@ class CommentType extends AbstractType
         );
     }
 
-
-} 
+}

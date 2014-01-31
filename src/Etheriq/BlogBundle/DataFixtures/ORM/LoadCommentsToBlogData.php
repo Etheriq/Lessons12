@@ -52,7 +52,6 @@ class LoadCommentsToBlogData  extends AbstractFixture implements OrderedFixtureI
         $manager->flush();
     }
 
-
     protected function getUsers()
     {
         $fosUserManager = $this->container->get('fos_user.user_manager');
@@ -76,7 +75,7 @@ class LoadCommentsToBlogData  extends AbstractFixture implements OrderedFixtureI
             ->findAll();
 
         $blogsArray = array();
-        foreach($blogs as $blog) {
+        foreach ($blogs as $blog) {
             $blogsArray[] = $blog;
         }
 

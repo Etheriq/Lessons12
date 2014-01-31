@@ -602,7 +602,7 @@ class Blog
     /**
      * Add comments
      *
-     * @param \Etheriq\BlogBundle\Entity\Comments $comments
+     * @param  \Etheriq\BlogBundle\Entity\Comments $comments
      * @return Blog
      */
     public function addComment(\Etheriq\BlogBundle\Entity\Comments $comments)
@@ -625,7 +625,7 @@ class Blog
     /**
      * Get comments
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getComments()
     {
@@ -635,7 +635,7 @@ class Blog
     /**
      * Set author
      *
-     * @param \Etheriq\AdminBlogBundle\Entity\User $author
+     * @param  \Etheriq\AdminBlogBundle\Entity\User $author
      * @return Blog
      */
     public function setAuthor(\Etheriq\AdminBlogBundle\Entity\User $author = null)
@@ -648,7 +648,7 @@ class Blog
     /**
      * Get author
      *
-     * @return \Etheriq\AdminBlogBundle\Entity\User 
+     * @return \Etheriq\AdminBlogBundle\Entity\User
      */
     public function getAuthor()
     {
