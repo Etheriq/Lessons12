@@ -35,7 +35,7 @@ class BlogControllerTest extends WebTestCase
     public function testGuestTest()
     {
         $client = static::createClient();
-        $crawler = $client->request('get', '/en/guest');
+        $client->request('get', '/en/guest');
 
         $this->assertRegExp('/More info/', $client->getResponse()->getContent());
     }

@@ -19,6 +19,11 @@ Search: Знайти
 Category: Категорія:
 Rating: Рейтинг:
 Tags: Теги:
+coments: Коментаріїв:
+enter_comment: Введіть ваш коментар
+Author: Автор:
+send: Відправити
+comments_list: Коментарі
 Last articles: Останні статті
 Articles by rating: Статті по рейтингу
 Last posts from guest book: Останні статті із гостьової книги
@@ -38,3 +43,24 @@ add_new_tags: Додати нові теги
 Guest book detail: Обліковий запис
 New Article: Нова стаття
 upload_file: Виберіть зображення для завантаження(макс розмір 3Мб)
+layout.logged_in_as: Ви увійшли як %username%
+layout.login: Увійти
+layout.logout: Вийти
+username: Логін
+email: E-mail
+password: Пароль
+role: Роль
+set_rating: встановив рейтинг
+Field: Поле
+Value: Значення
+profile.update: Форма редагування профілю
+cancel: Відміна
+login.to.site: Форма аутентентифікації
+register.to.site: Форма регістрації
+register.new.user: Регістрація
+login.remember_me: Запам'ятати мене
+form.password: Пароль
+password_confirmation: Повторіть пароль
+fos_user:
+    password:
+        mismatch: Паролі не співпадають

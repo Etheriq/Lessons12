@@ -23,7 +23,8 @@ class BlogRepository extends EntityRepository
     public function findBlogsDESC()
     {
         return $this->getEntityManager()
-            ->createQuery('SELECT b FROM EtheriqBlogBundle:Blog b ORDER BY b.created DESC');
+            ->createQuery('SELECT b FROM EtheriqBlogBundle:Blog b ORDER BY b.created DESC')
+            ->execute();
     }
 
     public function findAllBlogs()

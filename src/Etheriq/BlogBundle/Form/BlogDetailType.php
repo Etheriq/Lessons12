@@ -16,7 +16,7 @@ class BlogDetailType  extends AbstractType
 {
     public function getName()
     {
-        return 'blogDetailed';
+        return 'blog';
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)

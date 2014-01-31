@@ -20,7 +20,7 @@
                 <br>
                 {{ form_label(form.tags, 'Blog tags'|trans|raw) }}
                 {{ form_widget(form.tags, { 'attr': {'class': 'width80'} }) }}
-                {{ form_widget(form.rating) }}
+                {#{{ form_widget(form.rating) }}#}
                 <br>
                 <span><strong>{{ 'add_new_tags'|trans }}</strong> </span> <img src="{{ asset('img/blog/plus.png') }}" alt="plus"  id="show-input-tags"/>
                 <div class="hidden-category" id="input-tags">
@@ -54,16 +54,16 @@
                          <img src="{{ oldImage | imagine_filter('blog_main') }}" class="img-thumbnail">
                      </div>
                  </div>
-                 <p><strong>{{ 'rating_article'|trans }}</strong> <span class="badge">{{ rating|rating(voters) }}</span></p>
-                 <div  id = "rates">
-                 <ul>
-                     <li class="defaultRating"></li>
-                     <li class="defaultRating"></li>
-                     <li class="defaultRating"></li>
-                     <li class="defaultRating"></li>
-                     <li class="defaultRating"></li>
-                 </ul>
-                </div>
+                 {#<p><strong>{{ 'rating_article'|trans }}</strong> <span class="badge">{{ rating|rating(voters) }}</span></p>#}
+                 {#<div  id = "rates">#}
+                 {#<ul>#}
+                     {#<li class="defaultRating"></li>#}
+                     {#<li class="defaultRating"></li>#}
+                     {#<li class="defaultRating"></li>#}
+                     {#<li class="defaultRating"></li>#}
+                     {#<li class="defaultRating"></li>#}
+                 {#</ul>#}
+                {#</div>#}
                 <br><br>
                 {{ form_widget(form.save, { 'attr': {'class': 'btn btn-success'} }) }}
                 <p>{{ form_errors(form.title) }}</p>

@@ -1,6 +1,8 @@
+etheriq_admin_blog:
+    resource: "@EtheriqAdminBlogBundle/Resources/config/routing.yml"
+
 etheriq_blog:
     resource: "@EtheriqBlogBundle/Resources/config/routing.yml"
-    prefix:   /
 
 _imagine:
     resource: .

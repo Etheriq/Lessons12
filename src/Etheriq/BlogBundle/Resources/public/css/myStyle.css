@@ -50,6 +50,11 @@ body
     text-decoration: none;
 
 }
+.comment
+{
+    display: inline;
+    margin-left: 20px;
+}
 .myRating
 {
     float: left;
@@ -146,40 +151,38 @@ label.tagsInShow
     margin-top: 10px;
     margin-bottom: 10px;
 }
-#blogDetailed_tags label
+#blog_tags label
 {
     padding-left: 3px;
     padding-right: 13px;
 }
+#rating
+{
+    /*border: solid 1px #000000;*/
+    margin: 0;
+    font-size: 130%;
+    color: #6d6d6d;
+    padding: 3px;
+}
 /* =============   Rating CSS ==================== */
 #rates{
-    position : relative;
-    display: inline-block;
-}
-
-#rates ul{
     position: relative;
     list-style: none;
     margin-right: 20px;
     padding-left: 0px;
-    display: inline;
+    display: inline-block;
 }
 
-#rates ul li{
+#rates li{
     float: left;
     width: 32px;
     height: 32px;
 }
 
-#rates ul li:hover{
+#rates li:hover{
     cursor: pointer;
 }
 
-/*#rates span{
-    font-size: 14pt;
-    vertical-align: middle;
-}
-*/
 .defaultRating{
     background-image: url("../img/star-white.png");
     background-repeat: no-repeat;
@@ -193,6 +196,9 @@ label.tagsInShow
 .rating{
     background-image: url("../img/star-yellow.png");
     background-repeat: no-repeat;
-
+}
+.coolRating{
+    background-image: url("../img/star-green.png");
+    background-repeat: no-repeat;
 }
 /* =============   end Rating CSS ==================== */

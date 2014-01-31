@@ -10,17 +10,19 @@
 namespace Etheriq\BlogBundle\Controller;
 
 use Etheriq\BlogBundle\Entity\Blog;
+use Etheriq\BlogBundle\Entity\Comments;
+use Etheriq\BlogBundle\Form\CommentType;
 use Etheriq\BlogBundle\Entity\Tags;
 use Etheriq\BlogBundle\Entity\Category;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Pagerfanta\Exception\NotValidCurrentPageException;
 use Pagerfanta\Pagerfanta;
-use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Adapter\DoctrineCollectionAdapter;
 use Symfony\Component\HttpFoundation\Request;
 use Etheriq\BlogBundle\Form\BlogDetailType;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class BlogController extends Controller
 {
@@ -33,9 +35,9 @@ class BlogController extends Controller
 //        $em->getFilters()->disable('softdeleteable');  // to display removed data
         $query = $em->getRepository('EtheriqBlogBundle:Blog')->findBlogsDESC();  // Order by created DESC
 //        $query = $em->getRepository('EtheriqBlogBundle:Blog')->findAllBlogs();  // order by id DESC
-        $adapter = new DoctrineORMAdapter($query);
+        $adapter = new ArrayAdapter($query);
         $pagerBlog = new Pagerfanta($adapter);
-        $pagerBlog->setMaxPerPage(5);
+        $pagerBlog->setMaxPerPage($this->get('service_container')->getParameter('fantaPager_max_per_page'));
 
         try {
             $pagerBlog->setCurrentPage($page);
@@ -46,6 +48,64 @@ class BlogController extends Controller
         return $this->render('EtheriqBlogBundle:pages:homepage.html.twig', array(
             'blogs' => $pagerBlog
         ));
+    }
+
+    public function editCommentAction($id, $slug, Comments $comment, Request $request)
+    {
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $editComment = $em->getRepository('EtheriqBlogBundle:Comments')->findOneById($id);
+
+        if (!$editComment) {
+            return $this->render('EtheriqBlogBundle:pages:guestPageNotFound.html.twig', array('pageNumber' => $id));
+            exit;
+        }
+
+        if ($user->getId() != $editComment->getAuthor()->getId()) {
+            throw new AccessDeniedException();
+        }
+
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem("Home", $this->get("router")->generate("homepage"));
+        $breadcrumbs->addItem("Blog in detail", $this->get("router")->generate("blog_showInfo", array('slug' => $slug)));
+        $breadcrumbs->addItem("Edit comment");
+
+        $formEditComment = $this->createForm(new CommentType(), $editComment);
+        $formEditComment->handleRequest($request);
+
+        if ($formEditComment->isValid()) {
+            $commentToBd = $this->getDoctrine()->getManager();
+
+            $commentToBd->flush();
+
+            return $this->redirect($this->generateUrl('blog_showInfo', array('slug' => $slug)));
+        }
+
+        return $this->render('EtheriqBlogBundle:pages:commentEdit.html.twig', array(
+            'comment_form' => $formEditComment->createView(),
+        ));
+    }
+
+    public function deleteCommentAction($id, $slug, Comments $comment)
+    {
+
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $deleteComment = $em->getRepository('EtheriqBlogBundle:Comments')->findOneById($id);
+
+        if (!$deleteComment) {
+            return $this->render('EtheriqBlogBundle:pages:guestPageNotFound.html.twig', array('pageNumber' => $id));
+            exit;
+        }
+
+        if ($user->getId() != $deleteComment->getAuthor()->getId()) {
+            throw new AccessDeniedException();
+        }
+
+        $em->remove($deleteComment);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('blog_showInfo', array('slug' => $slug)));
     }
 
     public function showLastArticlesAction()
@@ -76,7 +136,7 @@ class BlogController extends Controller
 
         $adapter = new DoctrineCollectionAdapter($blogs);
         $pagerBlog = new Pagerfanta($adapter);
-        $pagerBlog->setMaxPerPage(5);
+        $pagerBlog->setMaxPerPage($this->get('service_container')->getParameter('fantaPager_max_per_page'));
 
         try {
             $pagerBlog->setCurrentPage($page);
@@ -102,7 +162,7 @@ class BlogController extends Controller
 
         $adapter = new DoctrineCollectionAdapter($blogs);
         $pagerBlog = new Pagerfanta($adapter);
-        $pagerBlog->setMaxPerPage(5);
+        $pagerBlog->setMaxPerPage($this->get('service_container')->getParameter('fantaPager_max_per_page'));
 
         try {
             $pagerBlog->setCurrentPage($page);
@@ -130,17 +190,56 @@ class BlogController extends Controller
             exit;
         }
 
+        $comment = new Comments();
+
+        $formComment = $this->createForm(new CommentType(), $comment);
+        $formComment->handleRequest($request);
+
+        if ($formComment->isValid()) {
+
+            $newComment = $this->getDoctrine()->getManager();
+
+            $user = $this->getUser();
+
+            if ($comment->getRating() != 0 ) {
+                $blogShow->setRating($blogShow->getRating() + $comment->getRating());
+                $blogShow->setNumberOfVoters($blogShow->getNumberOfVoters() + 1);
+
+                $newComment->persist($blogShow);
+            }
+
+            if ( is_null($user)) {
+                $comment->setBlog($blogShow);
+                $newComment->persist($comment);
+                $newComment->flush();
+
+                return $this->redirect($this->generateUrl('blog_showInfo', array('slug' => $blogShow->getSlug())));
+            }
+
+            $comment->setAuthor($user);
+            $comment->setBlog($blogShow);
+            $newComment->persist($comment);
+            $newComment->flush();
+
+            return $this->redirect($this->generateUrl('blog_showInfo', array('slug' => $blogShow->getSlug())));
+        }
+
         $editForm = $this->createEditForm($slug);
 
         return $this->render('EtheriqBlogBundle:pages:blogShow.html.twig', array(
             'article' => $blogShow,
             'edit_form' => $editForm->createView(),
+            'comment_form' => $formComment->createView()
         ));
-
     }
 
     public function newBlogArticleAction(Request $request)
     {
+        if (false === $this->get('security.context')->isGranted('ROLE_USER')) {
+            throw new AccessDeniedException();
+        }
+
+        $user = $this->getUser();
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem("Home", $this->get("router")->generate("homepage"));
         $breadcrumbs->addItem("Blog in detail");
@@ -155,9 +254,10 @@ class BlogController extends Controller
 
             $tags = $blog->getTags();
 
-            $blog
-                ->setTags($tags)
-                ->setNumberOfVoters(1);
+            $blog->setTags($tags)
+                ->setNumberOfVoters(1)
+                ->setRating($blog->getRating())
+                ->setAuthor($user);
 
             if ($blog->getNewTags() != null) {
                 $newTags = explode(',', trim($blog->getNewTags()));
@@ -169,7 +269,6 @@ class BlogController extends Controller
                     $newArticle->persist($tag);
                     $blog->addTag($tag);
                 }
-
             }
             if ($blog->getNewCategory() != null) {
                 $newCategory = explode(',', trim($blog->getNewCategory()));
@@ -187,6 +286,7 @@ class BlogController extends Controller
 
             $blog->setNewTags(null);
             $blog->setNewCategory(null);
+
             $newArticle->persist($blog);
             $newArticle->flush();
 
@@ -212,69 +312,55 @@ class BlogController extends Controller
             return $this->redirect($this->generateUrl('homepage'));
         }
 
-        return $this->redirect($this->generateUrl('blog_search', array('search' => $search)));
+        return $this->redirect($this->generateUrl('blog_search', array('slug' => $search)));
         } catch (NotFoundHttpException $e) {
             return $this->render('EtheriqBlogBundle:pages:guestPageNotFound.html.twig', array('pageNumber' => ''));
         }
     }
 
-    public function searchBlogsByTitleAction($search=null, $page)
+    public function searchBlogsByTitleAction($slug = null, $page)
     {
         $em = $this->getDoctrine()->getManager();
-        $searchedBlogs = $em->getRepository('EtheriqBlogBundle:Blog')->searchArticlesByTitle($search);
+        $searchedBlogs = $em->getRepository('EtheriqBlogBundle:Blog')->searchArticlesByTitle($slug);
 
         $adapter = new ArrayAdapter($searchedBlogs);
         $pagerBlog = new Pagerfanta($adapter);
-        $pagerBlog->setMaxPerPage(5);
+        $pagerBlog->setMaxPerPage($this->get('service_container')->getParameter('fantaPager_max_per_page'));
 
             $pagerBlog->setCurrentPage($page);
 
         return $this->render('EtheriqBlogBundle:pages:homepage.html.twig', array(
             'blogs' => $pagerBlog,
-            'filter' => $search
+            'filter' => $slug
         ));
     }
 
-    public function editBlogInfoAction($slug, Request $request)
+    public function editBlogInfoAction($slug, Request $request, Blog $blog)
     {
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $blogShow = $em->getRepository('EtheriqBlogBundle:Blog')->findOneBySlug($slug);
+        if ($user->getId() != $blogShow->getAuthor()->getId()) {
+            throw new AccessDeniedException();
+        }
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem("Home", $this->get("router")->generate("homepage"));
         $breadcrumbs->addItem("Blog in detail", $this->get("router")->generate("blog_showInfo", array('slug' => $slug)));
         $breadcrumbs->addItem("Edit Article");
-
-        $em = $this->getDoctrine()->getManager();
-        $blogShow = $em->getRepository('EtheriqBlogBundle:Blog')->findOneBySlug($slug);
 
         if (!$blogShow) {
             return $this->render('EtheriqBlogBundle:pages:guestPageNotFound.html.twig', array('pageNumber' => $slug));
             exit;
         }
 
-        $allRequest = $request->createFromGlobals();
-        $rate = $allRequest->request->all();
-
         $blogShow->setTitle($blogShow->getTitle());
         $blogShow->setTextBlog($blogShow->getTextBlog());
-
-        $ratingOld = $blogShow->getRating();
-        $blogShow->setRating(0);
 
         $form = $this->createForm(new BlogDetailType(), $blogShow);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $blogToDb = $this->getDoctrine()->getManager();
-
-            if ($rate['blogDetailed']['rating'] != 0) {
-                $ratingNew = $ratingOld + $rate['blogDetailed']['rating'];
-                $voters = $blogShow->getNumberOfVoters();
-
-                $blogShow->setRating($ratingNew);
-                $blogShow->setNumberOfVoters($voters + 1);
-
-            } else {
-                $blogShow->setRating($ratingOld);
-            }
 
             if ($blogShow->getNewTags() != null) {
                 $newTags = explode(',', trim($blogShow->getNewTags()));
@@ -314,7 +400,6 @@ class BlogController extends Controller
 
         return $this->render('EtheriqBlogBundle:pages:blogEdit.html.twig', array(
             'form' => $form->createView(),
-            'rating' => $ratingOld,
             'voters' => $blogShow->getNumberOfVoters(),
             'delete_form' => $deleteForm->createView(),
             'oldImage' => $blogShow->getPathImage()
@@ -322,13 +407,19 @@ class BlogController extends Controller
 
     }
 
-    public function deleteBlogInfoAction(Request $request, $slug)
+    public function deleteBlogInfoAction($slug)
     {
+
+        $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
         $article = $em->getRepository('EtheriqBlogBundle:Blog')->findOneBy(array('slug' => $slug));
 
         if (!$article) {
             throw $this->createNotFoundException("Not found entity $slug.");
+        }
+
+        if ($user->getId() != $article->getAuthor()->getId()) {
+            throw new AccessDeniedException();
         }
 
         $em->remove($article);

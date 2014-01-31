@@ -1,0 +1,35 @@
+{% extends 'EtheriqBlogBundle::base.html.twig' %}
+
+    {% block title %}
+        Comment editing
+    {% endblock title %}
+
+     {% block wraper %}
+
+         {% block breadcrumb %}
+
+             {{ wo_render_breadcrumbs() }}
+
+         {% endblock breadcrumb %}
+
+         <div class="row">
+             <div class="col-md-6">
+                 {{ form_start(comment_form, {'attr': {'role': 'form', 'novalidate': 'novalidate'  } } ) }}
+                 <div class="form-group">
+                     {{ form_label(comment_form.textComment, 'enter_comment'|trans) }}
+                     {{ form_widget(comment_form.textComment, { 'attr': {'class': 'form-control', 'placeholder': 'Comment' } }) }}
+                 </div>
+                 <div class="form-group text-right">
+                     <input type="submit" name="sendComment" value="{{ 'Save'|trans }}" class="btn btn-default">
+                 </div>
+                 {% if form_errors(comment_form.textComment) %}
+                     <br>
+                     <div class="alert alert-danger">
+                         {{ form_errors(comment_form.textComment) }}
+                     </div>
+                 {% endif %}
+                 {{ form_end(comment_form) }}
+             </div>
+         </div>
+
+     {% endblock %}

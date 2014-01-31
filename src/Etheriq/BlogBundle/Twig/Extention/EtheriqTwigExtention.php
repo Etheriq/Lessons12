@@ -9,6 +9,8 @@
 
 namespace Etheriq\BlogBundle\Twig\Extention;
 
+use Etheriq\BlogBundle\Entity\Blog;
+
 class EtheriqTwigExtention extends \Twig_Extension
 {
     public function getName()
@@ -23,6 +25,44 @@ class EtheriqTwigExtention extends \Twig_Extension
             'rating' => new \Twig_Filter_Method($this, 'rating'),
             'tagView' => new \Twig_Filter_Method($this, 'tagView')
         );
+    }
+
+    public function getFunctions()
+    {
+        return array(
+            new \Twig_SimpleFunction('setLocaleImg', array($this, 'setLocaleImg'), array('is_safe' => array('html'))),
+            new \Twig_SimpleFunction('getCountComments', array($this, 'getCountComments'), array('is_safe' => array('html'))),
+        );
+    }
+
+    public function getCountComments(Blog $blogComments)
+    {
+        $comments = $blogComments->getComments();
+
+        return count($comments);
+    }
+
+    public function setLocaleImg($string)
+    {
+        switch ($string) {
+            case 'en':
+                $img = 'img/flag_great_britain.png';
+                $alt = 'English';
+                break;
+            case 'ru':
+                $img = 'img/flag_russia.png';
+                $alt = 'Russian';
+                break;
+            case 'ua':
+                $img = 'img/flag_ukraine.png';
+                $alt = 'Ukrainian';
+                break;
+            default:
+                $img = 'img/flag_great_britain.png';
+                $alt = 'English';
+        }
+
+        return $img;
     }
 
     /**
@@ -50,7 +90,6 @@ class EtheriqTwigExtention extends \Twig_Extension
         } else {
             return $strResult;
         }
-
     }
 
     /**
@@ -61,18 +100,6 @@ class EtheriqTwigExtention extends \Twig_Extension
     public function rating($rating, $voters)
     {
         return round($rating / $voters, 1);
-    }
-
-    /**
-     *
-     * @param string $string
-     * @param string $link
-     */
-    public function tagView($string, $link)
-    {
-        $scale = mt_rand(80, 150);
-
-        return "<a href=".$link."><span style='font-size: $scale%'>$string</span></a>";
     }
 
 }

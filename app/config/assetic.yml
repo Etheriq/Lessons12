@@ -56,13 +56,6 @@ assetic:
                 - yui_js
             output:
                  js/bootstrap.js
-        javascript_rating:
-            inputs:
-                - %kernel.root_dir%/../src/Etheriq/BlogBundle/Resources/public/js/rates.js
-            filters:
-                - yui_js
-            output:
-                 js/rating.js
         javascript_jqcloud:
             inputs:
                 - %kernel.root_dir%/../src/Etheriq/BlogBundle/Resources/public/js/jqcloud.js

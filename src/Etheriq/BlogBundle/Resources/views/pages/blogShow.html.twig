@@ -19,7 +19,11 @@
                         <div class="col-md-6">
                            <span class="text-left showArticleTitle"> {{ article.title }} </span>
                             <div class="text-left">
-                                {{ form(edit_form) }}
+                                {% if app.user != null %}
+                                    {% if app.user.id == article.author.id %}
+                                        {{ form(edit_form) }}
+                                    {% endif %}
+                                {% endif %}
                             </div>
                         </div>
                         <div class="col-md-6 text-right">
@@ -62,5 +66,187 @@
 
              </div>
          </div>
+        <br><br>
+         <div class="row">
+            <div class="col-md-6">
+            {{ form_start(comment_form, {'attr': {'role': 'form', 'novalidate': 'novalidate'  } } ) }}
+                <div class="form-group">
+                    {{ form_label(comment_form.textComment, 'enter_comment'|trans) }}
+                    {{ form_widget(comment_form.textComment, { 'attr': {'class': 'form-control', 'placeholder': 'Comment' } }) }}
+
+                    {{ form_widget(comment_form.rating, {'attr': {'value': 0 } }) }}
+                </div>
+                <div>
+
+                    <ul id = "rates"
+                        data-min-rating = "-5"
+                        data-max-rating = "5"
+                        data-step = "1"
+                        data-transfer-element-selector = "#blog_rating"
+                            >
+                        <li class="defaultRating" id="prototype-star"></li>
+                        <span id="rating">0</span>
+                    </ul>
+
+                </div>
+                <div class="form-group text-right">
+                    <input type="submit" name="sendComment" value="{{ 'send'|trans }}" class="btn btn-default">
+                </div>
+                {% if form_errors(comment_form.textComment) %}
+                    <br>
+                    <div class="alert alert-danger">
+                        {{ form_errors(comment_form.textComment) }}
+                    </div>
+                {% endif %}
+            {{ form_end(comment_form) }}
+            </div>
+         </div>
+
+         {% if getCountComments(article) > 0  %}
+             <div class="panel panel-info">
+                 <div class="panel-heading">
+                     <strong>{{ 'comments_list'|trans }}</strong>
+                 </div>
+                 {% for comment in article.comments %}
+                    <div class="panel panel-default" style="margin: 15px;">
+                        <div class="panel-heading">
+                            #{{ loop.index }}:
+                            <span> <strong>{{ 'Author'|trans }} </strong>
+                                {% if comment.author is null %}
+                                    Anonymous ({{ 'set_rating'|trans }}  {{ comment.rating }})
+                                {% else %}
+                                    {{ comment.author  }} ({{ 'set_rating'|trans }}  {{ comment.rating }})
+                                {% endif %}
+                            </span>
+                            <span class="pull-right"> <strong>{{ 'Published'|trans }} </strong>
+                                {{ comment.created|date('d.m.Y') }}
+                            </span>
+                        </div>
+                        <div class="panel-body">
+                                {{ comment.textComment|trim }}
+                        </div>
+                        {% if app.user != null and comment.author != null %}
+                            {% if app.user.id == comment.author.id %}
+                                <div class="panel-footer">
+                                    <a href="{{ path('comment_edit', {'id': comment.id, 'slug': article.slug}) }}" class="btn btn-sm btn-warning">
+                                        {{ 'Save'|trans }}
+                                    </a>
+
+                                    <a href="{{ path('comment_delete', {'id': comment.id, 'slug': article.slug}) }}" class="btn btn-sm btn-danger pull-right">
+                                        {{ 'Delete'|trans }}
+                                    </a>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                    <hr>
+                 {% endfor %}
+             </div>
+        {% endif %}
 
      {% endblock wraper %}
+
+{% block myjs %}
+    <script>
+        jQuery(function($){
+
+            var rateContainer = $("#rates"),
+                    minRating = rateContainer.data('min-rating'),
+                    maxRating = rateContainer.data('max-rating'),
+                    rateStep = rateContainer.data('step'),
+                    transferElementSelector = rateContainer.data('transfer-element-selector'),
+                    ratingSpan = $('#rating').detach(),
+                    prototypeStar = $("#prototype-star").detach().prop("id", ""),
+
+                    memoryStarIndex = 0,
+                    rated = false,
+                    rateStars = createRatingStars(rateContainer, prototypeStar,minRating, maxRating, rateStep),
+                    rating;
+
+            rateContainer.on('mouseover', 'li', function(){
+
+                var indexOfRate = $(this).index();
+                ratingSpan.html(this.rating);
+                setRatesStars(indexOfRate);
+
+            });
+
+            rateContainer.on('mouseout', 'li', function(){
+
+                if(rated){
+                    setRatesStars(memoryStarIndex);
+                    ratingSpan.html(rating);
+                }
+                else{
+                    clearRates();
+                    ratingSpan.html("");
+                }
+
+            });
+            rateContainer.on('click', 'li', function(){
+
+                memoryStarIndex = $(this).index();
+                rating = this.rating;
+                rated = true;
+                ratingSpan.html(rating);
+                setRatesStars(memoryStarIndex);
+                console.log('Your rate is '+rating);
+                $(transferElementSelector).prop({"value" : rating });
+
+            });
+
+//region==================== Utils ========================
+
+            function setRatesStars(starIndex){
+
+                var
+                        countStars = rateStars.length,
+                        rateType = 'defaultRating';
+
+                if(starIndex <= countStars/3){
+                    rateType = 'badRating';
+                }
+                if((starIndex >= countStars/3)&&(starIndex <= countStars*2/3)){
+                    rateType = 'rating';
+                }
+                if((starIndex >= countStars*2/3)&&(starIndex<=countStars)){
+                    rateType = 'coolRating';
+                }
+
+                for(var i = 0; i < rateStars.length; i++){
+                    if(i <= starIndex){
+                        rateStars.eq(i).removeClass();
+                        rateStars.eq(i).addClass(rateType);
+                    }
+                    else{
+                        rateStars.eq(i).removeClass();
+                        rateStars.eq(i).addClass('defaultRating');
+                    }
+                }
+            }
+            function clearRates(){
+                for(var i = 0; i < rateStars.length; i++){
+                    rateStars.eq(i).removeClass();
+                    rateStars.eq(i).addClass('defaultRating');
+                }
+            }
+            function createRatingStars(rateContainer, prototypeStar, minRating, maxRating, rateStep){
+
+                var currentNode;
+
+                for(var i = minRating; i <= maxRating; i+=rateStep){
+
+                    currentNode = prototypeStar.clone();
+                    currentNode[0].rating = i;
+                    // currentNode.param("");
+                    rateContainer.append(currentNode);
+
+                }
+                rateContainer.append(ratingSpan);
+                return rateContainer.find('li');
+            }
+        });
+
+        //endregion
+    </script>
+{% endblock %}

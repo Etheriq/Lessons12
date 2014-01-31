@@ -19,6 +19,11 @@ Search: Search
 Category: Category:
 Rating: Rating:
 Tags: Tags:
+coments: Comments:
+enter_comment: Enter your comment
+Author: Author:
+send: Send
+comments_list: Comments:
 Last articles: Last articles
 Articles by rating: Articles by rating
 Last posts from guest book: Last posts from guest book
@@ -38,3 +43,20 @@ add_new_tags: Add new tags
 Guest book detail: Account
 New Article: New Article
 upload_file: Select an image to upload (max size 3MB)
+layout.logged_in_as: You are logged in as %username%
+layout.login: Enter
+layout.logout: Logout
+username: Login
+password: Password
+email: E-mail
+role: Role
+set_rating: set rating
+login.to.site: Authentication form
+register.to.site: Registration form
+register.new.user: Register new user
+login.remember_me: Remember me
+Field: Field
+Value: Value
+profile.update: Update profile form
+cancel: Cancel
+

@@ -1,6 +1,6 @@
 homepage:
     pattern:  /{_locale}/{page}
-    defaults: { _controller: EtheriqBlogBundle:Blog:showBlogMainPage, _locale: en, page: 1 }
+    defaults: { _controller: EtheriqBlogBundle:Blog:showBlogMainPage, page: 1, _locale: en }
     requirements:
             page:  \d+
             _locale: en|ru|ua
@@ -11,19 +11,31 @@ blog_showInfo:
     requirements:
             _locale: en|ru|ua
 
+comment_edit:
+    pattern:  /{_locale}/blog/comment/edit/{id}/{slug}
+    defaults: { _controller: EtheriqBlogBundle:Blog:editComment }
+    requirements:
+            _locale: en|ru|ua
+
+comment_delete:
+    pattern:  /{_locale}/blog/comment/delete/{id}/{slug}
+    defaults: { _controller: EtheriqBlogBundle:Blog:deleteComment }
+    requirements:
+            _locale: en|ru|ua
+
 blog_edit:
     pattern:  /{_locale}/blog/edit/{slug}
     defaults: { _controller: EtheriqBlogBundle:Blog:editBlogInfo }
     requirements:
-            _locale: en|ru|ua
             _method: post|put
+            _locale: en|ru|ua
 
 blog_delete:
     pattern:  /{_locale}/blog/delete/{slug}
     defaults: { _controller: EtheriqBlogBundle:Blog:deleteBlogInfo }
     requirements:
-            _locale: en|ru|ua
             _method: post|delete
+            _locale: en|ru|ua
 
 blog_category:
     pattern:  /{_locale}/blog/category/{slug}/{page}
@@ -44,8 +56,8 @@ blog_find:
             _locale: en|ru|ua
 
 blog_search:
-    pattern:  /{_locale}/blog/search/{search}/{page}
-    defaults: { _controller: EtheriqBlogBundle:Blog:searchBlogsByTitle, page: 1, search: '' }
+    pattern:  /{_locale}/blog/search/{slug}/{page}
+    defaults: { _controller: EtheriqBlogBundle:Blog:searchBlogsByTitle, page: 1, slug: '' }
     requirements:
             page:  \d+
             _locale: en|ru|ua
@@ -79,8 +91,8 @@ guest_deleteItem:
     pattern:  /{_locale}/guest/delete/{slug}
     defaults: { _controller: EtheriqBlogBundle:Guest:deleteGuestItem }
     requirements:
-            _locale: en|ru|ua
             _method: post|delete
+            _locale: en|ru|ua
 
 about:
     pattern:  /{_locale}/about
@@ -89,7 +101,7 @@ about:
             _locale: en|ru|ua
 
 set_locale:
-    pattern: /setLocale/{loc}
-    defaults: { _controller: EtheriqBlogBundle:Additional:setLocale, loc: en }
+    pattern: /{_locale}/setLocale/{loc}
+    defaults: { _controller: EtheriqBlogBundle:Additional:setLocale }
     requirements:
-            loc: en|ru|ua
+            _locale: en|ru|ua
