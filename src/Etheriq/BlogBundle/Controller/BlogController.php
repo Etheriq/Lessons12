@@ -17,16 +17,12 @@ use Etheriq\BlogBundle\Entity\Category;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Pagerfanta\Exception\NotValidCurrentPageException;
 use Pagerfanta\Pagerfanta;
-use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Adapter\DoctrineCollectionAdapter;
 use Symfony\Component\HttpFoundation\Request;
 use Etheriq\BlogBundle\Form\BlogDetailType;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Component\Security\Acl\Domain\ObjectIdentity;
-use Symfony\Component\Security\Acl\Domain\UserSecurityIdentity;
-use Symfony\Component\Security\Acl\Permission\MaskBuilder;
 
 class BlogController extends Controller
 {
@@ -56,16 +52,7 @@ class BlogController extends Controller
 
     public function editCommentAction($id, $slug, Comments $comment, Request $request)
     {
-        $securityContext = $this->get('security.context');
-        if (false === $securityContext->isGranted('EDIT', $comment)) {
-//        if ((false === $securityContext->isGranted('ROLE_ADMIN')) or (false === $securityContext->isGranted('EDIT', $blog))) {
-            throw new AccessDeniedException();
-        }
-        $breadcrumbs = $this->get("white_october_breadcrumbs");
-        $breadcrumbs->addItem("Home", $this->get("router")->generate("homepage"));
-        $breadcrumbs->addItem("Blog in detail", $this->get("router")->generate("blog_showInfo", array('slug' => $slug)));
-        $breadcrumbs->addItem("Edit comment");
-
+        $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
         $editComment = $em->getRepository('EtheriqBlogBundle:Comments')->findOneById($id);
 
@@ -73,6 +60,15 @@ class BlogController extends Controller
             return $this->render('EtheriqBlogBundle:pages:guestPageNotFound.html.twig', array('pageNumber' => $id));
             exit;
         }
+
+        if ($user->getId() != $editComment->getAuthor()->getId()) {
+            throw new AccessDeniedException();
+        }
+
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem("Home", $this->get("router")->generate("homepage"));
+        $breadcrumbs->addItem("Blog in detail", $this->get("router")->generate("blog_showInfo", array('slug' => $slug)));
+        $breadcrumbs->addItem("Edit comment");
 
         $formEditComment = $this->createForm(new CommentType(), $editComment);
         $formEditComment->handleRequest($request);
@@ -92,19 +88,21 @@ class BlogController extends Controller
 
     public function deleteCommentAction($id, $slug, Comments $comment)
     {
-        $securityContext = $this->get('security.context');
-        if (false === $securityContext->isGranted('EDIT', $comment)) {
-//        if ((false === $securityContext->isGranted('ROLE_ADMIN')) or (false === $securityContext->isGranted('EDIT', $blog))) {
+
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $deleteComment = $em->getRepository('EtheriqBlogBundle:Comments')->findOneById($id);
+
+        if (!$deleteComment) {
+            return $this->render('EtheriqBlogBundle:pages:guestPageNotFound.html.twig', array('pageNumber' => $id));
+            exit;
+        }
+
+        if ($user->getId() != $deleteComment->getAuthor()->getId()) {
             throw new AccessDeniedException();
         }
-        $em = $this->getDoctrine()->getManager();
-        $comment = $em->getRepository('EtheriqBlogBundle:Comments')->findOneById((int)$id);
 
-        if (!$comment) {
-            throw $this->createNotFoundException("Not found entity $comment.");
-        }
-
-        $em->remove($comment);
+        $em->remove($deleteComment);
         $em->flush();
 
         return $this->redirect($this->generateUrl('blog_showInfo', array('slug' => $slug)));
@@ -197,15 +195,11 @@ class BlogController extends Controller
         $formComment = $this->createForm(new CommentType(), $comment);
         $formComment->handleRequest($request);
 
-        if($formComment->isValid()) {
+        if ($formComment->isValid()) {
 
-//            if (false === $this->get('security.context')->isGranted('ROLE_USER')) {
-//                throw new AccessDeniedException();
-//            }
             $newComment = $this->getDoctrine()->getManager();
 
-            $securityContext = $this->get('security.context');
-            $user = $securityContext->getToken()->getUser();
+            $user = $this->getUser();
 
             if ($comment->getRating() != 0 ) {
                 $blogShow->setRating($blogShow->getRating() + $comment->getRating());
@@ -214,8 +208,7 @@ class BlogController extends Controller
                 $newComment->persist($blogShow);
             }
 
-            if ( $user == 'anon.') {
-
+            if ( is_null($user)) {
                 $comment->setBlog($blogShow);
                 $newComment->persist($comment);
                 $newComment->flush();
@@ -228,20 +221,6 @@ class BlogController extends Controller
             $newComment->persist($comment);
             $newComment->flush();
 
-            //  *******************************************************************
-            // creating the ACL
-            $aclProvider = $this->get('security.acl.provider');
-            $objectIdentity = ObjectIdentity::fromDomainObject($comment);
-            $acl = $aclProvider->createAcl($objectIdentity);
-
-            // retrieving the security identity of the currently logged-in user
-            $securityIdentity = UserSecurityIdentity::fromAccount($user);
-
-            // grant owner access
-            $acl->insertObjectAce($securityIdentity, MaskBuilder::MASK_OWNER);
-            $aclProvider->updateAcl($acl);
-            //  *******************************************************************
-
             return $this->redirect($this->generateUrl('blog_showInfo', array('slug' => $blogShow->getSlug())));
         }
 
@@ -252,7 +231,6 @@ class BlogController extends Controller
             'edit_form' => $editForm->createView(),
             'comment_form' => $formComment->createView()
         ));
-
     }
 
     public function newBlogArticleAction(Request $request)
@@ -261,6 +239,7 @@ class BlogController extends Controller
             throw new AccessDeniedException();
         }
 
+        $user = $this->getUser();
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem("Home", $this->get("router")->generate("homepage"));
         $breadcrumbs->addItem("Blog in detail");
@@ -277,7 +256,8 @@ class BlogController extends Controller
 
             $blog->setTags($tags)
                 ->setNumberOfVoters(1)
-                ->setRating($blog->getRating());
+                ->setRating($blog->getRating())
+                ->setAuthor($user);
 
             if ($blog->getNewTags() != null) {
                 $newTags = explode(',', trim($blog->getNewTags()));
@@ -311,22 +291,6 @@ class BlogController extends Controller
             $newArticle->flush();
 
             $this->get('etheriq.tagscloud')->update();
-
-            //  *******************************************************************
-            // creating the ACL
-            $aclProvider = $this->get('security.acl.provider');
-            $objectIdentity = ObjectIdentity::fromDomainObject($blog);
-            $acl = $aclProvider->createAcl($objectIdentity);
-
-            // retrieving the security identity of the currently logged-in user
-            $securityContext = $this->get('security.context');
-            $user = $securityContext->getToken()->getUser();
-            $securityIdentity = UserSecurityIdentity::fromAccount($user);
-
-            // grant owner access
-            $acl->insertObjectAce($securityIdentity, MaskBuilder::MASK_OWNER);
-            $aclProvider->updateAcl($acl);
-            //  *******************************************************************
 
             return $this->redirect($this->generateUrl('homepage'));
         }
@@ -373,18 +337,16 @@ class BlogController extends Controller
 
     public function editBlogInfoAction($slug, Request $request, Blog $blog)
     {
-        $securityContext = $this->get('security.context');
-        if (false === $securityContext->isGranted('EDIT', $blog)) {
-//        if ((false === $securityContext->isGranted('ROLE_ADMIN')) or (false === $securityContext->isGranted('EDIT', $blog))) {
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $blogShow = $em->getRepository('EtheriqBlogBundle:Blog')->findOneBySlug($slug);
+        if ($user->getId() != $blogShow->getAuthor()->getId()) {
             throw new AccessDeniedException();
         }
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem("Home", $this->get("router")->generate("homepage"));
         $breadcrumbs->addItem("Blog in detail", $this->get("router")->generate("blog_showInfo", array('slug' => $slug)));
         $breadcrumbs->addItem("Edit Article");
-
-        $em = $this->getDoctrine()->getManager();
-        $blogShow = $em->getRepository('EtheriqBlogBundle:Blog')->findOneBySlug($slug);
 
         if (!$blogShow) {
             return $this->render('EtheriqBlogBundle:pages:guestPageNotFound.html.twig', array('pageNumber' => $slug));
@@ -447,14 +409,17 @@ class BlogController extends Controller
 
     public function deleteBlogInfoAction($slug)
     {
-        if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
-            throw new AccessDeniedException();
-        }
+
+        $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
         $article = $em->getRepository('EtheriqBlogBundle:Blog')->findOneBy(array('slug' => $slug));
 
         if (!$article) {
             throw $this->createNotFoundException("Not found entity $slug.");
+        }
+
+        if ($user->getId() != $article->getAuthor()->getId()) {
+            throw new AccessDeniedException();
         }
 
         $em->remove($article);

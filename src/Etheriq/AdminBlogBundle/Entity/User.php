@@ -30,11 +30,10 @@ class User extends BaseUser
         // your own logic
     }
 
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {

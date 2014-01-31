@@ -9,7 +9,6 @@
 
 namespace Etheriq\BlogBundle\DataFixtures;
 
-
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;

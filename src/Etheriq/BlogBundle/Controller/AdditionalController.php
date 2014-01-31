@@ -20,11 +20,9 @@ class AdditionalController extends Controller
         $src = $request->get('src');
         $params = $this->get('router')->match($src);
 
-        if(isset($params['slug'])) {
-
+        if (isset($params['slug'])) {
             return $this->redirect($this->generateUrl($params['_route'], array('_locale' => $loc, 'slug' => $params['slug'])));
         } else {
-
             return $this->redirect($this->generateUrl($params['_route'], array('_locale' => $loc)));
         }
     }

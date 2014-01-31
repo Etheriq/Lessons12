@@ -12,8 +12,6 @@ namespace Etheriq\BlogBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Class Blog
@@ -64,7 +62,7 @@ class Comments
 
     /**
      *
-     * @Assert\NotBlank(message = "blog_title.not_blank")
+     * @Assert\NotBlank(message = "comment.not_blank")
      * @Assert\Length(min = "5", minMessage = "comment_text.minLength_error")
      * @ORM\Column(type="text")
      */
@@ -74,8 +72,6 @@ class Comments
      * @ORM\Column(type="integer", nullable=true)
      */
     protected $rating;
-
-
 
     public function getAuthorName()
     {
@@ -89,7 +85,7 @@ class Comments
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -99,7 +95,7 @@ class Comments
     /**
      * Set deletedComment
      *
-     * @param \DateTime $deletedComment
+     * @param  \DateTime $deletedComment
      * @return Comments
      */
     public function setDeletedComment($deletedComment)
@@ -112,7 +108,7 @@ class Comments
     /**
      * Get deletedComment
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDeletedComment()
     {
@@ -122,7 +118,7 @@ class Comments
     /**
      * Set created
      *
-     * @param \DateTime $created
+     * @param  \DateTime $created
      * @return Comments
      */
     public function setCreated($created)
@@ -135,7 +131,7 @@ class Comments
     /**
      * Get created
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreated()
     {
@@ -145,7 +141,7 @@ class Comments
     /**
      * Set textComment
      *
-     * @param string $textComment
+     * @param  string   $textComment
      * @return Comments
      */
     public function setTextComment($textComment)
@@ -158,7 +154,7 @@ class Comments
     /**
      * Get textComment
      *
-     * @return string 
+     * @return string
      */
     public function getTextComment()
     {
@@ -168,7 +164,7 @@ class Comments
     /**
      * Set blog
      *
-     * @param \Etheriq\BlogBundle\Entity\Blog $blog
+     * @param  \Etheriq\BlogBundle\Entity\Blog $blog
      * @return Comments
      */
     public function setBlog(\Etheriq\BlogBundle\Entity\Blog $blog = null)
@@ -181,7 +177,7 @@ class Comments
     /**
      * Get blog
      *
-     * @return \Etheriq\BlogBundle\Entity\Blog 
+     * @return \Etheriq\BlogBundle\Entity\Blog
      */
     public function getBlog()
     {
@@ -191,7 +187,7 @@ class Comments
     /**
      * Set author
      *
-     * @param \Etheriq\AdminBlogBundle\Entity\User $author
+     * @param  \Etheriq\AdminBlogBundle\Entity\User $author
      * @return Comments
      */
     public function setAuthor(\Etheriq\AdminBlogBundle\Entity\User $author = null)
@@ -204,7 +200,7 @@ class Comments
     /**
      * Get author
      *
-     * @return \Etheriq\AdminBlogBundle\Entity\User 
+     * @return \Etheriq\AdminBlogBundle\Entity\User
      */
     public function getAuthor()
     {
@@ -214,7 +210,7 @@ class Comments
     /**
      * Set rating
      *
-     * @param integer $rating
+     * @param  integer  $rating
      * @return Comments
      */
     public function setRating($rating)
@@ -227,7 +223,7 @@ class Comments
     /**
      * Get rating
      *
-     * @return integer 
+     * @return integer
      */
     public function getRating()
     {

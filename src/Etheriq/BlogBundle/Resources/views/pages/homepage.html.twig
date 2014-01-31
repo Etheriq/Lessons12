@@ -13,27 +13,6 @@
 
              {% endblock breadcrumb %}
          </div>
-         {#<div class="col-md-2">#}
-             {#<div class="translate">#}
-             {#<ul class="locale_change">#}
-                 {#<li>#}
-                     {#<a href="{{ path('set_locale', {'loc': 'en'}) }}">#}
-                         {#<img src="{{ asset('img/flag_great_britain.png') }}" alt="English">#}
-                     {#</a>#}
-                 {#</li>#}
-                 {#<li>#}
-                     {#<a href="{{ path('set_locale', {'loc': 'ru'}) }}">#}
-                         {#<img src="{{ asset('img/flag_russia.png') }}" alt="Russian">#}
-                     {#</a>#}
-                 {#</li>#}
-                 {#<li>#}
-                     {#<a href="{{ path('set_locale', {'loc': 'ua'}) }}">#}
-                         {#<img src="{{ asset('img/flag_ukraine.png') }}" alt="Ukrainian">#}
-                     {#</a>#}
-                 {#</li>#}
-             {#</ul>#}
-             {#</div>#}
-         {#</div>#}
 </div>
      <div class="row">
          <div class="col-md-8">
@@ -60,41 +39,44 @@
                                 </div>
                             </div>
                             <div class="col-md-4 text-right">
-                                <span>{{ 'Published'|trans }} {{ blog.created|date("d.m.Y") }}</span>
+                                <span>{{ 'Published'|trans }} {{ blog.created|date("d.m.Y") }} {{ 'by'|trans }} {{ blog.author.username }}</span>
                             </div>
-                       </div>
-                       <div class="article-body">
-                            <img src="{{ blog.pathImage | imagine_filter('blog_main') }}" class="img-thumbnail">
+                        </div>
+                        <div class="row">
+                            <div class="article-body">
+                                <img src="{{ blog.pathImage | imagine_filter('blog_main') }}" class="img-thumbnail">
 
-                            {#{{ blog.textBlog|limitWords(63) }}#}
-                            {{ blog.textBlog|limitWords(63, path('blog_showInfo', {'slug': blog.slug}))|raw }}
-                       </div>
+                                {#{{ blog.textBlog|limitWords(63) }}#}
+                                {{ blog.textBlog|limitWords(63, path('blog_showInfo', {'slug': blog.slug}))|raw }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="article-footer">
+                              <div class="text-left myCat">
+                                  <strong>{{ 'Category'|trans }} </strong>
+                                  <span class="label label-primary">
+                                      <a href="{{ path('blog_category', {'slug': blog.category.slug}) }}">
+                                        {{ blog.category.categoryName }}
+                                      </a>
+                                  </span>
+                              </div>
 
-                       <div class="article-footer">
-                          <div class="text-left myCat">
-                              <strong>{{ 'Category'|trans }} </strong>
-                              <span class="label label-primary">
-                                  <a href="{{ path('blog_category', {'slug': blog.category.slug}) }}">
-                                    {{ blog.category.categoryName }}
-                                  </a>
-                              </span>
-                          </div>
+                               <div class="myRating">
+                                   <strong>{{ 'Rating'|trans }}</strong>
+                                   <span class="badge">{{ blog.rating|rating(blog.numberOfVoters) }}</span>
+                               </div>
 
-                           <div class="myRating">
-                               <strong>{{ 'Rating'|trans }}</strong>
-                               <span class="badge">{{ blog.rating|rating(blog.numberOfVoters) }}</span>
-                           </div>
-
-                           <div class="text-right myTags">
-                               <strong>{{ 'Tags'|trans }} </strong>
-                              {% for tag in blog.tags %}
-                                  <a href="{{ path('blog_tag', {'slug': tag.slug}) }}">
-                                    <span class="label label-info">{{ tag.tagName }}</span>
-                                  </a>
-                              {% endfor %}
-                           </div>
-                       </div>
-                       <br><hr>
+                               <div class="text-right myTags">
+                                   <strong>{{ 'Tags'|trans }} </strong>
+                                  {% for tag in blog.tags %}
+                                      <a href="{{ path('blog_tag', {'slug': tag.slug}) }}">
+                                        <span class="label label-info">{{ tag.tagName }}</span>
+                                      </a>
+                                  {% endfor %}
+                               </div>
+                            </div>
+                        </div>
+                       <hr>
                     {% endfor %}
 
              {% endblock content %}
@@ -110,7 +92,6 @@
                          {{ render(controller('EtheriqBlogBundle:Blog:showLastArticles')) }}
                      </div>
                  </div>
-
                  <div class="panel panel-default">
                      <div class="panel-heading">
                          <h3 class="panel-title">{{ 'Articles by rating'|trans }}</h3>
@@ -119,8 +100,6 @@
                          {{ render(controller('EtheriqBlogBundle:Blog:showArticlesByRating')) }}
                      </div>
                  </div>
-
-
                  <div class="panel panel-default">
                      <div class="panel-heading">
                          <h3 class="panel-title">{{ 'Last posts from guest book'|trans }}</h3>
@@ -129,7 +108,6 @@
                          {{ render(controller('EtheriqBlogBundle:Guest:showLastGuest')) }}
                      </div>
                  </div>
-
                  <div class="panel panel-default">
                      <div class="panel-heading">
                          <h3 class="panel-title">{{ 'Blog tags'|trans }}</h3>
@@ -138,8 +116,6 @@
                          {{ render(controller('EtheriqBlogBundle:Additional:showTags')) }}
                      </div>
                  </div>
-
-
              {% endblock sidebar %}
          </div>
      </div>

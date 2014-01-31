@@ -17,6 +17,11 @@ use Etheriq\BlogBundle\Entity\Guest;
 
 class LoadGuestData extends AbstractFixture implements OrderedFixtureInterface
 {
+    public function getOrder()
+    {
+        return 1;
+    }
+
     public function load(ObjectManager $manager)
     {
         $dataArray = Yaml::parse(file_get_contents(__DIR__."/data/dataGuest.yml"));
@@ -32,10 +37,4 @@ class LoadGuestData extends AbstractFixture implements OrderedFixtureInterface
         }
         $manager->flush();
     }
-
-    public function getOrder()
-    {
-        return 1;
-    }
-
 }

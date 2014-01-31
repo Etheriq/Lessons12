@@ -23,7 +23,7 @@ show_run("fixtures:load", "app/console doctrine:fixtures:load --no-interaction")
 show_run("assets:install", "app/console assets:install --symlink");
 show_run("assets:dump", "app/console assetic:dump");
 
-show_run("init:acl", "app/console init:acl");
+//show_run("init:acl", "app/console init:acl");
 
 show_run("Warming up dev cache", "php app/console --env=dev cache:clear --no-warmup");
 show_run("Changing permissions", "chmod -R 777 app/cache app/logs web/");   // ************************

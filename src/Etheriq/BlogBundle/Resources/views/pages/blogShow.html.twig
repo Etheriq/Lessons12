@@ -19,8 +19,10 @@
                         <div class="col-md-6">
                            <span class="text-left showArticleTitle"> {{ article.title }} </span>
                             <div class="text-left">
-                                {% if is_granted('EDIT', article) %}
-                                    {{ form(edit_form) }}
+                                {% if app.user != null %}
+                                    {% if app.user.id == article.author.id %}
+                                        {{ form(edit_form) }}
+                                    {% endif %}
                                 {% endif %}
                             </div>
                         </div>
@@ -123,16 +125,18 @@
                         <div class="panel-body">
                                 {{ comment.textComment|trim }}
                         </div>
-                        {% if is_granted('EDIT', comment ) %}
-                            <div class="panel-footer">
-                                <a href="{{ path('comment_edit', {'id': comment.id, 'slug': article.slug}) }}" class="btn btn-sm btn-warning">
-                                    {{ 'Save'|trans }}
-                                </a>
+                        {% if app.user != null and comment.author != null %}
+                            {% if app.user.id == comment.author.id %}
+                                <div class="panel-footer">
+                                    <a href="{{ path('comment_edit', {'id': comment.id, 'slug': article.slug}) }}" class="btn btn-sm btn-warning">
+                                        {{ 'Save'|trans }}
+                                    </a>
 
-                                <a href="{{ path('comment_delete', {'id': comment.id, 'slug': article.slug}) }}" class="btn btn-sm btn-danger pull-right">
-                                    {{ 'Delete'|trans }}
-                                </a>
-                            </div>
+                                    <a href="{{ path('comment_delete', {'id': comment.id, 'slug': article.slug}) }}" class="btn btn-sm btn-danger pull-right">
+                                        {{ 'Delete'|trans }}
+                                    </a>
+                                </div>
+                            {% endif %}
                         {% endif %}
                     </div>
                     <hr>

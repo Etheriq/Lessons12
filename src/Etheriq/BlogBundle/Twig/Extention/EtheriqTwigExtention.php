@@ -38,6 +38,7 @@ class EtheriqTwigExtention extends \Twig_Extension
     public function getCountComments(Blog $blogComments)
     {
         $comments = $blogComments->getComments();
+
         return count($comments);
     }
 

@@ -19,5 +19,4 @@ php app/console cache:clear
 php app/console doctrine:fixtures:load --no-interaction
 php app/console assets:install --symlink
 php app/console assetic:dump
-php app/console init:acl
 php app/console cache:clear
